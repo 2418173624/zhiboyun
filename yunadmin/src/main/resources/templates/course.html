@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>管理中心-首页</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link href="/css/public_style.css?v=20160630" type="text/css" rel="stylesheet" />
+		<link type="text/css" rel="stylesheet" href="/css/qqlogin.css" />
+		<link type="text/css" rel="stylesheet" href="/css/menu.css" />
+		<link type="text/css" rel="stylesheet" href="/css/academy_school.css" />
+		<link type="text/css" rel="stylesheet" href="/css/cms.css" />
+		<link type="text/css" rel="stylesheet" href="/css/common.css" />
+		<link type="text/css" rel="stylesheet" href="/css/elementui.css" />
+		<link type="text/css" rel="stylesheet" href="/css/iconfont_cms.css" />
+		<script type="text/javascript">
+			var schoolVerFlag = "false" == "true";
+			var ctx = "/portal-web";
+			// itp 前端项目访问地址
+			var domain = 'https://zhjxy.kp.futurelab.tv'
+			var resourceHost = 'https://zhjxy.kp.futurelab.tv:18087'
+			var sessionid = "6b994432-a150-4946-92aa-3a4a13bccf16";
+			if (typeof String.prototype.startsWith != 'function') {
+				String.prototype.startsWith = function(prefix) {
+					return this.slice(0, prefix.length) === prefix;
+				};
+			}
+		</script>
+		<script type="text/javascript" src="/js/lodash.js"></script>
+		<script type="text/javascript" src="/js/jquery-1.12.0.min.js"></script>
+		<script type="text/javascript" src="/js/jquery.placeholder.min.js"></script>
+		<script type="text/javascript" src="/js/remoteCall.js"></script>
+		<!-- jQuery-Impromptu-master Start -->
+		<link href="/js/jquery-impromptu.min.css" type="text/css" rel="stylesheet" />
+		<script src="/js/jquery-impromptu.min.js" type="text/javascript"></script>
+		<!-- jQuery-Impromptu-master End -->
+		<script type="text/javascript" src="/js/jquery.lazyload.js"></script>
+		<script type="text/javascript" src="/js/ResizeSensor.js"></script>
+		<script type="text/javascript" src="/js/jquery.publicAlert.js"></script>
+		<script type="text/javascript" src="/js/util.js"></script>
+		<script type="text/javascript" src="/js/qqlogin.js?v=20160630"></script>
+		<script type="text/javascript">
+			jQuery.extend({
+				escapeXML: function(content) {
+					return $('<span></span>').text(content).html();
+				},
+				newline2br: function(content) {
+					return content.replace(/\r\n/g, "<br/>").replace(/\r/g, "<br/>").replace(/\n/g, "<br/>");
+				},
+			});
+			jQuery.prompt.setDefaults({
+				top: '30%',
+				persistent: false,
+				buttons: {
+					'确定': true
+				}
+			});
+			window.alert = function(info, func) {
+				if (!isNaN(parseInt(info))) {
+					info = info + "";
+				}
+				$.prompt(info, {
+					close: func
+				});
+			};
+
+			// 跳转页面
+			function gotoURL(targetUTL) {
+				window.location.href = targetUTL;
+			}
+		</script>
+		<!-- 图片懒加载 -->
+		<!-- <script type="text/javascript">
+$(function() {
+$("img.lazy").lazyload();
+$('input, textarea').placeholder();
+});
+</script> -->
+		<!-- Logo -->
+		<link href="img/favicon.ico" rel="icon" type="image/x-icon" />
+		<link href="img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+		
+		<link type="text/css" rel="stylesheet" href="/css/common_alert.css">
+		<link type="text/css" rel="stylesheet" href="/css/login_bomb.css">
+		<link type="text/css" rel="stylesheet" href="/css/header.css">
+		<link rel="stylesheet" type="text/css" href="/css/academy_school.css">
+		<script type="text/javascript">
+			$(function() {
+				$('.work_item').click(function() {
+					location.href = $(this).data('url');
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<!-- header部分 -->
+		<script type="text/javascript">
+			$(function() {
+				//消息处理
+				$('#msg_note_list_source ul li').each(function() {
+					$('#msg_note_list ul li').eq($(this).index()).children().text($(this).text());
+				});
+				$('.msg_box1').one('mouseover', function() {
+					$('#msg_note_list ul li a').each(function() {
+						var $a = $(this);
+						while ($a.outerHeight() > 44) {
+							$a.text($a.text().replace(/(\s)*([a-zA-Z0-9]+|\W|_)(\.\.\.)?$/, "..."));
+						}
+					});
+				});
+				// 注销
+				$("#logout").click(function() {
+					$.publicAlert({
+						text: "是否要退出系统?",
+						callBack: function() {
+							// window.location.href = ctx + "/u/logout";
+							$.getJSON(ctx + '/u/logout', {}, function(result) {
+								if (result && result.status == 200) {
+									window.location.reload(true);
+									return !1;
+								} else {
+									$.publicAlert("退出失败，重试！");
+								}
+							});
+						}
+					})
+				});
+				$("#goto_index_label").click(function() {
+					location.href = domain
+				})
+				// 菜单显示
+				if (location.pathname.indexOf("mgtExperiments") > -1) {
+					localStorage.setItem("mgtExperimentPage", "true");
+				} else if (location.pathname.indexOf("mgtIndex.do") > -1) {
+					localStorage.removeItem("mgtExperimentPage");
+				}
+				var mgtExperimentPage = localStorage.getItem("mgtExperimentPage") != null;
+				if (mgtExperimentPage) {
+					$(".logo_txt").text("在线实验管理后台");
+				}
+				window.health = setInterval(function() {
+					$.get(ctx + '/api/v1/health');
+				}, 1000 * 60 * 5);
+			});
+		</script>
+		<!--头部导航栏-->
+		<div th:replace="~{common::topbar}"></div>
+		<!-- 左侧导航部分 -->
+		<script type="text/javascript" src="/js/jquery_nicescroll_min.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				var mgtExperimentPage = localStorage.getItem("mgtExperimentPage") != null;
+				if (mgtExperimentPage) {
+					var menu = document.getElementById("menu");
+					var parent = menu.parentElement;
+					parent.innerHTML = '';
+					parent.append(menu);
+
+					var menus = document.getElementsByClassName("Select");
+					_.each(menus, function(menu) {
+						var url = menu.getAttribute("data-menu-url");
+						if (location.pathname == url) {
+							menu.classList.add("S_on")
+						}
+					});
+				} else {
+					document.getElementById("menu").remove();
+
+					$("#Loms").niceScroll({
+						cursorcolor: "#808080",
+						cursorwidth: "5px",
+						background: "none",
+						cursorborder: "1px solid #808080",
+						autohidemode: "leave",
+						horizrailenabled: false,
+						hidecursordelay: 0,
+						iframeautoresize: true
+					});
+					// 默认被激活的左侧菜单class名称
+					var level = parseInt("1");
+					var menuUrl = "/portal-web/mgt/mgtIndex.do";
+					if (typeof(menuUrl) == "undefined" || "" == menuUrl) {
+						menuUrl = location.pathname;
+					}
+					if (!isNaN(level) && level == 2) {
+						var $parentMenu = $('.sub_menu[data-menu-url="' + menuUrl + '"]').parents(".Ul").prev();
+						$parentMenu.addClass('S_on');
+						$('.sub_menu[data-menu-url="' + menuUrl + '"]').addClass('Li');
+						var height = $parentMenu.next("ul").find("li").length;
+						$parentMenu.data("ishide", 1);
+						$parentMenu.next("ul").css("height", height * 51 + "px");
+					} else {
+						//menuUrl += location.search;
+						$('.menu_root[data-menu-url="' + menuUrl + '"]').addClass('S_on');
+					}
+					if ($('.S_on').length > 0) {
+						$('#Loms').animate({
+							scrollTop: $('.S_on').offset().top
+						}, 0);
+					}
+					// 头部active 暂时只有宅客云 先注掉
+					/* $(".header_ul li").click(function() {
+					    $(this).addClass("active").siblings().removeClass("active");
+					}); */
+				}
+				// 收起、展开左侧导航
+				$("#adv_btn").click(function() {
+					var _this = $(this);
+					var isshow = _this.data("isshow");
+					if (isshow) {
+						$("#Loms").hide();
+						$("#Lomss").show();
+						$("#Roms").css("left", "70px");
+						_this.data("isshow", 0);
+					} else {
+						$("#Loms").show();
+						$("#Lomss").hide();
+						$("#Roms").css("left", "220px");
+						_this.data("isshow", 1);
+					}
+				});
+				// 左侧导航
+				var animationTime = parseFloat(window.getComputedStyle($('#Loms .Ul')[0])['transition-duration']) * 1000;
+				animationTime = animationTime ? animationTime : 500;
+				$(".Select").click(function() {
+					var _this = $(this);
+					var ishide = _this.data("ishide");
+					var height = _this.next("ul").find("li").length;
+					$(".Select").data("ishide", 0);
+					$(".Select").removeClass("S_on");
+					$(".Ul").css("height", "0px");
+					if (ishide) {
+						_this.children(".lab3").css("background-position", "-44px -21px");
+						_this.data("ishide", 0);
+						_this.next("ul").css("height", "0px");
+					} else {
+						_this.children(".lab3").css("background-position", "-35px -21px");
+						_this.data("ishide", 1);
+						_this.next("ul").css("height", height * 51 + "px");
+					}
+					setTimeout(function() {
+						$("#Loms").getNiceScroll().resize();
+					}, animationTime);
+					_this.addClass("S_on");
+				});
+				// 左侧hover效果
+				$(".Ul li").click(function() {
+					$(this).addClass("Li").siblings().removeClass("Li");
+				});
+
+				$(".Ul").each(function() {
+					if ($(this).html().trim() == "") {
+						$(this).parent().find(".lab3").remove();
+					}
+				});
+
+			});
+		</script>
+		<!-- 左侧导航部分 -->
+		<div th:replace="~{common::sidebar}"></div>
+		<!-- 右侧部分开始 -->
+		<div id="app" class="Roms">
+			<div id="cmsContent" element-loading-text="课程导入中" class="cms_content_main">
+				<div id="Roms" class="cms_content_box">
+					<div class="Plf20 Prt20">
+						<div class="cms_content_nav Ptp20"><span class="p_ibt title">课程列表</span>
+							<div class="use_hint_box" style="margin-top: 9px;"><span class="p_ibt iconfont icon-question" style="margin-top: 3px;"></span>
+								<div class="hint_box"><span>新增/导入课程文件夹：</span> <span>选择课程类型</span> <span>--&gt;</span> <span>设计章节</span> <span>--&gt;</span>
+									<span>关联（试题、PPT、资料）</span> <span>--&gt;</span> <span>关联实训案例</span> <span>--&gt;</span> <span>关联实验案例</span>
+									<span>--&gt;</span> <span>上线课程</span> <span>--&gt;</span> <span>课程管理</span></div>
+							</div>
+							<div class="right"><a href="javascript:;" class="p_button control_btn "><span class="iconfont icon-join"></span>
+									<span>导入课程</span></a> <a href="/portal-web/resources/courses/create?courseCategory=0" class="p_button control_btn"><span
+									 class="iconfont icon-join"></span> <span>创建专业课</span></a> <a href="/portal-web/resources/courses/create?courseCategory=1"
+								 class="p_button control_btn"><span class="iconfont icon-join"></span> <span>创建开放课</span></a> <a href="/portal-web/resources/courses/create?courseCategory=2"
+								 class="p_button control_btn"><span class="iconfont icon-join"></span> <span>创建实验课</span></a></div>
+						</div>
+						<div class="Mtp25">
+							<ul class="p_ibt sel_tab_ul">
+								<li class="p_ibt">全部状态</li>
+								<li class="p_ibt">已下线</li>
+								<li class="p_ibt">已上线</li>
+								<li class="p_ibt on">未上线</li>
+							</ul>
+						</div>
+						<div class="Mtp20">
+							<div class="p_ibt search_input_box"><input type="text" name="search" placeholder="搜索" class="input0 search_input0">
+								<span class="iconfont icon-search"></span></div>
+							<div class="p_ibt Mtp5 Mlf30 el_sel_module">
+								<div class="seled_box"><label class="p_ibt sel_txt">全部课程</label> <span class="iconfont icon-show_down"></span></div>
+								<ul class="el_sel_ul" style="display: none;">
+									<li>我的课程</li>
+									<li>全部课程</li>
+								</ul>
+							</div>
+							<div class="p_ibt Mtp5 Mlf30 el_sel_module">
+								<div class="seled_box"><label class="p_ibt sel_txt">全部方向</label> <span class="iconfont icon-show_down"></span></div>
+								<ul class="el_sel_ul" style="display: none;">
+									<li>全部方向</li>
+									<li>前端开发</li>
+									<li>Java</li>
+									<li>人工智能</li>
+									<li>数据库</li>
+									<li>云计算</li>
+									<li>大数据</li>
+									<li>物联网</li>
+									<li>鲲鹏训练营</li>
+									<li>PHP</li>
+									<li>C_嵌入式</li>
+									<li>UXD</li>
+									<li>鲲鹏云-HCIA</li>
+									<li>gaussDB-HCIP</li>
+									<li>敏捷</li>
+									<li>项目管理</li>
+									<li>软件测试</li>
+									<li>思想道德修养与法律基础</li>
+									<li>通用课程</li>
+									<li>产品管理</li>
+									<li>金融工程</li>
+									<li>电子商务</li>
+								</ul>
+							</div>
+							<div class="p_ibt Mtp5 Mlf30 el_sel_module">
+								<div class="seled_box"><label class="p_ibt sel_txt">全部体系</label> <span class="iconfont icon-show_down"></span></div>
+								<ul class="el_sel_ul" style="display: none;">
+									<li>全部体系</li>
+									<li>理论课</li>
+									<li>专题</li>
+									<li>实战课</li>
+								</ul>
+							</div>
+							<div class="p_ibt Mtp5 Mlf30 el_sel_module">
+								<div class="seled_box"><label class="p_ibt sel_txt">全部类别</label> <span class="iconfont icon-show_down"></span></div>
+								<ul class="el_sel_ul" style="display: none;">
+									<li>全部类别</li>
+									<li>专业课</li>
+									<li>开放课</li>
+									<li>实验课</li>
+								</ul>
+							</div>
+						</div>
+						<div class="Mbm5 Mtp25 F12">共找到55个相关内容</div>
+						<div>
+							<div class="cms_panel course_list_item">
+								<div class="left posr"><a href="/portal-web/resources/courses/dc8b586867dd4093a7a2bed49da58af2" class="link"></a>
+									<img src="https://zhjxy.kp.futurelab.tv:18087/courses/dc8b586867dd4093a7a2bed49da58af2/image/36163f9739c84f9d8ab0d99f2c4612bf.jpg"
+									 class="img"> <span class="type" style="background-color: rgb(80, 227, 194);">未上线</span></div>
+								<div class="info" style="margin-left: 305px; max-width: unset;">
+									<div class="p_ibt title">厦门ETC-mxt-2021-java测试</div>
+									<div>
+										<div class="description wido60 p_ibt">JAVA课程体系全部内容</div>
+										<div class="right Mtp10"><a href="/portal-web/resources/courses/dc8b586867dd4093a7a2bed49da58af2" class="p_button detail_btn">查看详细</a>
+											<!----> <a href="javascript:;" class="p_button detail_btn">转换视频</a> <a href="javascript:;" class="p_button detail_btn">上传视频</a>
+											<!---->
+											<!---->
+										</div>
+									</div>
+									<div class="type_count"><span>专业课</span> <span class="p_ibt vline"></span> <span>章</span> <span>7</span> <span
+										 class="p_ibt vline"></span> <span>节</span> <span>39</span> <span class="p_ibt vline"></span> <span>实训案例</span>
+										<span>0</span> <span class="p_ibt vline"></span> <span>创建时间：</span> <span>2021-01-14 21:31</span> <span class="p_ibt vline"></span>
+										<span>课程负责人：</span> <span>莫筱婷</span></div>
+								</div>
+							</div>
+							<div class="cms_panel course_list_item">
+								<div class="left posr"><a href="/portal-web/resources/courses/2f84feb1968148eaa74189827ffcea2c" class="link"></a>
+									<img src="https://zhjxy.kp.futurelab.tv:18087/courses/2f84feb1968148eaa74189827ffcea2c/image/1609214798893.jpg"
+									 class="img"> <span class="type" style="background-color: rgb(80, 227, 194);">未上线</span></div>
+								<div class="info" style="margin-left: 305px; max-width: unset;">
+									<div class="p_ibt title">宁波中心Java全栈双师精英2101001预科班</div>
+									<div>
+										<div class="description wido60 p_ibt">Java是一门面向对象编程语言，不仅吸收了C++语言的各种优点，还摒弃了C++里难以理解的多继承、指针等概念，因此Java语言具有功能强大和简单易用两个特征。</div>
+										<div class="right Mtp10"><a href="/portal-web/resources/courses/2f84feb1968148eaa74189827ffcea2c" class="p_button detail_btn">查看详细</a>
+											<!----> <a href="javascript:;" class="p_button detail_btn">转换视频</a> <a href="javascript:;" class="p_button detail_btn">上传视频</a>
+											<!---->
+											<!---->
+										</div>
+									</div>
+									<div class="type_count"><span>专业课</span> <span class="p_ibt vline"></span> <span>章</span> <span>0</span> <span
+										 class="p_ibt vline"></span> <span>节</span> <span>0</span> <span class="p_ibt vline"></span> <span>实训案例</span>
+										<span>0</span> <span class="p_ibt vline"></span> <span>创建时间：</span> <span>2020-12-29 12:07</span> <span class="p_ibt vline"></span>
+										<span>课程负责人：</span> <span>刘华丽</span></div>
+								</div>
+							</div>
+							<div class="cms_panel course_list_item">
+								<div class="left posr"><a href="/portal-web/resources/courses/407916448a974c2faf3d5c55ef22d0a4" class="link"></a>
+									<img src="https://zhjxy.kp.futurelab.tv:18087/courses/407916448a974c2faf3d5c55ef22d0a4/image/bff677e1f08842eabb5b6dba191f30ac.jpg"
+									 class="img"> <span class="type" style="background-color: rgb(80, 227, 194);">未上线</span></div>
+								<div class="info" style="margin-left: 305px; max-width: unset;">
+									<div class="p_ibt title">湖北工业大学工程技术学院2019级第3 学期</div>
+									<div>
+										<div class="description wido60 p_ibt">本教材主要以Web设计为主，主要学习基础的HTML，了解HTML用途及使用方法； 能利用HTML制作网页；了解层叠样式表的一些简单操作；
+											了解CSS用途及使用方法；讲解 Bootstrap 框架的基础，通过学习这些内容，您将可以轻松地创建 Web 项目。学习JQuery基础教学教程； 了解JQuery框架基本功能； 掌握JQuery的一些事件处理教学；</div>
+										<div class="right Mtp10"><a href="/portal-web/resources/courses/407916448a974c2faf3d5c55ef22d0a4" class="p_button detail_btn">查看详细</a>
+											<!----> <a href="javascript:;" class="p_button detail_btn">转换视频</a> <a href="javascript:;" class="p_button detail_btn">上传视频</a>
+											<!---->
+											<!---->
+										</div>
+									</div>
+									<div class="type_count"><span>专业课</span> <span class="p_ibt vline"></span> <span>章</span> <span>4</span> <span
+										 class="p_ibt vline"></span> <span>节</span> <span>23</span> <span class="p_ibt vline"></span> <span>实训案例</span>
+										<span>0</span> <span class="p_ibt vline"></span> <span>创建时间：</span> <span>2020-12-24 10:55</span> <span class="p_ibt vline"></span>
+										<span>课程负责人：</span> <span>尹菠</span></div>
+								</div>
+							</div>
+							<div class="cms_panel course_list_item">
+								<div class="left posr"><a href="/portal-web/resources/courses/3c7ece57c9ea41889518088916501976" class="link"></a>
+									<img src="https://zhjxy.kp.futurelab.tv:18087/courses/3c7ece57c9ea41889518088916501976/image/6426a1842e60462ea6795e426060f84e.jpg"
+									 class="img"> <span class="type" style="background-color: rgb(80, 227, 194);">未上线</span></div>
+								<div class="info" style="margin-left: 305px; max-width: unset;">
+									<div class="p_ibt title">湖北工业大学工程技术学院2018级第5学期</div>
+									<div>
+										<div class="description wido60 p_ibt">java</div>
+										<div class="right Mtp10"><a href="/portal-web/resources/courses/3c7ece57c9ea41889518088916501976" class="p_button detail_btn">查看详细</a>
+											<!----> <a href="javascript:;" class="p_button detail_btn">转换视频</a> <a href="javascript:;" class="p_button detail_btn">上传视频</a>
+											<!---->
+											<!---->
+										</div>
+									</div>
+									<div class="type_count"><span>专业课</span> <span class="p_ibt vline"></span> <span>章</span> <span>5</span> <span
+										 class="p_ibt vline"></span> <span>节</span> <span>31</span> <span class="p_ibt vline"></span> <span>实训案例</span>
+										<span>0</span> <span class="p_ibt vline"></span> <span>创建时间：</span> <span>2020-12-24 10:38</span> <span class="p_ibt vline"></span>
+										<span>课程负责人：</span> <span>130****4462</span></div>
+								</div>
+							</div>
+							<div class="cms_panel course_list_item">
+								<div class="left posr"><a href="/portal-web/resources/courses/dad11ee331a84d39848e5fb619520b44" class="link"></a>
+									<img src="https://zhjxy.kp.futurelab.tv:18087/courses/dad11ee331a84d39848e5fb619520b44/image/36163f9739c84f9d8ab0d99f2c4612bf.jpg"
+									 class="img"> <span class="type" style="background-color: rgb(80, 227, 194);">未上线</span></div>
+								<div class="info" style="margin-left: 305px; max-width: unset;">
+									<div class="p_ibt title">中软国际-2020-JAVA课程体系</div>
+									<div>
+										<div class="description wido60 p_ibt">JAVA课程体系全部内容</div>
+										<div class="right Mtp10"><a href="/portal-web/resources/courses/dad11ee331a84d39848e5fb619520b44" class="p_button detail_btn">查看详细</a>
+											<!----> <a href="javascript:;" class="p_button detail_btn">转换视频</a> <a href="javascript:;" class="p_button detail_btn">上传视频</a>
+											<!---->
+											<!---->
+										</div>
+									</div>
+									<div class="type_count"><span>专业课</span> <span class="p_ibt vline"></span> <span>章</span> <span>9</span> <span
+										 class="p_ibt vline"></span> <span>节</span> <span>90</span> <span class="p_ibt vline"></span> <span>实训案例</span>
+										<span>0</span> <span class="p_ibt vline"></span> <span>创建时间：</span> <span>2020-12-11 16:41</span> <span class="p_ibt vline"></span>
+										<span>课程负责人：</span> <span>李鹏</span></div>
+								</div>
+							</div>
+							<div class="cms_panel course_list_item">
+								<div class="left posr"><a href="/portal-web/resources/courses/ab078fd623164f56a9b2c38877fe0a96" class="link"></a>
+									<img src="https://zhjxy.kp.futurelab.tv:18087/courses/ab078fd623164f56a9b2c38877fe0a96/image/36163f9739c84f9d8ab0d99f2c4612bf.jpg"
+									 class="img"> <span class="type" style="background-color: rgb(80, 227, 194);">未上线</span></div>
+								<div class="info" style="margin-left: 305px; max-width: unset;">
+									<div class="p_ibt title">厦门ETC-JJA2013-Java-全栈</div>
+									<div>
+										<div class="description wido60 p_ibt">JAVA课程体系全部内容</div>
+										<div class="right Mtp10"><a href="/portal-web/resources/courses/ab078fd623164f56a9b2c38877fe0a96" class="p_button detail_btn">查看详细</a>
+											<!----> <a href="javascript:;" class="p_button detail_btn">转换视频</a> <a href="javascript:;" class="p_button detail_btn">上传视频</a>
+											<!---->
+											<!---->
+										</div>
+									</div>
+									<div class="type_count"><span>专业课</span> <span class="p_ibt vline"></span> <span>章</span> <span>9</span> <span
+										 class="p_ibt vline"></span> <span>节</span> <span>90</span> <span class="p_ibt vline"></span> <span>实训案例</span>
+										<span>0</span> <span class="p_ibt vline"></span> <span>创建时间：</span> <span>2020-12-11 11:41</span> <span class="p_ibt vline"></span>
+										<span>课程负责人：</span> <span>杨宗强</span></div>
+								</div>
+							</div>
+							<div class="cms_panel course_list_item">
+								<div class="left posr"><a href="/portal-web/resources/courses/cd38e71da00146508a5ee0801a25272b" class="link"></a>
+									<img src="https://zhjxy.kp.futurelab.tv:18087/courses/cd38e71da00146508a5ee0801a25272b/image/b46675707d604a5b8c6f625f5e225487.jfif"
+									 class="img"> <span class="type" style="background-color: rgb(80, 227, 194);">未上线</span></div>
+								<div class="info" style="margin-left: 305px; max-width: unset;">
+									<div class="p_ibt title">西安EEC-JAVA20201026班-Mysql</div>
+									<div>
+										<div class="description wido60 p_ibt">西安EEC-JAVA20201026班-Mysql</div>
+										<div class="right Mtp10"><a href="/portal-web/resources/courses/cd38e71da00146508a5ee0801a25272b" class="p_button detail_btn">查看详细</a>
+											<!----> <a href="javascript:;" class="p_button detail_btn">转换视频</a> <a href="javascript:;" class="p_button detail_btn">上传视频</a>
+											<!---->
+											<!---->
+										</div>
+									</div>
+									<div class="type_count"><span>专业课</span> <span class="p_ibt vline"></span> <span>章</span> <span>8</span> <span
+										 class="p_ibt vline"></span> <span>节</span> <span>8</span> <span class="p_ibt vline"></span> <span>实训案例</span>
+										<span>0</span> <span class="p_ibt vline"></span> <span>创建时间：</span> <span>2020-12-09 10:52</span> <span class="p_ibt vline"></span>
+										<span>课程负责人：</span> <span>行者孙</span></div>
+								</div>
+							</div>
+							<div class="cms_panel course_list_item">
+								<div class="left posr"><a href="/portal-web/resources/courses/be14c6c57116488998133f09fde0c283" class="link"></a>
+									<img src="https://zhjxy.kp.futurelab.tv:18087/courses/be14c6c57116488998133f09fde0c283/image/1607073665292.jpg"
+									 class="img"> <span class="type" style="background-color: rgb(80, 227, 194);">未上线</span></div>
+								<div class="info" style="margin-left: 305px; max-width: unset;">
+									<div class="p_ibt title">厦门ETC-JAVA-20201123-第一阶段</div>
+									<div>
+										<div class="description wido60 p_ibt">javaSE基础</div>
+										<div class="right Mtp10"><a href="/portal-web/resources/courses/be14c6c57116488998133f09fde0c283" class="p_button detail_btn">查看详细</a>
+											<!----> <a href="javascript:;" class="p_button detail_btn">转换视频</a> <a href="javascript:;" class="p_button detail_btn">上传视频</a>
+											<!---->
+											<!---->
+										</div>
+									</div>
+									<div class="type_count"><span>专业课</span> <span class="p_ibt vline"></span> <span>章</span> <span>0</span> <span
+										 class="p_ibt vline"></span> <span>节</span> <span>0</span> <span class="p_ibt vline"></span> <span>实训案例</span>
+										<span>0</span> <span class="p_ibt vline"></span> <span>创建时间：</span> <span>2020-12-04 17:23</span> <span class="p_ibt vline"></span>
+										<span>课程负责人：</span> <span>张清</span></div>
+								</div>
+							</div>
+							<div class="cms_panel course_list_item">
+								<div class="left posr"><a href="/portal-web/resources/courses/8a93864cf23049b298aaf25fe278fc1f" class="link"></a>
+									<img src="https://zhjxy.kp.futurelab.tv:18087/courses/8a93864cf23049b298aaf25fe278fc1f/image/faee13d02469499fb7ee06aa5024ac1b.png"
+									 class="img"> <span class="type" style="background-color: rgb(80, 227, 194);">未上线</span></div>
+								<div class="info" style="margin-left: 305px; max-width: unset;">
+									<div class="p_ibt title">武汉ETC-JAVA-社招0907班-微服务框架</div>
+									<div>
+										<div class="description wido60 p_ibt">微服务</div>
+										<div class="right Mtp10"><a href="/portal-web/resources/courses/8a93864cf23049b298aaf25fe278fc1f" class="p_button detail_btn">查看详细</a>
+											<!----> <a href="javascript:;" class="p_button detail_btn">转换视频</a> <a href="javascript:;" class="p_button detail_btn">上传视频</a>
+											<!---->
+											<!---->
+										</div>
+									</div>
+									<div class="type_count"><span>专业课</span> <span class="p_ibt vline"></span> <span>章</span> <span>4</span> <span
+										 class="p_ibt vline"></span> <span>节</span> <span>7</span> <span class="p_ibt vline"></span> <span>实训案例</span>
+										<span>0</span> <span class="p_ibt vline"></span> <span>创建时间：</span> <span>2020-11-25 16:27</span> <span class="p_ibt vline"></span>
+										<span>课程负责人：</span> <span>陈翔</span></div>
+								</div>
+							</div>
+							<div class="cms_panel course_list_item">
+								<div class="left posr"><a href="/portal-web/resources/courses/343d74a72ce749d2a6126d94baa1629b" class="link"></a>
+									<img src="https://zhjxy.kp.futurelab.tv:18087/courses/343d74a72ce749d2a6126d94baa1629b/image/5a28bed64b7644efb253f04f7265ed2c.png"
+									 class="img"> <span class="type" style="background-color: rgb(80, 227, 194);">未上线</span></div>
+								<div class="info" style="margin-left: 305px; max-width: unset;">
+									<div class="p_ibt title">武汉ETC-社招0907班Vue基础</div>
+									<div>
+										<div class="description wido60 p_ibt">vue基础</div>
+										<div class="right Mtp10"><a href="/portal-web/resources/courses/343d74a72ce749d2a6126d94baa1629b" class="p_button detail_btn">查看详细</a>
+											<!----> <a href="javascript:;" class="p_button detail_btn">转换视频</a> <a href="javascript:;" class="p_button detail_btn">上传视频</a>
+											<!---->
+											<!---->
+										</div>
+									</div>
+									<div class="type_count"><span>专业课</span> <span class="p_ibt vline"></span> <span>章</span> <span>12</span>
+										<span class="p_ibt vline"></span> <span>节</span> <span>51</span> <span class="p_ibt vline"></span> <span>实训案例</span>
+										<span>0</span> <span class="p_ibt vline"></span> <span>创建时间：</span> <span>2020-11-25 16:12</span> <span class="p_ibt vline"></span>
+										<span>课程负责人：</span> <span>陈翔</span></div>
+								</div>
+							</div>
+						</div>
+						<div class="Center Ptp25 Pbm40">
+							<div class="cms_page el-pagination" prev-text="上一页" next-text="下一页"><span class="el-pagination__total">共 55 条</span><button
+								 type="button" class="btn-prev disabled"><span>上一页</span></button>
+								<ul class="el-pager">
+									<li class="number active">1</li>
+									<!---->
+									<li class="number">2</li>
+									<li class="number">3</li>
+									<li class="number">4</li>
+									<li class="number">5</li>
+									<!---->
+									<li class="number">6</li>
+								</ul><button type="button" class="btn-next"><span>下一页</span></button>
+							</div>
+						</div>
+					</div>
+					<div class="bomb_box">
+						<!---->
+						<div class="slide_box slide_box1">
+							<div class="title"><span>导入教材</span> <span class="right iconfont icon-close"></span></div>
+							<div class="scroll">
+								<p class="Plf20 text_name Mtp20">技术方向</p>
+								<div class="posr limit_letter">
+									<div class="el-select el_select0 Mlf20 Mtp10">
+										<!---->
+										<div class="el-input el-input--large">
+											<!----><i class="el-input__icon el-icon-caret-top"></i><input autocomplete="off" placeholder="请选择方向" size="large"
+											 readonly="readonly" icon="caret-top" type="text" rows="2" class="el-input__inner">
+											<!---->
+											<!---->
+										</div>
+										<div class="el-select-dropdown" style="display: none; min-width: 279.996px;">
+											<div class="el-scrollbar" style="">
+												<div class="el-select-dropdown__wrap el-scrollbar__wrap" style="margin-bottom: -17px; margin-right: -17px;">
+													<ul class="el-scrollbar__view el-select-dropdown__list" style="position: relative;">
+														<!---->
+														<li class="el-select-dropdown__item"><span>前端开发</span></li>
+														<li class="el-select-dropdown__item"><span>Java</span></li>
+														<li class="el-select-dropdown__item"><span>人工智能</span></li>
+														<li class="el-select-dropdown__item"><span>数据库</span></li>
+														<li class="el-select-dropdown__item"><span>云计算</span></li>
+														<li class="el-select-dropdown__item"><span>大数据</span></li>
+														<li class="el-select-dropdown__item"><span>鲲鹏训练营</span></li>
+														<li class="el-select-dropdown__item"><span>物联网</span></li>
+														<li class="el-select-dropdown__item"><span>PHP</span></li>
+														<li class="el-select-dropdown__item"><span>C_嵌入式</span></li>
+														<li class="el-select-dropdown__item"><span>思想道德修养与法律基础</span></li>
+														<li class="el-select-dropdown__item"><span>UXD</span></li>
+														<li class="el-select-dropdown__item"><span>通用课程</span></li>
+														<li class="el-select-dropdown__item"><span>产品管理</span></li>
+														<li class="el-select-dropdown__item"><span>金融工程</span></li>
+														<li class="el-select-dropdown__item"><span>电子商务</span></li>
+														<li class="el-select-dropdown__item"><span>软件测试</span></li>
+														<li class="el-select-dropdown__item"><span>鲲鹏云-HCIA</span></li>
+														<li class="el-select-dropdown__item"><span>gaussDB-HCIP</span></li>
+														<li class="el-select-dropdown__item"><span>敏捷</span></li>
+														<li class="el-select-dropdown__item"><span>项目管理</span></li>
+														<li class="el-select-dropdown__item"><span>全部方向</span></li>
+														<div class="resize-triggers">
+															<div class="expand-trigger">
+																<div style="width: 1px; height: 1px;"></div>
+															</div>
+															<div class="contract-trigger"></div>
+														</div>
+													</ul>
+												</div>
+												<div class="el-scrollbar__bar is-horizontal">
+													<div class="el-scrollbar__thumb" style="transform: translateX(0%);"></div>
+												</div>
+												<div class="el-scrollbar__bar is-vertical">
+													<div class="el-scrollbar__thumb" style="transform: translateY(0%);"></div>
+												</div>
+											</div>
+											<!---->
+										</div>
+										<div class="resize-triggers">
+											<div class="expand-trigger">
+												<div style="width: 281px; height: 43px;"></div>
+											</div>
+											<div class="contract-trigger"></div>
+										</div>
+									</div>
+								</div>
+								<p class="Plf20 text_name Mtp20">子方向</p>
+								<div class="posr limit_letter">
+									<div class="el-select el_select0 Mlf20 Mtp10">
+										<!---->
+										<div class="el-input el-input--large">
+											<!----><i class="el-input__icon el-icon-caret-top"></i><input autocomplete="off" placeholder="请选择子方向" size="large"
+											 readonly="readonly" icon="caret-top" type="text" rows="2" class="el-input__inner">
+											<!---->
+											<!---->
+										</div>
+										<div class="el-select-dropdown" style="display: none; min-width: 279.996px;">
+											<div class="el-scrollbar is-empty" style="display: none;">
+												<div class="el-select-dropdown__wrap el-scrollbar__wrap" style="margin-bottom: -17px; margin-right: -17px;">
+													<ul class="el-scrollbar__view el-select-dropdown__list" style="position: relative;">
+														<div class="resize-triggers">
+															<div class="expand-trigger">
+																<div style="width: 1px; height: 1px;"></div>
+															</div>
+															<div class="contract-trigger"></div>
+														</div>
+													</ul>
+												</div>
+												<div class="el-scrollbar__bar is-horizontal">
+													<div class="el-scrollbar__thumb" style="transform: translateX(0%);"></div>
+												</div>
+												<div class="el-scrollbar__bar is-vertical">
+													<div class="el-scrollbar__thumb" style="transform: translateY(0%);"></div>
+												</div>
+											</div>
+											<p class="el-select-dropdown__empty">无数据</p>
+										</div>
+										<div class="resize-triggers">
+											<div class="expand-trigger">
+												<div style="width: 281px; height: 43px;"></div>
+											</div>
+											<div class="contract-trigger"></div>
+										</div>
+									</div>
+								</div>
+								<p class="Plf20 text_name Mtp20">课程分类</p>
+								<div class="posr limit_letter">
+									<div class="el-select el_select0 Mlf20 Mtp10">
+										<!---->
+										<div class="el-input el-input--large">
+											<!----><i class="el-input__icon el-icon-caret-top"></i><input autocomplete="off" placeholder="请选择课程分类" size="large"
+											 readonly="readonly" icon="caret-top" type="text" rows="2" class="el-input__inner">
+											<!---->
+											<!---->
+										</div>
+										<div class="el-select-dropdown" style="display: none; min-width: 279.996px;">
+											<div class="el-scrollbar" style="">
+												<div class="el-select-dropdown__wrap el-scrollbar__wrap" style="margin-bottom: -17px; margin-right: -17px;">
+													<ul class="el-scrollbar__view el-select-dropdown__list" style="position: relative;">
+														<!---->
+														<li class="el-select-dropdown__item selected"><span>开放课</span></li>
+														<li class="el-select-dropdown__item"><span>专业课</span></li>
+														<div class="resize-triggers">
+															<div class="expand-trigger">
+																<div style="width: 1px; height: 1px;"></div>
+															</div>
+															<div class="contract-trigger"></div>
+														</div>
+													</ul>
+												</div>
+												<div class="el-scrollbar__bar is-horizontal">
+													<div class="el-scrollbar__thumb" style="transform: translateX(0%);"></div>
+												</div>
+												<div class="el-scrollbar__bar is-vertical">
+													<div class="el-scrollbar__thumb" style="transform: translateY(0%);"></div>
+												</div>
+											</div>
+											<!---->
+										</div>
+										<div class="resize-triggers">
+											<div class="expand-trigger">
+												<div style="width: 281px; height: 43px;"></div>
+											</div>
+											<div class="contract-trigger"></div>
+										</div>
+									</div>
+								</div>
+								<p class="Plf20 text_name Mtp20">课程体系</p>
+								<div class="posr limit_letter">
+									<div class="el-select el_select0 Mlf20 Mtp10">
+										<!---->
+										<div class="el-input el-input--large">
+											<!----><i class="el-input__icon el-icon-caret-top"></i><input autocomplete="off" placeholder="请选择课程体系" size="large"
+											 readonly="readonly" icon="caret-top" type="text" rows="2" class="el-input__inner">
+											<!---->
+											<!---->
+										</div>
+										<div class="el-select-dropdown" style="display: none; min-width: 279.996px;">
+											<div class="el-scrollbar" style="">
+												<div class="el-select-dropdown__wrap el-scrollbar__wrap" style="margin-bottom: -17px; margin-right: -17px;">
+													<ul class="el-scrollbar__view el-select-dropdown__list" style="position: relative;">
+														<div class="resize-triggers">
+															<div class="expand-trigger">
+																<div style="width: 1px; height: 1px;"></div>
+															</div>
+															<div class="contract-trigger"></div>
+														</div>
+														<!---->
+														<li class="el-select-dropdown__item selected"><span>理论课</span></li>
+														<li class="el-select-dropdown__item"><span>专题</span></li>
+														<li class="el-select-dropdown__item"><span>实战课</span></li>
+													</ul>
+												</div>
+												<div class="el-scrollbar__bar is-horizontal">
+													<div class="el-scrollbar__thumb" style="transform: translateX(0%);"></div>
+												</div>
+												<div class="el-scrollbar__bar is-vertical">
+													<div class="el-scrollbar__thumb" style="transform: translateY(0%);"></div>
+												</div>
+											</div>
+											<!---->
+										</div>
+										<div class="resize-triggers">
+											<div class="expand-trigger">
+												<div style="width: 281px; height: 43px;"></div>
+											</div>
+											<div class="contract-trigger"></div>
+										</div>
+									</div>
+								</div>
+								<p class="Plf20 text_name Mtp20">资源包</p>
+								<div class="posr limit_letter">
+									<div class="el_upload_file Mlf20 Mtp10 wido80">
+										<div class="p_ibt"><i class="p_ibt iconfont icon-join"></i> <span>选择课程导入文件夹</span></div>
+									</div>
+								</div>
+								<div class="col_md5 Mtp20">
+									<div class="Mtp25 Mlf20"><a href="javascript:;" class="p_button join_resource_btn">确定</a></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div>
+						<!---->
+						<div class="el-dialog__wrapper" width="400px" style="display: none;">
+							<div class="el-dialog el-dialog--small" style="top: 15%;">
+								<div class="el-dialog__header"><span class="el-dialog__title">新建文件夹</span><button type="button" aria-label="Close"
+									 class="el-dialog__headerbtn"><i class="el-dialog__close el-icon el-icon-close"></i></button></div>
+								<!---->
+								<div class="el-dialog__footer"><span class="dialog-footer"><button type="button" class="el-button el-button--primary">
+											<!---->
+											<!----><span>确定</span></button></span></div>
+							</div>
+						</div>
+						<div class="el-dialog__wrapper" width="500px" style="display: none;">
+							<div class="el-dialog el-dialog--small" style="top: 15%;">
+								<div class="el-dialog__header"><span class="el-dialog__title">手动上传文件</span>
+									<!---->
+								</div>
+								<!---->
+								<div class="el-dialog__footer"><span class="dialog-footer"><button type="button" class="el-button el-button--primary">
+											<!---->
+											<!----><span>完 成</span></button></span></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 右侧部分结束 -->
+
+	</body>
+</html>

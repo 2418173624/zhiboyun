@@ -1,0 +1,58 @@
+.personalNav {
+	float: left;
+	background-color: #fff;
+	border-radius: 3px
+}
+
+.personalNav ul li a {
+	display: block;
+	height: 80px;
+	line-height: 60px;
+	width: 240px;
+	font-size: 14px;
+	color: #798f9c;
+	cursor: pointer;
+	position: relative
+}
+
+.personalNav ul li:hover {
+	background-color: #f2fbff;
+	color: #09f
+}
+
+.personalNav ul li:hover a::before {
+	content: '';
+	height: 100%;
+	width: 3px;
+	position: absolute;
+	left: 0;
+	top: 0;
+	background-color: #09f
+}
+
+.personalNav ul li:hover a {
+	color: #09f
+}
+
+.personalNav ul li .iconfont {
+	font-size: 22px
+}
+
+.personalNav ul li.checkon {
+	background-color: #f2fbff;
+	color: #09f
+}
+
+.personalNav ul li.checkon a::before {
+	content: '';
+	height: 100%;
+	width: 3px;
+	position: absolute;
+	left: 0;
+	top: 0;
+	background-color: #09f
+}
+
+.personalNav ul li.checkon a {
+	color: #09f
+}

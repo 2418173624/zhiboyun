@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link href="/css/common_dbbbd09.css" rel="stylesheet" />
+		<link href="/css/components_2ada063.css" rel="stylesheet" />
+		<link href="/css/train_banner_429adde.css" rel="stylesheet" />
+		<link href="/css/personal_nav_5b79317.css" rel="stylesheet" />
+		<link href="/css/iconfont.css" rel="stylesheet" />
+		<link href="/css/main_4d07d49.css" rel="stylesheet" />
+		<link href="/css/element.css" rel="stylesheet" />
+		<link href="/css/classroom_cfd09f6.css" rel="stylesheet" />
+		<link href="/css/elementui.css" rel="stylesheet" />
+	</head>
+	<body>
+		<div id="app" style="position: relative; min-height: calc(100vh - 185px);">
+			<div th:replace="~{common::topbar}"></div>
+					
+						<!-- 中间部分开始 -->
+
+						<div class="training_activity_list_main clearfix" style="height:10s00px;">
+							<!--中间左半部分开始-->
+							<div th:replace="~{common::sidebar}"></div>
+							<div class="training_activity_list_detailed">
+								<div class="training_activity_list_detailed_nav clearfix">
+									<ul class="left">
+										<li class="active">进行中</li>
+										<li class="">已结束</li>
+									</ul>
+								</div>
+								<div class="Ptp20 Plf20">
+									<div class="wid200 el-input">
+										<!----><input type="text" autocomplete="off" placeholder="课堂名" class="el-input__inner">
+										<!---->
+										<!---->
+										<!---->
+									</div>
+
+								</div>
+								<div class="Mtp20">
+									<ul class="vc_classroom">
+										<li class="li p_ibt" style="margin-right: 50px;"><a href="https://zhjxy.kp.futurelab.tv/classrooms/8f90fe7588f240a794c0bfd5709e4165"
+											 target="_blank">
+												<div class="classroom_img" style="background-image: url(&quot;https://zhjxy.kp.futurelab.tv:18087/courses/321654ea56a349cf810c400c8953685c/image/36163f9739c84f9d8ab0d99f2c4612bf.jpg&quot;);"></div>
+												<div class="assistant_flag" style="display: none;">助</div>
+												<div class="assistant_flag" style="display: none;">管</div>
+												<div class="classroom_detail">
+													<div class="tech_type" style="background-color: rgb(255, 186, 73);">
+														Java</div>
+													<div class="tech_type" style="background-color: rgb(126, 211, 33);">
+														标准课堂</div>
+													<div class="tech_type" style="background-color: rgb(255, 186, 73);">
+														腾讯云视频</div>
+													<h2 class="classroom_name">天津ETC-JAVA-202009291班-Java</h2>
+													<p class="description">JAVA课程体系全部内容</p>
+													<div class="count_box">
+														<div class="p_ibm count"><span>章</span> <span>8</span></div> <span class="Mlf10 Mrt10">|</span>
+														<div class="p_ibm count"><span>节</span> <span>72</span></div> <span class="Mlf10 Mrt10">|</span>
+														<div class="p_ibm count"><span>老师：</span> <span>田恩泽</span></div>
+														<!---->
+													</div>
+												</div>
+											</a>
+											<div class="control_box"> <span class="iconfont icon-checkbox" style="display: none;"></span></div>
+											<div class="mask_box" style="display: none;"></div>
+										</li>
+									</ul>
+								</div>
+								<div class="Mtp10 training_activity_list_detailed_empty" style="display: none;"><img src="/webApp/images/no_data.png"
+									 alt="暂无云课堂">
+									<div class="prom_txt">暂无云课堂</div>
+								</div>
+								</header>
+							</div>
+						</div>
+			</div>
+		</div>
+			<!-- 中间部分结束 -->
+		
+		<!-- 底部开始 -->
+		<div th:replace="~{common::footerbar}"></div>
+		<!-- 底部结束 -->
+	</body>
+</html>

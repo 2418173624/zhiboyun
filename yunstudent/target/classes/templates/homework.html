@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link href="/css/common_dbbbd09.css" rel="stylesheet" />
+		<link href="/css/components_2ada063.css" rel="stylesheet" />
+		<link href="/css/train_banner_429adde.css" rel="stylesheet" />
+		<link href="/css/personal_nav_5b79317.css" rel="stylesheet" />
+		<link href="/css/iconfont.css" rel="stylesheet" />
+		<link href="/css/main_4d07d49.css" rel="stylesheet" />
+		<link href="/css/element.css" rel="stylesheet" />
+		<link href="/css/classroom_cfd09f6.css" rel="stylesheet" />
+		<link href="/css/elementui.css" rel="stylesheet" />
+	</head>
+	<body>
+		<div id="app" style="position: relative; min-height: calc(100vh - 185px);">
+			<!-- 头部开始 -->
+			<div th:replace="~{common::topbar}"></div>
+						<!--头部结束-->
+
+
+					<article>
+						<!-- 中间部分开始 -->
+						<div class="training_activity_list_main clearfix">
+							<!-- 中间左半部分开始 -->
+							<div th:replace="~{common::sidebar}"></div>
+
+							<!-- 中间左半部分结束 -->
+							<!-- 中间右半部分开始 -->
+							
+							<!-- 中间右半部分结束 -->
+
+						</div>
+					</article>
+					<!-- 中间部分结束 -->
+				</header>
+			</div>
+		</div>
+		
+		<!-- 底部开始 -->
+		<div th:replace="~{common::footerbar}"></div>
+		<!-- 底部结束 -->
+	</body>
+</html>
+

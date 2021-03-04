@@ -1,0 +1,55 @@
+.training_class_student_download{box-sizing:border-box;line-height:54px;}
+.outcomePage .number,.outcomePage .el-icon{border-radius:50%;margin:0 4px;width:36px;height:36px;border:1px solid #E6EEF0;background-color:#fafafa;color:#333333;line-height:36px;text-align:center;}
+.outcomePage .number:last-child{border:1px solid #E6EEF0;}
+.outcomePage button.btn-prev,.outcomePage button.btn-next{height:36px;margin:0 4px;width:74px;border:1px solid #E6EEF0;text-align:center;border-radius:18px;padding: 0px 6px;}
+.outcomePage button.btn-prev:hover span,.outcomePage button.btn-next:hover span{color:#20a0ff;}
+.outcomePage button span{line-height:36px;color:#33495F;}
+.outcomePage button[disabled=disabled] span{color:#afbec4;}
+.outcomePage button[disabled=disabled]:hover span{color:#afbec4;}
+.outcomePage button[disabled=disabled]:hover{cursor:not-allowed;}
+.outcomePage .el-icon-more{line-height:36px;border-radius:50%;}
+.outcomePage .el-icon-more::before{content:'.....'}
+.outcomePage .el-icon-d-arrow-left:before{content:"....."}
+.outcomePage .el-icon-d-arrow-right:before{content:"....."}
+.outcomePage .active:last-child{border-color:#E6EEF0;}
+.outcomePage button,.outcomePage span:not([class*="suffix"]){vertical-align:middle;}
+
+.el-date-picker__header .el-date-picker__prev-btn{padding:0px 8px;}
+.el-date-picker__header .el-picker-panel__icon-btn{padding:0px 8px;}
+.el-date-picker__header .el-date-picker__next-btn{padding:0px 8px;}
+
+/*提示框*/
+.el_dialog{color:#8ba0ac;}
+.el_dialog .el-dialog__title{color:#314248;}
+.el_dialog .el-button--default{color:#797979;border-radius:20px;width:100px;padding: 12px 15px;}
+.el_dialog .el-button--default:hover{color:#20a0ff;}
+.el_dialog .el-button--primary{color:#fff;border-radius:20px;width:100px;padding: 12px 15px;}
+.el_dialog .el-dialog__header{padding: 15px 20px 0;}
+.el_dialog .el-dialog__headerbtn{font-size: 16px;color:#999999;}
+
+/* .el-icon-success{color: #67c23a;}
+.el-icon-error{color: #f56c6c;} */
+
+/*查看试题的禁用颜色*/
+.preview_que .el-radio__input.is-disabled+span.el-radio__label{color:#606266}
+.preview_que .el-checkbox__input.is-disabled+span.el-checkbox__label{color:#606266}
+
+/*滚动条*/
+.el_scrollbar .el-scrollbar__wrap{overflow-x:hidden;}
+
+/*menu*/
+.el_menu{border:none;}
+.el_menu > .el-submenu.is-active .el-submenu__title,.el_menu > .el-menu-item.is-active{border-bottom:3px solid #409EFF;}
+
+.el_radio_box .el-radio__input{vertical-align:top;margin-top:3px;}
+.el_radio_box .el-checkbox__input{vertical-align:top;margin-top:4px;}
+.el_radio_box{line-height: normal;}
+
+.el_tabs .el-tabs__content{overflow:visible;min-height: 400px;}
+/*在dialog里面用滚动条再嵌套el-collapse下三角图标在展开时横向溢出导致出现横向滚动条*/
+.el-collapse-item__arrow{line-height: 1;margin-top: 18px;}
+.el-collapse-item__header{overflow:hidden;}
+
+.el-table .el_table_header_bg{
+    background-color: #f5f7fa;
+}

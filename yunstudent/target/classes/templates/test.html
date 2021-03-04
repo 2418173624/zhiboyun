@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link href="/css/common_dbbbd09.css" rel="stylesheet" />
+		<link href="/css/components_2ada063.css" rel="stylesheet" />
+		<link href="/css/train_banner_429adde.css" rel="stylesheet" />
+		<link href="/css/personal_nav_5b79317.css" rel="stylesheet" />
+		<link href="/css/iconfont.css" rel="stylesheet" />
+		<link href="/css/main_4d07d49.css" rel="stylesheet" />
+		<link href="/css/element.css" rel="stylesheet" />
+		<link href="/css/classroom_cfd09f6.css" rel="stylesheet" />
+		<link href="/css/elementui.css" rel="stylesheet" />
+	</head>
+	<body>
+		<div id="app" style="position: relative; min-height: calc(100vh - 185px);">
+			<!-- 头部开始 -->
+			<div th:replace="~{common::topbar}"></div>
+					<article>
+						<!-- 中间部分开始 -->
+						<div class="training_activity_list_main clearfix">
+							<!-- 中间左半部分开始 -->
+							<div th:replace="~{common::sidebar}"></div>
+							<!-- 中间左半部分结束 -->
+							<!-- 中间右半部分开始 -->
+							<div class="training_activity_list_detailed">
+								<div class="el-tabs el-tabs--card el-tabs--top" element-loading-text="拼命加载中" element-loading-spinner="el-icon-loading"
+								 element-loading-background="rgba(0, 0, 0, 0.8)">
+									<div class="el-tabs__header is-top">
+										<div class="el-tabs__nav-wrap is-top">
+											<div class="el-tabs__nav-scroll">
+												<div role="tablist" class="el-tabs__nav" style="transform: translateX(0px);">
+													<div id="tab-1" aria-controls="pane-1" role="tab" tabindex="0" class="el-tabs__item is-top is-active"
+													 aria-selected="true">班级考试</div>
+												
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="el-tabs__content">
+										<div role="tabpanel" id="pane-1" aria-labelledby="tab-1" class="el-tab-pane" style="">
+											<div>
+												<div class="p_ibt Mlf10">
+													<div class="el-select">
+														<!---->
+														<div class="el-input el-input--suffix">
+															<!----><input type="text" autocomplete="off" placeholder="请选择考试状态" readonly="readonly" class="el-input__inner">
+															<!----><span class="el-input__suffix"><span class="el-input__suffix-inner"><i class="el-select__caret el-input__icon el-icon-arrow-up"></i>
+																	<!----></span>
+																<!----></span>
+															<!---->
+														</div>
+														<div class="el-select-dropdown el-popper" style="display: none; min-width: 205.109px;">
+															<div class="el-scrollbar" style="">
+																<div class="el-select-dropdown__wrap el-scrollbar__wrap" style="margin-bottom: -17px; margin-right: -17px;">
+																	<ul class="el-scrollbar__view el-select-dropdown__list">
+																		<!---->
+																		<li class="el-select-dropdown__item"><span>未加入</span></li>
+																		<li class="el-select-dropdown__item"><span>未交卷</span></li>
+																		<li class="el-select-dropdown__item"><span>未判阅</span></li>
+																		<li class="el-select-dropdown__item"><span>已判阅</span></li>
+																	</ul>
+																</div>
+																<div class="el-scrollbar__bar is-horizontal">
+																	<div class="el-scrollbar__thumb" style="transform: translateX(0%);"></div>
+																</div>
+																<div class="el-scrollbar__bar is-vertical">
+																	<div class="el-scrollbar__thumb" style="transform: translateY(0%);"></div>
+																</div>
+															</div>
+															<!---->
+														</div>
+													</div>
+												</div>
+												<div class="p_ibt Mlf10"><button type="button" class="el-button el-button--primary">
+														<!---->
+														<!----><span>搜索</span></button> <button type="button" class="el-button el-button--primary">
+														<!---->
+														<!----><span>清空</span></button>
+													<div class="p_ibt Mlf10" style="margin-left:350px;">
+														<button type="button" class="el-button el-button--primary">
+															<span>添加考试</span></button>
+													</div>
+
+												</div>
+											</div>
+
+											<div class="el-table Mtp10 el-table--fit el-table--enable-row-hover el-table--enable-row-transition" style="width: 100%; height: 500px;">
+												<div class="hidden-columns">
+													<div></div>
+													<div></div>
+													<div></div>
+													<div></div>
+													<div></div>
+													<div></div>
+													<div fiexd="right"></div>
+												</div>
+												<div class="el-table__header-wrapper">
+													<table cellspacing="0" cellpadding="0" border="0" class="el-table__header" style="width: 940px;">
+														<colgroup>
+															<col name="el-table_3_column_15" width="50">
+															<col name="el-table_3_column_16" width="170">
+															<col name="el-table_3_column_17" width="180">
+															<col name="el-table_3_column_18" width="100">
+															<col name="el-table_3_column_19" width="100">
+															<col name="el-table_3_column_20" width="100">
+															<col name="el-table_3_column_21" width="240">
+															<col name="gutter" width="0">
+														</colgroup>
+														<thead class="has-gutter">
+															<tr class="">
+																<th colspan="1" rowspan="1" class="el-table_3_column_15     is-leaf">
+																	<div class="cell">#</div>
+																</th>
+																<th colspan="1" rowspan="1" class="el-table_3_column_16  is-center   is-leaf">
+																	<div class="cell">名称</div>
+																</th>
+																<th colspan="1" rowspan="1" class="el-table_3_column_17  is-center   is-leaf">
+																	<div class="cell">开始时间</div>
+																</th>
+																<th colspan="1" rowspan="1" class="el-table_3_column_18     is-leaf">
+																	<div class="cell">客观题</div>
+																</th>
+																<th colspan="1" rowspan="1" class="el-table_3_column_19     is-leaf">
+																	<div class="cell">主观题</div>
+																</th>
+																<th colspan="1" rowspan="1" class="el-table_3_column_20     is-leaf">
+																	<div class="cell">总分</div>
+																</th>
+																<th colspan="1" rowspan="1" class="el-table_3_column_21  is-center   is-leaf">
+																	<div class="cell">操作</div>
+																</th>
+																<th class="gutter" style="width: 0px; display: none;"></th>
+															</tr>
+														</thead>
+													</table>
+												</div>
+												<div class="el-table__body-wrapper is-scrolling-none" style="height: 452px;">
+													<table cellspacing="0" cellpadding="0" border="0" class="el-table__body" style="width: 940px;">
+														<colgroup>
+															<col name="el-table_3_column_15" width="50">
+															<col name="el-table_3_column_16" width="170">
+															<col name="el-table_3_column_17" width="180">
+															<col name="el-table_3_column_18" width="100">
+															<col name="el-table_3_column_19" width="100">
+															<col name="el-table_3_column_20" width="100">
+															<col name="el-table_3_column_21" width="240">
+														</colgroup>
+														<tbody>
+															<tr class="el-table__row">
+																<td class="el-table_3_column_15  ">
+																	<div class="cell">
+																		<div>1</div>
+																	</div>
+																</td>
+																<td class="el-table_3_column_16  ">
+																	<div class="cell el-tooltip" style="width: 169px;">第6单元</div>
+																</td>
+																<td class="el-table_3_column_17  ">
+																	<div class="cell"><span>2020-12-09 10:55</span></div>
+																</td>
+																<td class="el-table_3_column_18  ">
+																	<div class="cell"><span>--</span></div>
+																</td>
+																<td class="el-table_3_column_19  ">
+																	<div class="cell"><span>--</span></div>
+																</td>
+																<td class="el-table_3_column_20  ">
+																	<div class="cell"><span>--</span></div>
+																</td>
+																<td class="el-table_3_column_21  ">
+																	<div class="cell"><button type="button" class="el-button right el-button--mini">
+																			<!----><i class="el-icon-close"></i><span>考试迟到</span></button></div>
+																</td>
+															</tr>
+															<tr class="el-table__row">
+																<td class="el-table_3_column_15  ">
+																	<div class="cell">
+																		<div>2</div>
+																	</div>
+																</td>
+																<td class="el-table_3_column_16  ">
+																	<div class="cell el-tooltip" style="width: 169px;">第5单元模拟考试一</div>
+																</td>
+																<td class="el-table_3_column_17  ">
+																	<div class="cell"><span>2020-12-08 08:00</span></div>
+																</td>
+																<td class="el-table_3_column_18  ">
+																	<div class="cell"><span>--</span></div>
+																</td>
+																<td class="el-table_3_column_19  ">
+																	<div class="cell"><span>--</span></div>
+																</td>
+																<td class="el-table_3_column_20  ">
+																	<div class="cell"><span>--</span></div>
+																</td>
+																<td class="el-table_3_column_21  ">
+																	<div class="cell"><button type="button" class="el-button right el-button--mini">
+																			<!----><i class="el-icon-close"></i><span>考试结束</span></button></div>
+																</td>
+															</tr>
+															<tr class="el-table__row">
+																<td class="el-table_3_column_15  ">
+																	<div class="cell">
+																		<div>3</div>
+																	</div>
+																</td>
+																<td class="el-table_3_column_16  ">
+																	<div class="cell el-tooltip" style="width: 169px;">111</div>
+																</td>
+																<td class="el-table_3_column_17  ">
+																	<div class="cell"><span>2020-11-28 08:00</span></div>
+																</td>
+																<td class="el-table_3_column_18  ">
+																	<div class="cell"><span>--</span></div>
+																</td>
+																<td class="el-table_3_column_19  ">
+																	<div class="cell"><span>--</span></div>
+																</td>
+																<td class="el-table_3_column_20  ">
+																	<div class="cell"><span>--</span></div>
+																</td>
+																<td class="el-table_3_column_21  ">
+																	<div class="cell"><button type="button" class="el-button right el-button--mini">
+																			<!----><i class="el-icon-close"></i><span>考试结束</span></button></div>
+																</td>
+															</tr>
+															<tr class="el-table__row">
+																<td class="el-table_3_column_15  ">
+																	<div class="cell">
+																		<div>4</div>
+																	</div>
+																</td>
+																<td class="el-table_3_column_16  ">
+																	<div class="cell el-tooltip" style="width: 169px;">test1</div>
+																</td>
+																<td class="el-table_3_column_17  ">
+																	<div class="cell"><span>2020-11-10 08:00</span></div>
+																</td>
+																<td class="el-table_3_column_18  ">
+																	<div class="cell"><span>--</span></div>
+																</td>
+																<td class="el-table_3_column_19  ">
+																	<div class="cell"><span>--</span></div>
+																</td>
+																<td class="el-table_3_column_20  ">
+																	<div class="cell"><span>--</span></div>
+																</td>
+																<td class="el-table_3_column_21  ">
+																	<div class="cell"><button type="button" class="el-button right el-button--mini">
+																			<!----><i class="el-icon-close"></i><span>考试结束</span></button></div>
+																</td>
+															</tr>
+															<tr class="el-table__row">
+																<td class="el-table_3_column_15  ">
+																	<div class="cell">
+																		<div>5</div>
+																	</div>
+																</td>
+																<td class="el-table_3_column_16  ">
+																	<div class="cell el-tooltip" style="width: 169px;">test</div>
+																</td>
+																<td class="el-table_3_column_17  ">
+																	<div class="cell"><span>2020-11-09 11:30</span></div>
+																</td>
+																<td class="el-table_3_column_18  ">
+																	<div class="cell"><span>--</span></div>
+																</td>
+																<td class="el-table_3_column_19  ">
+																	<div class="cell"><span>--</span></div>
+																</td>
+																<td class="el-table_3_column_20  ">
+																	<div class="cell"><span>--</span></div>
+																</td>
+																<td class="el-table_3_column_21  ">
+																	<div class="cell"><button type="button" class="el-button right el-button--mini">
+																			<!----><i class="el-icon-close"></i><span>考试结束</span></button></div>
+																</td>
+															</tr>
+															<tr class="el-table__row">
+																<td class="el-table_3_column_15  ">
+																	<div class="cell">
+																		<div>6</div>
+																	</div>
+																</td>
+																<td class="el-table_3_column_16  ">
+																	<div class="cell el-tooltip" style="width: 169px;">111</div>
+																</td>
+																<td class="el-table_3_column_17  ">
+																	<div class="cell"><span>2020-11-09 08:00</span></div>
+																</td>
+																<td class="el-table_3_column_18  ">
+																	<div class="cell"><span>--</span></div>
+																</td>
+																<td class="el-table_3_column_19  ">
+																	<div class="cell"><span>--</span></div>
+																</td>
+																<td class="el-table_3_column_20  ">
+																	<div class="cell"><span>--</span></div>
+																</td>
+																<td class="el-table_3_column_21  ">
+																	<div class="cell"><button type="button" class="el-button right el-button--mini">
+																			<!----><i class="el-icon-close"></i><span>考试结束</span></button></div>
+																</td>
+															</tr>
+															<tr class="el-table__row">
+																<td class="el-table_3_column_15  ">
+																	<div class="cell">
+																		<div>7</div>
+																	</div>
+																</td>
+																<td class="el-table_3_column_16  ">
+																	<div class="cell el-tooltip" style="width: 169px;">test3</div>
+																</td>
+																<td class="el-table_3_column_17  ">
+																	<div class="cell"><span>2020-11-09 08:00</span></div>
+																</td>
+																<td class="el-table_3_column_18  ">
+																	<div class="cell"><span>--</span></div>
+																</td>
+																<td class="el-table_3_column_19  ">
+																	<div class="cell"><span>--</span></div>
+																</td>
+																<td class="el-table_3_column_20  ">
+																	<div class="cell"><span>--</span></div>
+																</td>
+																<td class="el-table_3_column_21  ">
+																	<div class="cell"><button type="button" class="el-button right el-button--mini">
+																			<!----><i class="el-icon-close"></i><span>考试结束</span></button></div>
+																</td>
+															</tr>
+															<tr class="el-table__row">
+																<td class="el-table_3_column_15  ">
+																	<div class="cell">
+																		<div>8</div>
+																	</div>
+																</td>
+																<td class="el-table_3_column_16  ">
+																	<div class="cell el-tooltip" style="width: 169px;">test3</div>
+																</td>
+																<td class="el-table_3_column_17  ">
+																	<div class="cell"><span>2020-11-09 08:00</span></div>
+																</td>
+																<td class="el-table_3_column_18  ">
+																	<div class="cell"><span>--</span></div>
+																</td>
+																<td class="el-table_3_column_19  ">
+																	<div class="cell"><span>--</span></div>
+																</td>
+																<td class="el-table_3_column_20  ">
+																	<div class="cell"><span>--</span></div>
+																</td>
+																<td class="el-table_3_column_21  ">
+																	<div class="cell"><button type="button" class="el-button right el-button--mini">
+																			<!----><i class="el-icon-close"></i><span>考试结束</span></button></div>
+																</td>
+															</tr>
+															<!---->
+														</tbody>
+													</table>
+													<!---->
+													<!---->
+												</div>
+												<!---->
+												<!---->
+												<!---->
+												<!---->
+												<div class="el-table__column-resize-proxy" style="display: none;"></div>
+											</div>
+										</div>
+										<div role="tabpanel" id="pane-0" aria-labelledby="tab-0" class="el-tab-pane" style="display: none;"
+										 aria-hidden="true">
+											<!---->
+											<div class="Mtp10 training_activity_list_detailed_empty" style="display: none;"><img src="/webApp/images/no_data.png"
+												 alt="你学习的课程中，没有找到课堂考试哦！">
+												<div class="prom_txt">你学习的课程中，没有找到课堂考试哦！</div>
+											</div>
+										</div>
+										<div role="tabpanel" id="pane-2" aria-labelledby="tab-2" class="el-tab-pane" style="display: none;"
+										 aria-hidden="true">
+											<div>
+												<div class="p_ibt Mlf10">
+													<div class="el-select">
+														<!---->
+														<div class="el-input el-input--suffix">
+															<!----><input type="text" autocomplete="off" placeholder="请选择考试状态" readonly="readonly" class="el-input__inner">
+															<!----><span class="el-input__suffix"><span class="el-input__suffix-inner"><i class="el-select__caret el-input__icon el-icon-arrow-up"></i>
+																	<!----></span>
+																<!----></span>
+															<!---->
+														</div>
+														<div class="el-select-dropdown el-popper" style="display: none; min-width: 0px;">
+															<div class="el-scrollbar" style="">
+																<div class="el-select-dropdown__wrap el-scrollbar__wrap" style="margin-bottom: -17px; margin-right: -17px;">
+																	<ul class="el-scrollbar__view el-select-dropdown__list">
+																		<!---->
+																		<li class="el-select-dropdown__item"><span>未交卷</span></li>
+																		<li class="el-select-dropdown__item"><span>未判阅</span></li>
+																		<li class="el-select-dropdown__item"><span>已判阅</span></li>
+																	</ul>
+																</div>
+																<div class="el-scrollbar__bar is-horizontal">
+																	<div class="el-scrollbar__thumb" style="transform: translateX(0%);"></div>
+																</div>
+																<div class="el-scrollbar__bar is-vertical">
+																	<div class="el-scrollbar__thumb" style="transform: translateY(0%);"></div>
+																</div>
+															</div>
+															<!---->
+														</div>
+													</div>
+												</div>
+												<div class="p_ibt Mlf10"><button type="button" class="el-button el-button--primary">
+														<!---->
+														<!----><span>搜索</span></button> <button type="button" class="el-button el-button--primary">
+														<!---->
+														<!----><span>清空</span></button></div>
+											</div>
+											<!---->
+										</div>
+									</div>
+									<div class="el-loading-mask" style="background-color: rgba(0, 0, 0, 0.8); display: none;">
+										<div class="el-loading-spinner"><i class="el-icon-loading"></i>
+											<p class="el-loading-text">拼命加载中</p>
+										</div>
+									</div>
+								</div>
+
+
+								<div class="Center Pbm30" style="margin-top:20px;">
+									<div class="outcomePage el-pagination"><span class="el-pagination__total" style="margin-top:5px;">共 10 条</span><!--<button type="button"
+																																						   disabled="disabled" class="btn-prev"><span>上一页</span></button>-->
+										<ul class="el-pager">
+											<li class="number active">1</li>
+											<!---->
+											<!---->
+											<li class="number">2</li>
+										</ul><!--<button type="button" class="btn-next"><span>下一页</span></button>-->
+									</div>
+								</div>
+
+
+
+
+							</div>
+							<!-- 中间右半部分结束 -->
+
+						</div>
+					</article>
+					<!-- 中间部分结束 -->
+				</header>
+			</div>
+		</div>
+		
+		<!-- 底部开始 -->
+		<div th:replace="~{common::footerbar}"></div>
+		<!-- 底部结束 -->
+	</body>
+</html>

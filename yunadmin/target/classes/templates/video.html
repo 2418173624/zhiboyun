@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>管理中心-首页</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link href="/css/public_style.css?v=20160630" type="text/css" rel="stylesheet" />
+		<link type="text/css" rel="stylesheet" href="/css/qqlogin.css" />
+		<link type="text/css" rel="stylesheet" href="/css/menu.css" />
+		<link type="text/css" rel="stylesheet" href="/css/academy_school.css" />
+			<link type="text/css" rel="stylesheet" href="/css/elementUI-2.3.7.css" />
+		<script type="text/javascript">
+			var schoolVerFlag = "false" == "true";
+			var ctx = "/portal-web";
+			// itp 前端项目访问地址
+			var domain = 'https://zhjxy.kp.futurelab.tv'
+			var resourceHost = 'https://zhjxy.kp.futurelab.tv:18087'
+			var sessionid = "6b994432-a150-4946-92aa-3a4a13bccf16";
+			if (typeof String.prototype.startsWith != 'function') {
+				String.prototype.startsWith = function(prefix) {
+					return this.slice(0, prefix.length) === prefix;
+				};
+			}
+		</script>
+		<script type="text/javascript" src="/js/lodash.js"></script>
+		<script type="text/javascript" src="/js/jquery-1.12.0.min.js"></script>
+		<script type="text/javascript" src="/js/jquery.placeholder.min.js"></script>
+		<script type="text/javascript" src="/js/remoteCall.js"></script>
+		<!-- jQuery-Impromptu-master Start -->
+		<link href="/js/jquery-impromptu.min.css" type="text/css" rel="stylesheet" />
+		<script src="/js/jquery-impromptu.min.js" type="text/javascript"></script>
+		<!-- jQuery-Impromptu-master End -->
+		<script type="text/javascript" src="/js/jquery.lazyload.js"></script>
+		<script type="text/javascript" src="/js/ResizeSensor.js"></script>
+		<script type="text/javascript" src="/js/jquery.publicAlert.js"></script>
+		<script type="text/javascript" src="/js/util.js"></script>
+		<script type="text/javascript" src="/js/qqlogin.js?v=20160630"></script>
+		<script type="text/javascript">
+			jQuery.extend({
+				escapeXML: function(content) {
+					return $('<span></span>').text(content).html();
+				},
+				newline2br: function(content) {
+					return content.replace(/\r\n/g, "<br/>").replace(/\r/g, "<br/>").replace(/\n/g, "<br/>");
+				},
+			});
+			jQuery.prompt.setDefaults({
+				top: '30%',
+				persistent: false,
+				buttons: {
+					'确定': true
+				}
+			});
+			window.alert = function(info, func) {
+				if (!isNaN(parseInt(info))) {
+					info = info + "";
+				}
+				$.prompt(info, {
+					close: func
+				});
+			};
+
+			// 跳转页面
+			function gotoURL(targetUTL) {
+				window.location.href = targetUTL;
+			}
+		</script>
+		<!-- 图片懒加载 -->
+		<!-- <script type="text/javascript">
+$(function() {
+$("img.lazy").lazyload();
+$('input, textarea').placeholder();
+});
+</script> -->
+		<!-- Logo -->
+		<link href="img/favicon.ico" rel="icon" type="image/x-icon" />
+		<link href="img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+		<link type="text/css" rel="stylesheet" href="/css/iconfont.css">
+		<link type="text/css" rel="stylesheet" href="/css/common_alert.css">
+		<link type="text/css" rel="stylesheet" href="/css/login_bomb.css">
+		<link type="text/css" rel="stylesheet" href="/css/header.css">
+		<link rel="stylesheet" type="text/css" href="/css/academy_school.css">
+		<script type="text/javascript">
+			$(function() {
+				$('.work_item').click(function() {
+					location.href = $(this).data('url');
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<!-- header部分 -->
+		<script type="text/javascript">
+			$(function() {
+				//消息处理
+				$('#msg_note_list_source ul li').each(function() {
+					$('#msg_note_list ul li').eq($(this).index()).children().text($(this).text());
+				});
+				$('.msg_box1').one('mouseover', function() {
+					$('#msg_note_list ul li a').each(function() {
+						var $a = $(this);
+						while ($a.outerHeight() > 44) {
+							$a.text($a.text().replace(/(\s)*([a-zA-Z0-9]+|\W|_)(\.\.\.)?$/, "..."));
+						}
+					});
+				});
+				// 注销
+				$("#logout").click(function() {
+					$.publicAlert({
+						text: "是否要退出系统?",
+						callBack: function() {
+							// window.location.href = ctx + "/u/logout";
+							$.getJSON(ctx + '/u/logout', {}, function(result) {
+								if (result && result.status == 200) {
+									window.location.reload(true);
+									return !1;
+								} else {
+									$.publicAlert("退出失败，重试！");
+								}
+							});
+						}
+					})
+				});
+				$("#goto_index_label").click(function() {
+					location.href = domain
+				})
+				// 菜单显示
+				if (location.pathname.indexOf("mgtExperiments") > -1) {
+					localStorage.setItem("mgtExperimentPage", "true");
+				} else if (location.pathname.indexOf("mgtIndex.do") > -1) {
+					localStorage.removeItem("mgtExperimentPage");
+				}
+				var mgtExperimentPage = localStorage.getItem("mgtExperimentPage") != null;
+				if (mgtExperimentPage) {
+					$(".logo_txt").text("在线实验管理后台");
+				}
+				window.health = setInterval(function() {
+					$.get(ctx + '/api/v1/health');
+				}, 1000 * 60 * 5);
+			});
+		</script>
+		<!--头部导航栏-->
+		<div th:replace="~{common::topbar}"></div>
+		<!-- 左侧导航部分 -->
+		<script type="text/javascript" src="/js/jquery_nicescroll_min.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				var mgtExperimentPage = localStorage.getItem("mgtExperimentPage") != null;
+				if (mgtExperimentPage) {
+					var menu = document.getElementById("menu");
+					var parent = menu.parentElement;
+					parent.innerHTML = '';
+					parent.append(menu);
+
+					var menus = document.getElementsByClassName("Select");
+					_.each(menus, function(menu) {
+						var url = menu.getAttribute("data-menu-url");
+						if (location.pathname == url) {
+							menu.classList.add("S_on")
+						}
+					});
+				} else {
+					document.getElementById("menu").remove();
+
+					$("#Loms").niceScroll({
+						cursorcolor: "#808080",
+						cursorwidth: "5px",
+						background: "none",
+						cursorborder: "1px solid #808080",
+						autohidemode: "leave",
+						horizrailenabled: false,
+						hidecursordelay: 0,
+						iframeautoresize: true
+					});
+					// 默认被激活的左侧菜单class名称
+					var level = parseInt("1");
+					var menuUrl = "/portal-web/mgt/mgtIndex.do";
+					if (typeof(menuUrl) == "undefined" || "" == menuUrl) {
+						menuUrl = location.pathname;
+					}
+					if (!isNaN(level) && level == 2) {
+						var $parentMenu = $('.sub_menu[data-menu-url="' + menuUrl + '"]').parents(".Ul").prev();
+						$parentMenu.addClass('S_on');
+						$('.sub_menu[data-menu-url="' + menuUrl + '"]').addClass('Li');
+						var height = $parentMenu.next("ul").find("li").length;
+						$parentMenu.data("ishide", 1);
+						$parentMenu.next("ul").css("height", height * 51 + "px");
+					} else {
+						//menuUrl += location.search;
+						$('.menu_root[data-menu-url="' + menuUrl + '"]').addClass('S_on');
+					}
+					if ($('.S_on').length > 0) {
+						$('#Loms').animate({
+							scrollTop: $('.S_on').offset().top
+						}, 0);
+					}
+					// 头部active 暂时只有宅客云 先注掉
+					/* $(".header_ul li").click(function() {
+					    $(this).addClass("active").siblings().removeClass("active");
+					}); */
+				}
+				// 收起、展开左侧导航
+				$("#adv_btn").click(function() {
+					var _this = $(this);
+					var isshow = _this.data("isshow");
+					if (isshow) {
+						$("#Loms").hide();
+						$("#Lomss").show();
+						$("#Roms").css("left", "70px");
+						_this.data("isshow", 0);
+					} else {
+						$("#Loms").show();
+						$("#Lomss").hide();
+						$("#Roms").css("left", "220px");
+						_this.data("isshow", 1);
+					}
+				});
+				// 左侧导航
+				var animationTime = parseFloat(window.getComputedStyle($('#Loms .Ul')[0])['transition-duration']) * 1000;
+				animationTime = animationTime ? animationTime : 500;
+				$(".Select").click(function() {
+					var _this = $(this);
+					var ishide = _this.data("ishide");
+					var height = _this.next("ul").find("li").length;
+					$(".Select").data("ishide", 0);
+					$(".Select").removeClass("S_on");
+					$(".Ul").css("height", "0px");
+					if (ishide) {
+						_this.children(".lab3").css("background-position", "-44px -21px");
+						_this.data("ishide", 0);
+						_this.next("ul").css("height", "0px");
+					} else {
+						_this.children(".lab3").css("background-position", "-35px -21px");
+						_this.data("ishide", 1);
+						_this.next("ul").css("height", height * 51 + "px");
+					}
+					setTimeout(function() {
+						$("#Loms").getNiceScroll().resize();
+					}, animationTime);
+					_this.addClass("S_on");
+				});
+				// 左侧hover效果
+				$(".Ul li").click(function() {
+					$(this).addClass("Li").siblings().removeClass("Li");
+				});
+
+				$(".Ul").each(function() {
+					if ($(this).html().trim() == "") {
+						$(this).parent().find(".lab3").remove();
+					}
+				});
+
+			});
+		</script>
+		<!-- 左侧导航部分 -->
+		<div th:replace="~{common::sidebar}"></div>
+		<!-- 右侧部分开始 -->
+		<section id="Roms" class="Roms">
+			<div class="user_box border_none Mlf10">
+				<div class="Mtp20">
+					<div class="p_ibt posr Line30"><span>关键字：</span>
+						<div class="Width200 el-input">
+							<!----><input type="text" autocomplete="off" placeholder="关键字" class="el-input__inner">
+							<!---->
+							<!---->
+							<!---->
+						</div>
+					</div>
+					<div class="p_ibt posr Line30 Mlf20"><span>技术方向：</span>
+						<div class="el-select Width200">
+							<!---->
+							<div class="el-input el-input--suffix">
+								<!----><input type="text" autocomplete="off" placeholder="请选择" readonly="readonly" class="el-input__inner">
+								<!----><span class="el-input__suffix"><span class="el-input__suffix-inner"><i class="el-select__caret el-input__icon el-icon-arrow-up"></i>
+										<!----></span>
+									<!----></span>
+								<!---->
+							</div>
+							<div class="el-select-dropdown el-popper" style="display: none; min-width: 199.992px;">
+								<div class="el-scrollbar" style="">
+									<div class="el-select-dropdown__wrap el-scrollbar__wrap" style="margin-bottom: -17px; margin-right: -17px;">
+										<ul class="el-scrollbar__view el-select-dropdown__list">
+											<!---->
+											<li class="el-select-dropdown__item"><span>前端开发</span></li>
+											<li class="el-select-dropdown__item"><span>Java</span></li>
+											<li class="el-select-dropdown__item"><span>人工智能</span></li>
+											<li class="el-select-dropdown__item"><span>数据库</span></li>
+											<li class="el-select-dropdown__item"><span>云计算</span></li>
+											<li class="el-select-dropdown__item"><span>大数据</span></li>
+											<li class="el-select-dropdown__item"><span>鲲鹏训练营</span></li>
+											<li class="el-select-dropdown__item"><span>物联网</span></li>
+											<li class="el-select-dropdown__item"><span>PHP</span></li>
+											<li class="el-select-dropdown__item"><span>C_嵌入式</span></li>
+											<li class="el-select-dropdown__item"><span>思想道德修养与法律基础</span></li>
+											<li class="el-select-dropdown__item"><span>UXD</span></li>
+											<li class="el-select-dropdown__item"><span>通用课程</span></li>
+											<li class="el-select-dropdown__item"><span>产品管理</span></li>
+											<li class="el-select-dropdown__item"><span>金融工程</span></li>
+											<li class="el-select-dropdown__item"><span>电子商务</span></li>
+											<li class="el-select-dropdown__item"><span>软件测试</span></li>
+											<li class="el-select-dropdown__item"><span>鲲鹏云-HCIA</span></li>
+											<li class="el-select-dropdown__item"><span>gaussDB-HCIP</span></li>
+											<li class="el-select-dropdown__item"><span>敏捷</span></li>
+											<li class="el-select-dropdown__item"><span>项目管理</span></li>
+										</ul>
+									</div>
+									<div class="el-scrollbar__bar is-horizontal">
+										<div class="el-scrollbar__thumb" style="transform: translateX(0%);"></div>
+									</div>
+									<div class="el-scrollbar__bar is-vertical">
+										<div class="el-scrollbar__thumb" style="transform: translateY(0%);"></div>
+									</div>
+								</div>
+								<!---->
+							</div>
+						</div>
+						<div class="el-select Width200" style="display: none;">
+							<!---->
+							<div class="el-input el-input--suffix">
+								<!----><input type="text" autocomplete="off" placeholder="请选择" readonly="readonly" class="el-input__inner">
+								<!----><span class="el-input__suffix"><span class="el-input__suffix-inner"><i class="el-select__caret el-input__icon el-icon-arrow-up"></i>
+										<!----></span>
+									<!----></span>
+								<!---->
+							</div>
+							<div class="el-select-dropdown el-popper" style="display: none;">
+								<div class="el-scrollbar" style="display: none;">
+									<div class="el-select-dropdown__wrap el-scrollbar__wrap" style="margin-bottom: -17px; margin-right: -17px;">
+										<ul class="el-scrollbar__view el-select-dropdown__list"></ul>
+									</div>
+									<div class="el-scrollbar__bar is-horizontal">
+										<div class="el-scrollbar__thumb" style="transform: translateX(0%);"></div>
+									</div>
+									<div class="el-scrollbar__bar is-vertical">
+										<div class="el-scrollbar__thumb" style="transform: translateY(0%);"></div>
+									</div>
+								</div>
+								<p class="el-select-dropdown__empty">
+									无数据
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="p_ibt posr Line30 Mlf20"><span>资源类型：</span>
+						<div class="el-select">
+							<!---->
+							<div class="el-input el-input--suffix">
+								<!----><input type="text" autocomplete="off" placeholder="请选择" readonly="readonly" class="el-input__inner">
+								<!----><span class="el-input__suffix"><span class="el-input__suffix-inner"><i class="el-select__caret el-input__icon el-icon-arrow-up"></i>
+										<!----></span>
+									<!----></span>
+								<!---->
+							</div>
+							<div class="el-select-dropdown el-popper" style="display: none; min-width: 205.109px;">
+								<div class="el-scrollbar" style="">
+									<div class="el-select-dropdown__wrap el-scrollbar__wrap" style="margin-bottom: -17px; margin-right: -17px;">
+										<ul class="el-scrollbar__view el-select-dropdown__list">
+											<!---->
+											<li class="el-select-dropdown__item"><span>普通视频</span></li>
+											<li class="el-select-dropdown__item"><span>教材视频</span></li>
+											<li class="el-select-dropdown__item"><span>课程视频</span></li>
+											<li class="el-select-dropdown__item"><span>案例视频</span></li>
+											<li class="el-select-dropdown__item"><span>直播回放</span></li>
+										</ul>
+									</div>
+									<div class="el-scrollbar__bar is-horizontal">
+										<div class="el-scrollbar__thumb" style="transform: translateX(0%);"></div>
+									</div>
+									<div class="el-scrollbar__bar is-vertical">
+										<div class="el-scrollbar__thumb" style="transform: translateY(0%);"></div>
+									</div>
+								</div>
+								<!---->
+							</div>
+						</div>
+					</div> <button type="button" class="el-button el-button--primary">
+						<!---->
+						<!----><span>搜索</span></button>
+				</div>
+				<div class="Mtp10">
+					<div class="el-table el-table--fit el-table--striped el-table--scrollable-y el-table--enable-row-hover el-table--enable-row-transition"
+					 style="width: 100%; height: 768px;">
+						<div class="hidden-columns">
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div fiexd="right"></div>
+						</div>
+						<div class="el-table__header-wrapper">
+							<table cellspacing="0" cellpadding="0" border="0" class="el-table__header" style="width: 1283px;">
+								<colgroup>
+									<col name="el-table_1_column_1" width="200">
+									<col name="el-table_1_column_2" width="132">
+									<col name="el-table_1_column_3" width="130">
+									<col name="el-table_1_column_4" width="80">
+									<col name="el-table_1_column_5" width="100">
+									<col name="el-table_1_column_6" width="130">
+									<col name="el-table_1_column_7" width="130">
+									<col name="el-table_1_column_8" width="208">
+									<col name="el-table_1_column_9" width="156">
+									<col name="gutter" width="17">
+								</colgroup>
+								<thead class="has-gutter">
+									<tr class="">
+										<th colspan="1" rowspan="1" class="el-table_1_column_1     is-leaf">
+											<div class="cell">名称</div>
+										</th>
+										<th colspan="1" rowspan="1" class="el-table_1_column_2     is-leaf">
+											<div class="cell">源文件</div>
+										</th>
+										<th colspan="1" rowspan="1" class="el-table_1_column_3     is-leaf">
+											<div class="cell">技术方向</div>
+										</th>
+										<th colspan="1" rowspan="1" class="el-table_1_column_4     is-leaf">
+											<div class="cell">类型</div>
+										</th>
+										<th colspan="1" rowspan="1" class="el-table_1_column_5     is-leaf">
+											<div class="cell">大小</div>
+										</th>
+										<th colspan="1" rowspan="1" class="el-table_1_column_6     is-leaf">
+											<div class="cell">时长</div>
+										</th>
+										<th colspan="1" rowspan="1" class="el-table_1_column_7     is-leaf">
+											<div class="cell">分辨率</div>
+										</th>
+										<th colspan="1" rowspan="1" class="el-table_1_column_8     is-leaf">
+											<div class="cell">创建时间</div>
+										</th>
+										<th colspan="1" rowspan="1" class="el-table_1_column_9     is-leaf">
+											<div class="cell">操作</div>
+										</th>
+										<th class="gutter" style="width: 17px;"></th>
+									</tr>
+								</thead>
+							</table>
+						</div>
+						<div class="el-table__body-wrapper is-scrolling-none" style="height: 720px;">
+							<table cellspacing="0" cellpadding="0" border="0" class="el-table__body" style="width: 1266px;">
+								<colgroup>
+									<col name="el-table_1_column_1" width="200">
+									<col name="el-table_1_column_2" width="132">
+									<col name="el-table_1_column_3" width="130">
+									<col name="el-table_1_column_4" width="80">
+									<col name="el-table_1_column_5" width="100">
+									<col name="el-table_1_column_6" width="130">
+									<col name="el-table_1_column_7" width="130">
+									<col name="el-table_1_column_8" width="208">
+									<col name="el-table_1_column_9" width="156">
+								</colgroup>
+								<tbody>
+									<tr class="el-table__row">
+										<td class="el-table_1_column_1  ">
+											<div class="cell el-tooltip" style="width: 199px;">【武汉ETC】社招湖经-2021.1.15-J1109班级J2EE
+												Web应用开发阶段-Vue.js表单自动化输入验证控件+axios前端文件上传数据传递演示-105.mp4</div>
+										</td>
+										<td class="el-table_1_column_2  ">
+											<div class="cell el-tooltip" style="width: 131px;">/武汉ETC-软件园/武汉ETC-易绍轩/【武汉ETC】社招湖经-2021.1.15-J1109班级J2EE
+												Web应用开发阶段-Vue.js表单自动化输入验证控件+axios前端文件上传数据传递演示-105.mp4</div>
+										</td>
+										<td class="el-table_1_column_3  ">
+											<div class="cell el-tooltip" style="width: 129px;"><span>Java</span></div>
+										</td>
+										<td class="el-table_1_column_4  ">
+											<div class="cell"><span>直播回放</span></div>
+										</td>
+										<td class="el-table_1_column_5  ">
+											<div class="cell"><span>451.42M</span></div>
+										</td>
+										<td class="el-table_1_column_6  ">
+											<div class="cell"><span>1小时08分25秒</span></div>
+										</td>
+										<td class="el-table_1_column_7  ">
+											<div class="cell">1920*1080</div>
+										</td>
+										<td class="el-table_1_column_8  ">
+											<div class="cell"><span>2021-01-15 17:38:26</span></div>
+										</td>
+										<td class="el-table_1_column_9  ">
+											<div class="cell"><a href="javascript:;">预览</a> <a href="javascript:;" style="display: none;">删除</a> <a href="javascript:;">下载</a>
+												<a href="javascript:;">转换</a> <a href="javascript:;">上传</a></div>
+										</td>
+									</tr>
+									<tr class="el-table__row el-table__row--striped">
+										<td class="el-table_1_column_1  ">
+											<div class="cell el-tooltip" style="width: 199px;">自定义异常的使用方式.mp4</div>
+										</td>
+										<td class="el-table_1_column_2  ">
+											<div class="cell el-tooltip" style="width: 131px;">/西安ETC/JAVA/2020年JAVA1228班级资料/视频回放/JavaSE/异常处理/自定义异常的使用方式.mp4</div>
+										</td>
+										<td class="el-table_1_column_3  ">
+											<div class="cell el-tooltip" style="width: 129px;"><span>Java</span></div>
+										</td>
+										<td class="el-table_1_column_4  ">
+											<div class="cell"><span>直播回放</span></div>
+										</td>
+										<td class="el-table_1_column_5  ">
+											<div class="cell"><span>20.81M</span></div>
+										</td>
+										<td class="el-table_1_column_6  ">
+											<div class="cell"><span>06分25秒</span></div>
+										</td>
+										<td class="el-table_1_column_7  ">
+											<div class="cell">1920*1080</div>
+										</td>
+										<td class="el-table_1_column_8  ">
+											<div class="cell"><span>2021-01-15 17:36:13</span></div>
+										</td>
+										<td class="el-table_1_column_9  ">
+											<div class="cell"><a href="javascript:;">预览</a> <a href="javascript:;" style="display: none;">删除</a> <a href="javascript:;">下载</a>
+												<a href="javascript:;">转换</a> <a href="javascript:;">上传</a></div>
+										</td>
+									</tr>
+									<tr class="el-table__row">
+										<td class="el-table_1_column_1  ">
+											<div class="cell el-tooltip" style="width: 199px;">throw&amp;throws的关键字用法.mp4</div>
+										</td>
+										<td class="el-table_1_column_2  ">
+											<div class="cell el-tooltip" style="width: 131px;">/西安ETC/JAVA/2020年JAVA1228班级资料/视频回放/JavaSE/异常处理/throw&amp;throws的关键字用法.mp4</div>
+										</td>
+										<td class="el-table_1_column_3  ">
+											<div class="cell el-tooltip" style="width: 129px;"><span>Java</span></div>
+										</td>
+										<td class="el-table_1_column_4  ">
+											<div class="cell"><span>直播回放</span></div>
+										</td>
+										<td class="el-table_1_column_5  ">
+											<div class="cell"><span>23.17M</span></div>
+										</td>
+										<td class="el-table_1_column_6  ">
+											<div class="cell"><span>07分27秒</span></div>
+										</td>
+										<td class="el-table_1_column_7  ">
+											<div class="cell">1920*1080</div>
+										</td>
+										<td class="el-table_1_column_8  ">
+											<div class="cell"><span>2021-01-15 17:34:36</span></div>
+										</td>
+										<td class="el-table_1_column_9  ">
+											<div class="cell"><a href="javascript:;">预览</a> <a href="javascript:;" style="display: none;">删除</a> <a href="javascript:;">下载</a>
+												<a href="javascript:;">转换</a> <a href="javascript:;">上传</a></div>
+										</td>
+									</tr>
+									<tr class="el-table__row el-table__row--striped">
+										<td class="el-table_1_column_1  ">
+											<div class="cell el-tooltip" style="width: 199px;">异常示例1.mp4</div>
+										</td>
+										<td class="el-table_1_column_2  ">
+											<div class="cell el-tooltip" style="width: 131px;">/西安ETC/JAVA/2020年JAVA1228班级资料/视频回放/JavaSE/异常处理/异常示例1.mp4</div>
+										</td>
+										<td class="el-table_1_column_3  ">
+											<div class="cell el-tooltip" style="width: 129px;"><span>Java</span></div>
+										</td>
+										<td class="el-table_1_column_4  ">
+											<div class="cell"><span>直播回放</span></div>
+										</td>
+										<td class="el-table_1_column_5  ">
+											<div class="cell"><span>36.09M</span></div>
+										</td>
+										<td class="el-table_1_column_6  ">
+											<div class="cell"><span>08分59秒</span></div>
+										</td>
+										<td class="el-table_1_column_7  ">
+											<div class="cell">1920*1080</div>
+										</td>
+										<td class="el-table_1_column_8  ">
+											<div class="cell"><span>2021-01-15 17:33:47</span></div>
+										</td>
+										<td class="el-table_1_column_9  ">
+											<div class="cell"><a href="javascript:;">预览</a> <a href="javascript:;" style="display: none;">删除</a> <a href="javascript:;">下载</a>
+												<a href="javascript:;">转换</a> <a href="javascript:;">上传</a></div>
+										</td>
+									</tr>
+									<tr class="el-table__row">
+										<td class="el-table_1_column_1  ">
+											<div class="cell el-tooltip" style="width: 199px;">8.自定义序列化.mp4</div>
+										</td>
+										<td class="el-table_1_column_2  ">
+											<div class="cell el-tooltip" style="width: 131px;">/广州ETC/GZETC-JY-JV-20201228-01/第三周/day05/8.自定义序列化.mp4</div>
+										</td>
+										<td class="el-table_1_column_3  ">
+											<div class="cell el-tooltip" style="width: 129px;"><span>Java</span></div>
+										</td>
+										<td class="el-table_1_column_4  ">
+											<div class="cell"><span>直播回放</span></div>
+										</td>
+										<td class="el-table_1_column_5  ">
+											<div class="cell"><span>58.11M</span></div>
+										</td>
+										<td class="el-table_1_column_6  ">
+											<div class="cell"><span>20分18秒</span></div>
+										</td>
+										<td class="el-table_1_column_7  ">
+											<div class="cell">1360*768</div>
+										</td>
+										<td class="el-table_1_column_8  ">
+											<div class="cell"><span>2021-01-15 17:33:13</span></div>
+										</td>
+										<td class="el-table_1_column_9  ">
+											<div class="cell"><a href="javascript:;">预览</a> <a href="javascript:;" style="display: none;">删除</a> <a href="javascript:;">下载</a>
+												<a href="javascript:;">转换</a> <a href="javascript:;">上传</a></div>
+										</td>
+									</tr>
+									<tr class="el-table__row el-table__row--striped">
+										<td class="el-table_1_column_1  ">
+											<div class="cell el-tooltip" style="width: 199px;">10-集合嵌套遍历案例.mp4</div>
+										</td>
+										<td class="el-table_1_column_2  ">
+											<div class="cell el-tooltip" style="width: 131px;">/广州ETC/GZETC-JY-JV-20210105-01/day09/10-集合嵌套遍历案例.mp4</div>
+										</td>
+										<td class="el-table_1_column_3  ">
+											<div class="cell el-tooltip" style="width: 129px;"><span>Java</span></div>
+										</td>
+										<td class="el-table_1_column_4  ">
+											<div class="cell"><span>直播回放</span></div>
+										</td>
+										<td class="el-table_1_column_5  ">
+											<div class="cell"><span>47.18M</span></div>
+										</td>
+										<td class="el-table_1_column_6  ">
+											<div class="cell"><span>14分08秒</span></div>
+										</td>
+										<td class="el-table_1_column_7  ">
+											<div class="cell">1920*1040</div>
+										</td>
+										<td class="el-table_1_column_8  ">
+											<div class="cell"><span>2021-01-15 17:32:53</span></div>
+										</td>
+										<td class="el-table_1_column_9  ">
+											<div class="cell"><a href="javascript:;">预览</a> <a href="javascript:;" style="display: none;">删除</a> <a href="javascript:;">下载</a>
+												<a href="javascript:;">转换</a> <a href="javascript:;">上传</a></div>
+										</td>
+									</tr>
+									<tr class="el-table__row">
+										<td class="el-table_1_column_1  ">
+											<div class="cell el-tooltip" style="width: 199px;">7.默认序列化.mp4</div>
+										</td>
+										<td class="el-table_1_column_2  ">
+											<div class="cell el-tooltip" style="width: 131px;">/广州ETC/GZETC-JY-JV-20201228-01/第三周/day05/7.默认序列化.mp4</div>
+										</td>
+										<td class="el-table_1_column_3  ">
+											<div class="cell el-tooltip" style="width: 129px;"><span>Java</span></div>
+										</td>
+										<td class="el-table_1_column_4  ">
+											<div class="cell"><span>直播回放</span></div>
+										</td>
+										<td class="el-table_1_column_5  ">
+											<div class="cell"><span>145.45M</span></div>
+										</td>
+										<td class="el-table_1_column_6  ">
+											<div class="cell"><span>51分28秒</span></div>
+										</td>
+										<td class="el-table_1_column_7  ">
+											<div class="cell">1360*768</div>
+										</td>
+										<td class="el-table_1_column_8  ">
+											<div class="cell"><span>2021-01-15 17:32:52</span></div>
+										</td>
+										<td class="el-table_1_column_9  ">
+											<div class="cell"><a href="javascript:;">预览</a> <a href="javascript:;" style="display: none;">删除</a> <a href="javascript:;">下载</a>
+												<a href="javascript:;">转换</a> <a href="javascript:;">上传</a></div>
+										</td>
+									</tr>
+									<tr class="el-table__row el-table__row--striped">
+										<td class="el-table_1_column_1  ">
+											<div class="cell el-tooltip" style="width: 199px;">09-斗地主有序发牌.mp4</div>
+										</td>
+										<td class="el-table_1_column_2  ">
+											<div class="cell el-tooltip" style="width: 131px;">/广州ETC/GZETC-JY-JV-20210105-01/day09/09-斗地主有序发牌.mp4</div>
+										</td>
+										<td class="el-table_1_column_3  ">
+											<div class="cell el-tooltip" style="width: 129px;"><span>Java</span></div>
+										</td>
+										<td class="el-table_1_column_4  ">
+											<div class="cell"><span>直播回放</span></div>
+										</td>
+										<td class="el-table_1_column_5  ">
+											<div class="cell"><span>81.15M</span></div>
+										</td>
+										<td class="el-table_1_column_6  ">
+											<div class="cell"><span>29分56秒</span></div>
+										</td>
+										<td class="el-table_1_column_7  ">
+											<div class="cell">1920*1040</div>
+										</td>
+										<td class="el-table_1_column_8  ">
+											<div class="cell"><span>2021-01-15 17:32:34</span></div>
+										</td>
+										<td class="el-table_1_column_9  ">
+											<div class="cell"><a href="javascript:;">预览</a> <a href="javascript:;" style="display: none;">删除</a> <a href="javascript:;">下载</a>
+												<a href="javascript:;">转换</a> <a href="javascript:;">上传</a></div>
+										</td>
+									</tr>
+									<tr class="el-table__row">
+										<td class="el-table_1_column_1  ">
+											<div class="cell el-tooltip" style="width: 199px;">6.nio流和键盘输入流.mp4</div>
+										</td>
+										<td class="el-table_1_column_2  ">
+											<div class="cell el-tooltip" style="width: 131px;">/广州ETC/GZETC-JY-JV-20201228-01/第三周/day05/6.nio流和键盘输入流.mp4</div>
+										</td>
+										<td class="el-table_1_column_3  ">
+											<div class="cell el-tooltip" style="width: 129px;"><span>Java</span></div>
+										</td>
+										<td class="el-table_1_column_4  ">
+											<div class="cell"><span>直播回放</span></div>
+										</td>
+										<td class="el-table_1_column_5  ">
+											<div class="cell"><span>69.85M</span></div>
+										</td>
+										<td class="el-table_1_column_6  ">
+											<div class="cell"><span>25分17秒</span></div>
+										</td>
+										<td class="el-table_1_column_7  ">
+											<div class="cell">1360*768</div>
+										</td>
+										<td class="el-table_1_column_8  ">
+											<div class="cell"><span>2021-01-15 17:32:26</span></div>
+										</td>
+										<td class="el-table_1_column_9  ">
+											<div class="cell"><a href="javascript:;">预览</a> <a href="javascript:;" style="display: none;">删除</a> <a href="javascript:;">下载</a>
+												<a href="javascript:;">转换</a> <a href="javascript:;">上传</a></div>
+										</td>
+									</tr>
+									<tr class="el-table__row el-table__row--striped">
+										<td class="el-table_1_column_1  ">
+											<div class="cell el-tooltip" style="width: 199px;">08-Map体系结构.mp4</div>
+										</td>
+										<td class="el-table_1_column_2  ">
+											<div class="cell el-tooltip" style="width: 131px;">/广州ETC/GZETC-JY-JV-20210105-01/day09/08-Map体系结构.mp4</div>
+										</td>
+										<td class="el-table_1_column_3  ">
+											<div class="cell el-tooltip" style="width: 129px;"><span>Java</span></div>
+										</td>
+										<td class="el-table_1_column_4  ">
+											<div class="cell"><span>直播回放</span></div>
+										</td>
+										<td class="el-table_1_column_5  ">
+											<div class="cell"><span>24.52M</span></div>
+										</td>
+										<td class="el-table_1_column_6  ">
+											<div class="cell"><span>10分13秒</span></div>
+										</td>
+										<td class="el-table_1_column_7  ">
+											<div class="cell">1920*1040</div>
+										</td>
+										<td class="el-table_1_column_8  ">
+											<div class="cell"><span>2021-01-15 17:32:01</span></div>
+										</td>
+										<td class="el-table_1_column_9  ">
+											<div class="cell"><a href="javascript:;">预览</a> <a href="javascript:;" style="display: none;">删除</a> <a href="javascript:;">下载</a>
+												<a href="javascript:;">转换</a> <a href="javascript:;">上传</a></div>
+										</td>
+									</tr>
+									<tr class="el-table__row">
+										<td class="el-table_1_column_1  ">
+											<div class="cell el-tooltip" style="width: 199px;">5.DataInput和DataOutput流.mp4</div>
+										</td>
+										<td class="el-table_1_column_2  ">
+											<div class="cell el-tooltip" style="width: 131px;">/广州ETC/GZETC-JY-JV-20201228-01/第三周/day05/5.DataInput和DataOutput流.mp4</div>
+										</td>
+										<td class="el-table_1_column_3  ">
+											<div class="cell el-tooltip" style="width: 129px;"><span>Java</span></div>
+										</td>
+										<td class="el-table_1_column_4  ">
+											<div class="cell"><span>直播回放</span></div>
+										</td>
+										<td class="el-table_1_column_5  ">
+											<div class="cell"><span>107.62M</span></div>
+										</td>
+										<td class="el-table_1_column_6  ">
+											<div class="cell"><span>39分41秒</span></div>
+										</td>
+										<td class="el-table_1_column_7  ">
+											<div class="cell">1360*768</div>
+										</td>
+										<td class="el-table_1_column_8  ">
+											<div class="cell"><span>2021-01-15 17:31:56</span></div>
+										</td>
+										<td class="el-table_1_column_9  ">
+											<div class="cell"><a href="javascript:;">预览</a> <a href="javascript:;" style="display: none;">删除</a> <a href="javascript:;">下载</a>
+												<a href="javascript:;">转换</a> <a href="javascript:;">上传</a></div>
+										</td>
+									</tr>
+									<tr class="el-table__row el-table__row--striped">
+										<td class="el-table_1_column_1  ">
+											<div class="cell el-tooltip" style="width: 199px;">4.输出流和缓冲流.mp4</div>
+										</td>
+										<td class="el-table_1_column_2  ">
+											<div class="cell el-tooltip" style="width: 131px;">/广州ETC/GZETC-JY-JV-20201228-01/第三周/day05/4.输出流和缓冲流.mp4</div>
+										</td>
+										<td class="el-table_1_column_3  ">
+											<div class="cell el-tooltip" style="width: 129px;"><span>Java</span></div>
+										</td>
+										<td class="el-table_1_column_4  ">
+											<div class="cell"><span>直播回放</span></div>
+										</td>
+										<td class="el-table_1_column_5  ">
+											<div class="cell"><span>106.51M</span></div>
+										</td>
+										<td class="el-table_1_column_6  ">
+											<div class="cell"><span>43分20秒</span></div>
+										</td>
+										<td class="el-table_1_column_7  ">
+											<div class="cell">1360*768</div>
+										</td>
+										<td class="el-table_1_column_8  ">
+											<div class="cell"><span>2021-01-15 17:31:30</span></div>
+										</td>
+										<td class="el-table_1_column_9  ">
+											<div class="cell"><a href="javascript:;">预览</a> <a href="javascript:;" style="display: none;">删除</a> <a href="javascript:;">下载</a>
+												<a href="javascript:;">转换</a> <a href="javascript:;">上传</a></div>
+										</td>
+									</tr>
+									<tr class="el-table__row">
+										<td class="el-table_1_column_1  ">
+											<div class="cell el-tooltip" style="width: 199px;">3.输入流.mp4</div>
+										</td>
+										<td class="el-table_1_column_2  ">
+											<div class="cell el-tooltip" style="width: 131px;">/广州ETC/GZETC-JY-JV-20201228-01/第三周/day05/3.输入流.mp4</div>
+										</td>
+										<td class="el-table_1_column_3  ">
+											<div class="cell el-tooltip" style="width: 129px;"><span>Java</span></div>
+										</td>
+										<td class="el-table_1_column_4  ">
+											<div class="cell"><span>直播回放</span></div>
+										</td>
+										<td class="el-table_1_column_5  ">
+											<div class="cell"><span>74.86M</span></div>
+										</td>
+										<td class="el-table_1_column_6  ">
+											<div class="cell"><span>27分17秒</span></div>
+										</td>
+										<td class="el-table_1_column_7  ">
+											<div class="cell">1360*768</div>
+										</td>
+										<td class="el-table_1_column_8  ">
+											<div class="cell"><span>2021-01-15 17:31:01</span></div>
+										</td>
+										<td class="el-table_1_column_9  ">
+											<div class="cell"><a href="javascript:;">预览</a> <a href="javascript:;" style="display: none;">删除</a> <a href="javascript:;">下载</a>
+												<a href="javascript:;">转换</a> <a href="javascript:;">上传</a></div>
+										</td>
+									</tr>
+									<tr class="el-table__row el-table__row--striped">
+										<td class="el-table_1_column_1  ">
+											<div class="cell el-tooltip" style="width: 199px;">2.File文件.mp4</div>
+										</td>
+										<td class="el-table_1_column_2  ">
+											<div class="cell el-tooltip" style="width: 131px;">/广州ETC/GZETC-JY-JV-20201228-01/第三周/day05/2.File文件.mp4</div>
+										</td>
+										<td class="el-table_1_column_3  ">
+											<div class="cell el-tooltip" style="width: 129px;"><span>Java</span></div>
+										</td>
+										<td class="el-table_1_column_4  ">
+											<div class="cell"><span>直播回放</span></div>
+										</td>
+										<td class="el-table_1_column_5  ">
+											<div class="cell"><span>91.37M</span></div>
+										</td>
+										<td class="el-table_1_column_6  ">
+											<div class="cell"><span>33分52秒</span></div>
+										</td>
+										<td class="el-table_1_column_7  ">
+											<div class="cell">1360*768</div>
+										</td>
+										<td class="el-table_1_column_8  ">
+											<div class="cell"><span>2021-01-15 17:30:27</span></div>
+										</td>
+										<td class="el-table_1_column_9  ">
+											<div class="cell"><a href="javascript:;">预览</a> <a href="javascript:;" style="display: none;">删除</a> <a href="javascript:;">下载</a>
+												<a href="javascript:;">转换</a> <a href="javascript:;">上传</a></div>
+										</td>
+									</tr>
+									<tr class="el-table__row">
+										<td class="el-table_1_column_1  ">
+											<div class="cell el-tooltip" style="width: 199px;">1.知识点回顾.mp4</div>
+										</td>
+										<td class="el-table_1_column_2  ">
+											<div class="cell el-tooltip" style="width: 131px;">/广州ETC/GZETC-JY-JV-20201228-01/第三周/day05/1.知识点回顾.mp4</div>
+										</td>
+										<td class="el-table_1_column_3  ">
+											<div class="cell el-tooltip" style="width: 129px;"><span>Java</span></div>
+										</td>
+										<td class="el-table_1_column_4  ">
+											<div class="cell"><span>直播回放</span></div>
+										</td>
+										<td class="el-table_1_column_5  ">
+											<div class="cell"><span>87.69M</span></div>
+										</td>
+										<td class="el-table_1_column_6  ">
+											<div class="cell"><span>29分40秒</span></div>
+										</td>
+										<td class="el-table_1_column_7  ">
+											<div class="cell">1360*768</div>
+										</td>
+										<td class="el-table_1_column_8  ">
+											<div class="cell"><span>2021-01-15 17:30:01</span></div>
+										</td>
+										<td class="el-table_1_column_9  ">
+											<div class="cell"><a href="javascript:;">预览</a> <a href="javascript:;" style="display: none;">删除</a> <a href="javascript:;">下载</a>
+												<a href="javascript:;">转换</a> <a href="javascript:;">上传</a></div>
+										</td>
+									</tr>
+									<tr class="el-table__row el-table__row--striped">
+										<td class="el-table_1_column_1  ">
+											<div class="cell el-tooltip" style="width: 199px;">07-HashMap案例.mp4</div>
+										</td>
+										<td class="el-table_1_column_2  ">
+											<div class="cell el-tooltip" style="width: 131px;">/广州ETC/GZETC-JY-JV-20210105-01/day09/07-HashMap案例.mp4</div>
+										</td>
+										<td class="el-table_1_column_3  ">
+											<div class="cell el-tooltip" style="width: 129px;"><span>Java</span></div>
+										</td>
+										<td class="el-table_1_column_4  ">
+											<div class="cell"><span>直播回放</span></div>
+										</td>
+										<td class="el-table_1_column_5  ">
+											<div class="cell"><span>111.54M</span></div>
+										</td>
+										<td class="el-table_1_column_6  ">
+											<div class="cell"><span>16分12秒</span></div>
+										</td>
+										<td class="el-table_1_column_7  ">
+											<div class="cell">1920*1080</div>
+										</td>
+										<td class="el-table_1_column_8  ">
+											<div class="cell"><span>2021-01-15 17:20:04</span></div>
+										</td>
+										<td class="el-table_1_column_9  ">
+											<div class="cell"><a href="javascript:;">预览</a> <a href="javascript:;" style="display: none;">删除</a> <a href="javascript:;">下载</a>
+												<a href="javascript:;">转换</a> <a href="javascript:;">上传</a></div>
+										</td>
+									</tr>
+									<tr class="el-table__row">
+										<td class="el-table_1_column_1  ">
+											<div class="cell el-tooltip" style="width: 199px;">06-HashMap和HashTable.mp4</div>
+										</td>
+										<td class="el-table_1_column_2  ">
+											<div class="cell el-tooltip" style="width: 131px;">/广州ETC/GZETC-JY-JV-20210105-01/day09/06-HashMap和HashTable.mp4</div>
+										</td>
+										<td class="el-table_1_column_3  ">
+											<div class="cell el-tooltip" style="width: 129px;"><span>Java</span></div>
+										</td>
+										<td class="el-table_1_column_4  ">
+											<div class="cell"><span>直播回放</span></div>
+										</td>
+										<td class="el-table_1_column_5  ">
+											<div class="cell"><span>145.41M</span></div>
+										</td>
+										<td class="el-table_1_column_6  ">
+											<div class="cell"><span>26分44秒</span></div>
+										</td>
+										<td class="el-table_1_column_7  ">
+											<div class="cell">1920*1080</div>
+										</td>
+										<td class="el-table_1_column_8  ">
+											<div class="cell"><span>2021-01-15 17:19:39</span></div>
+										</td>
+										<td class="el-table_1_column_9  ">
+											<div class="cell"><a href="javascript:;">预览</a> <a href="javascript:;" style="display: none;">删除</a> <a href="javascript:;">下载</a>
+												<a href="javascript:;">转换</a> <a href="javascript:;">上传</a></div>
+										</td>
+									</tr>
+									<tr class="el-table__row el-table__row--striped">
+										<td class="el-table_1_column_1  ">
+											<div class="cell el-tooltip" style="width: 199px;">05-Map的Entry源码解析.mp4</div>
+										</td>
+										<td class="el-table_1_column_2  ">
+											<div class="cell el-tooltip" style="width: 131px;">/广州ETC/GZETC-JY-JV-20210105-01/day09/05-Map的Entry源码解析.mp4</div>
+										</td>
+										<td class="el-table_1_column_3  ">
+											<div class="cell el-tooltip" style="width: 129px;"><span>Java</span></div>
+										</td>
+										<td class="el-table_1_column_4  ">
+											<div class="cell"><span>直播回放</span></div>
+										</td>
+										<td class="el-table_1_column_5  ">
+											<div class="cell"><span>62.73M</span></div>
+										</td>
+										<td class="el-table_1_column_6  ">
+											<div class="cell"><span>11分07秒</span></div>
+										</td>
+										<td class="el-table_1_column_7  ">
+											<div class="cell">1920*1080</div>
+										</td>
+										<td class="el-table_1_column_8  ">
+											<div class="cell"><span>2021-01-15 17:19:14</span></div>
+										</td>
+										<td class="el-table_1_column_9  ">
+											<div class="cell"><a href="javascript:;">预览</a> <a href="javascript:;" style="display: none;">删除</a> <a href="javascript:;">下载</a>
+												<a href="javascript:;">转换</a> <a href="javascript:;">上传</a></div>
+										</td>
+									</tr>
+									<tr class="el-table__row">
+										<td class="el-table_1_column_1  ">
+											<div class="cell el-tooltip" style="width: 199px;">04-Map集合的两种遍历方式.mp4</div>
+										</td>
+										<td class="el-table_1_column_2  ">
+											<div class="cell el-tooltip" style="width: 131px;">/广州ETC/GZETC-JY-JV-20210105-01/day09/04-Map集合的两种遍历方式.mp4</div>
+										</td>
+										<td class="el-table_1_column_3  ">
+											<div class="cell el-tooltip" style="width: 129px;"><span>Java</span></div>
+										</td>
+										<td class="el-table_1_column_4  ">
+											<div class="cell"><span>直播回放</span></div>
+										</td>
+										<td class="el-table_1_column_5  ">
+											<div class="cell"><span>80.69M</span></div>
+										</td>
+										<td class="el-table_1_column_6  ">
+											<div class="cell"><span>12分10秒</span></div>
+										</td>
+										<td class="el-table_1_column_7  ">
+											<div class="cell">1920*1080</div>
+										</td>
+										<td class="el-table_1_column_8  ">
+											<div class="cell"><span>2021-01-15 17:18:46</span></div>
+										</td>
+										<td class="el-table_1_column_9  ">
+											<div class="cell"><a href="javascript:;">预览</a> <a href="javascript:;" style="display: none;">删除</a> <a href="javascript:;">下载</a>
+												<a href="javascript:;">转换</a> <a href="javascript:;">上传</a></div>
+										</td>
+									</tr>
+									<tr class="el-table__row el-table__row--striped">
+										<td class="el-table_1_column_1  ">
+											<div class="cell el-tooltip" style="width: 199px;">03-Map概述及通用方法.mp4</div>
+										</td>
+										<td class="el-table_1_column_2  ">
+											<div class="cell el-tooltip" style="width: 131px;">/广州ETC/GZETC-JY-JV-20210105-01/day09/03-Map概述及通用方法.mp4</div>
+										</td>
+										<td class="el-table_1_column_3  ">
+											<div class="cell el-tooltip" style="width: 129px;"><span>Java</span></div>
+										</td>
+										<td class="el-table_1_column_4  ">
+											<div class="cell"><span>直播回放</span></div>
+										</td>
+										<td class="el-table_1_column_5  ">
+											<div class="cell"><span>154.47M</span></div>
+										</td>
+										<td class="el-table_1_column_6  ">
+											<div class="cell"><span>21分54秒</span></div>
+										</td>
+										<td class="el-table_1_column_7  ">
+											<div class="cell">1920*1080</div>
+										</td>
+										<td class="el-table_1_column_8  ">
+											<div class="cell"><span>2021-01-15 17:18:15</span></div>
+										</td>
+										<td class="el-table_1_column_9  ">
+											<div class="cell"><a href="javascript:;">预览</a> <a href="javascript:;" style="display: none;">删除</a> <a href="javascript:;">下载</a>
+												<a href="javascript:;">转换</a> <a href="javascript:;">上传</a></div>
+										</td>
+									</tr>
+									<!---->
+								</tbody>
+							</table>
+							<!---->
+							<!---->
+						</div>
+						<!---->
+						<!---->
+						<!---->
+						<!---->
+						<div class="el-table__column-resize-proxy" style="display: none;"></div>
+					</div>
+				</div>
+				<div class="Mlf40 Mrt20 Mtp10 Mbm10">
+					<div class="oms_page el-pagination"><span class="el-pagination__total">共 6732 条</span><span class="el-pagination__sizes">
+							<div class="el-select">
+								<!---->
+								<div class="el-input el-input--suffix">
+									<!----><input type="text" autocomplete="off" placeholder="请选择" readonly="readonly" class="el-input__inner">
+									<!----><span class="el-input__suffix"><span class="el-input__suffix-inner"><i class="el-select__caret el-input__icon el-icon-arrow-up"></i>
+											<!----></span>
+										<!----></span>
+									<!---->
+								</div>
+								<div class="el-select-dropdown el-popper" style="display: none; min-width: 109.979px;">
+									<div class="el-scrollbar" style="">
+										<div class="el-select-dropdown__wrap el-scrollbar__wrap" style="margin-bottom: -17px; margin-right: -17px;">
+											<ul class="el-scrollbar__view el-select-dropdown__list">
+												<!---->
+												<li class="el-select-dropdown__item selected"><span>20条/页</span></li>
+												<li class="el-select-dropdown__item"><span>30条/页</span></li>
+												<li class="el-select-dropdown__item"><span>50条/页</span></li>
+											</ul>
+										</div>
+										<div class="el-scrollbar__bar is-horizontal">
+											<div class="el-scrollbar__thumb" style="transform: translateX(0%);"></div>
+										</div>
+										<div class="el-scrollbar__bar is-vertical">
+											<div class="el-scrollbar__thumb" style="transform: translateY(0%);"></div>
+										</div>
+									</div>
+									<!---->
+								</div>
+							</div>
+						</span><span class="el-pagination__jump">前往<div class="el-input el-pagination__editor is-in-pagination">
+								<!----><input type="number" autocomplete="off" min="1" class="el-input__inner" max="337">
+								<!---->
+								<!---->
+								<!---->
+							</div>页</span>
+						<!----><button type="button" disabled="disabled" class="btn-prev"><i class="el-icon el-icon-arrow-left"></i></button>
+						<ul class="el-pager">
+							<li class="number active">1</li>
+							<!---->
+							<li class="number">2</li>
+							<li class="number">3</li>
+							<li class="number">4</li>
+							<li class="number">5</li>
+							<li class="number">6</li>
+							<li class="el-icon more btn-quicknext el-icon-more"></li>
+							<li class="number">337</li>
+						</ul><button type="button" class="btn-next"><i class="el-icon el-icon-arrow-right"></i></button>
+					</div>
+				</div>
+			</div>
+			<div class="el-dialog__wrapper" style="display: none;">
+				<div class="el-dialog el-dialog--center" style="margin-top: 15vh;">
+					<div class="el-dialog__header"><span class="el-dialog__title">undefined预览</span><button type="button" aria-label="Close"
+						 class="el-dialog__headerbtn"><i class="el-dialog__close el-icon el-icon-close"></i></button></div>
+					<!---->
+					<div class="el-dialog__footer">
+						<div class="dialog-footer"><button type="button" class="el-button el-button--primary">
+								<!---->
+								<!----><span>关闭</span></button></div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- 右侧部分结束 -->
+
+	</body>
+</html>

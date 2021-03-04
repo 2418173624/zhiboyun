@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link href="/css/common_dbbbd09.css" rel="stylesheet" />
+		<link href="/css/components_2ada063.css" rel="stylesheet" />
+		<link href="/css/train_banner_429adde.css" rel="stylesheet" />
+		<link href="/css/personal_nav_5b79317.css" rel="stylesheet" />
+		<link href="/css/iconfont.css" rel="stylesheet" />
+		<link href="/css/main_4d07d49.css" rel="stylesheet" />
+		<link href="/css/element.css" rel="stylesheet" />
+		<link href="/css/classroom_cfd09f6.css" rel="stylesheet" />
+		<link href="/css/elementui.css" rel="stylesheet" />
+	</head>
+	<body>
+		<div id="app" style="position: relative; min-height: calc(100vh - 185px);">
+			<!-- 头部开始 -->
+			<div th:replace="~{common::topbar}"></div>
+						<!--头部结束-->
+
+
+					<article>
+						<!-- 中间部分开始 -->
+						<div class="training_activity_list_main clearfix">
+							<!-- 中间左半部分开始 -->
+							<div th:replace="~{common::sidebar}"></div>
+							<!-- 中间左半部分结束 -->
+							<!-- 中间右半部分开始 -->
+							<div class="training_activity_list_detailed">
+								<!--中间右上部分导航栏-->
+								<div th:replace="~{common::upbar}"></div>
+
+
+								<div class="user_info_box" style="display: none;">
+									<div class="base_info Ptp20"><span class="p_ibt wido7">姓名：</span> <span class="p_ibt wido30">郄常华</span> <span
+										 class="p_ibt wido7">昵称：</span> <span class="p_ibt wido30">郄常华</span></div>
+									<div class="base_info Ptp20"><span class="p_ibt wido7">性别：</span> <span class="p_ibt wido30">女</span> <span
+										 class="p_ibt wido7">生日：</span> <span class="p_ibt wido30"></span></div>
+								</div>
+								<div class="user_info_box" style="">
+									<div class="Ptp20">
+										<div class="p_ibt"><img id="userHead" src="blob:https://zhjxy.kp.futurelab.tv/621604b4-38d2-4d74-94b2-44dd5094b558"
+											 class="user_head" style="width: 0px; height: 0px; display: none;">
+											<div class="jcrop-holder" style="width: 200px; height: 200px; position: relative; background-color: black;">
+												<div style="position: absolute; z-index: 600; display: block; width: 180px; height: 180px; top: 10px; left: 10px;">
+													<div style="width: 100%; height: 100%; z-index: 310; position: absolute; overflow: hidden;"><img src="blob:https://zhjxy.kp.futurelab.tv/621604b4-38d2-4d74-94b2-44dd5094b558"
+														 style="border: none; visibility: visible; margin: 0px; padding: 0px; position: absolute; top: -10px; left: -10px; width: 200px; height: 200px;">
+														<div class="jcrop-hline" style="position: absolute; opacity: 0.4;"></div>
+														<div class="jcrop-hline bottom" style="position: absolute; opacity: 0.4;"></div>
+														<div class="jcrop-vline right" style="position: absolute; opacity: 0.4;"></div>
+														<div class="jcrop-vline" style="position: absolute; opacity: 0.4;"></div>
+														<div class="jcrop-tracker" style="cursor: move; position: absolute; z-index: 360;"></div>
+													</div>
+													<div style="width: 100%; height: 100%; z-index: 320; display: block;">
+														<div class="ord-n jcrop-dragbar" style="cursor: n-resize; position: absolute; z-index: 370;"></div>
+														<div class="ord-s jcrop-dragbar" style="cursor: s-resize; position: absolute; z-index: 371;"></div>
+														<div class="ord-e jcrop-dragbar" style="cursor: e-resize; position: absolute; z-index: 372;"></div>
+														<div class="ord-w jcrop-dragbar" style="cursor: w-resize; position: absolute; z-index: 373;"></div>
+														<div class="ord-n jcrop-handle" style="cursor: n-resize; position: absolute; z-index: 374; opacity: 0.5;"></div>
+														<div class="ord-s jcrop-handle" style="cursor: s-resize; position: absolute; z-index: 375; opacity: 0.5;"></div>
+														<div class="ord-e jcrop-handle" style="cursor: e-resize; position: absolute; z-index: 376; opacity: 0.5;"></div>
+														<div class="ord-w jcrop-handle" style="cursor: w-resize; position: absolute; z-index: 377; opacity: 0.5;"></div>
+														<div class="ord-nw jcrop-handle" style="cursor: nw-resize; position: absolute; z-index: 378; opacity: 0.5;"></div>
+														<div class="ord-ne jcrop-handle" style="cursor: ne-resize; position: absolute; z-index: 379; opacity: 0.5;"></div>
+														<div class="ord-se jcrop-handle" style="cursor: se-resize; position: absolute; z-index: 380; opacity: 0.5;"></div>
+														<div class="ord-sw jcrop-handle" style="cursor: sw-resize; position: absolute; z-index: 381; opacity: 0.5;"></div>
+													</div>
+												</div>
+												<div class="jcrop-tracker" style="width: 204px; height: 204px; position: absolute; top: -2px; left: -2px; z-index: 290; cursor: crosshair;"></div><input
+												 type="radio" class="jcrop-keymgr" style="position: fixed; left: -120px; width: 12px;"><img src="img/ccf70887-09c8-4aac-ab11-fe85ef90ac6d.jpg"
+												 class="user_head" style="width: 200px; height: 200px; border: none; visibility: visible; margin: 0px; padding: 0px; position: absolute; top: 0px; left: 0px; display: inline-block; opacity: 0.6;">
+											</div>
+										</div>
+										<div class="p_ibt Mlf20"><canvas id="canvas" width="200" height="200" class="canvas"></canvas></div>
+									</div>
+									<div class="Ptp20">
+										<div class="p_ibt el_upload_head">
+											<div tabindex="0" class="el-upload el-upload--text"><button type="button" class="el-button el-button--primary el-button--small is-round">
+													<!---->
+													<!----><span>选择头像</span></button><input type="file" name="file" class="el-upload__input"></div>
+										</div> <button type="button" class="el-button Mlf20 el-button--primary el-button--small is-round">
+											<!---->
+											<!----><span>保存头像
+											</span></button>
+									</div>
+								</div>
+								<div class="user_info_box" style="display: none;">
+									<div class="user_pwd Ptp20"><span class="p_ibm wido10">旧密码：</span>
+										<div class="wid200 el-input">
+											<!----><input type="password" autocomplete="off" placeholder="请输入旧密码" class="el-input__inner">
+											<!---->
+											<!---->
+											<!---->
+										</div>
+									</div>
+									<div class="user_pwd"><span class="p_ibm wido10">新密码：</span>
+										<div class="wid200 el-input">
+											<!----><input type="password" autocomplete="off" placeholder="请输入新密码" class="el-input__inner">
+											<!---->
+											<!---->
+											<!---->
+										</div>
+									</div>
+									<div class="user_pwd"><span class="p_ibm wido10">确认新密码：</span>
+										<div class="wid200 el-input">
+											<!----><input type="password" autocomplete="off" placeholder="请输入新密码" class="el-input__inner">
+											<!---->
+											<!---->
+											<!---->
+										</div>
+									</div>
+									<div><button type="button" class="el-button el-button--primary el-button--small is-round">
+											<!---->
+											<!----><span>保 存</span></button></div>
+								</div>
+								<div class="user_info_box" style="display: none;">
+									<div class="Ptp20"><span class="p_ibm wido10 co_666 Tright">Git登陆名：</span>
+										<div class="wid200 el-input">
+											<!----><input type="text" autocomplete="off" readonly="readonly" class="el-input__inner">
+											<!---->
+											<!---->
+											<!---->
+										</div>
+									</div>
+									<div class="Ptp20"><span class="p_ibm wido10 co_666 Tright">Git邮箱：</span>
+										<div class="wid200 el-input">
+											<!----><input type="text" autocomplete="off" readonly="readonly" class="el-input__inner">
+											<!---->
+											<!---->
+											<!---->
+										</div>
+									</div>
+									<div class="Ptp20"><button type="button" class="el-button el-button--primary el-button--small is-round">
+											<!---->
+											<!----><span>同步Git用户信息</span></button> <span class="F12 co_999 Mlf5"><span class="el-icon-question" style="color: rgb(230, 162, 60); font-size: 16px;"></span>在GitLab中修改用户信息后，需要在此同步Git用户信息，否则可能会导致实训相关功能出现异常！</span></div>
+									<div style="border-top: 1px solid rgb(239, 239, 239); margin-top: 20px;"></div>
+									<div class="user_pwd Ptp20"><span class="p_ibm wido10 co_666 Tright">平台密码：</span>
+										<div class="wid200 el-tooltip el-input" aria-describedby="el-tooltip-5350" tabindex="0">
+											<!----><input type="password" autocomplete="off" placeholder="请输入平台密码" class="el-input__inner">
+											<!---->
+											<!---->
+											<!---->
+										</div>
+									</div>
+									<div><span class="p_ibm wido10 co_666 Tright">Git默认密码：</span> <span class="co_999">"zrgj4733"，一旦重置密码,本密码立即失效</span></div>
+									<div class="Ptp20"><button type="button" class="el-button el-button--primary el-button--small is-round">
+											<!---->
+											<!----><span>重置Git密码</span></button></div>
+								</div>
+								<div class="user_info_box" style="display: none;">
+									<div class="Ptp30 Pbm30 co_09f F20"><span class="iconfont icon-userinfo F20"></span> <span>个人信息</span></div>
+									<div class="el-row">
+										<div class="el-col el-col-14">
+											<form class="el-form">
+												<div class="el-form-item is-required"><label for="name" class="el-form-item__label" style="width: 110px;">姓名</label>
+													<div class="el-form-item__content" style="margin-left: 110px;">
+														<div class="wid220 el-input">
+															<!----><input type="text" autocomplete="off" class="el-input__inner">
+															<!---->
+															<!---->
+															<!---->
+														</div>
+														<!---->
+													</div>
+												</div>
+												<div class="el-form-item is-required"><label for="birthday" class="el-form-item__label" style="width: 110px;">出生日期</label>
+													<div class="el-form-item__content" style="margin-left: 110px;">
+														<div class="el-date-editor el-input el-input--prefix el-input--suffix el-date-editor--date">
+															<!----><input type="text" autocomplete="off" name="" placeholder="选择日期" class="el-input__inner"><span
+															 class="el-input__prefix"><i class="el-input__icon el-icon-date"></i>
+																<!----></span><span class="el-input__suffix"><span class="el-input__suffix-inner"><i class="el-input__icon"></i>
+																	<!----></span>
+																<!----></span>
+															<!---->
+														</div>
+														<!---->
+													</div>
+												</div>
+												<div class="el-form-item is-required"><label for="phone" class="el-form-item__label" style="width: 110px;">手机</label>
+													<div class="el-form-item__content" style="margin-left: 110px;">
+														<div class="wid220 el-input">
+															<!----><input type="text" autocomplete="off" class="el-input__inner">
+															<!---->
+															<!---->
+															<!---->
+														</div>
+														<!---->
+													</div>
+												</div>
+												<div class="el-form-item is-required"><label for="address" class="el-form-item__label" style="width: 110px;">居住地</label>
+													<div class="el-form-item__content" style="margin-left: 110px;">
+														<div class="wid220 el-input">
+															<!----><input type="text" autocomplete="off" class="el-input__inner">
+															<!---->
+															<!---->
+															<!---->
+														</div>
+														<!---->
+													</div>
+												</div>
+											</form>
+										</div>
+										<div class="el-col el-col-10">
+											<form class="el-form">
+												<div class="el-form-item is-required"><label for="gender" class="el-form-item__label" style="width: 110px;">性别</label>
+													<div class="el-form-item__content" style="margin-left: 110px;">
+														<div role="radiogroup" class="el-radio-group"><label role="radio" aria-checked="true" tabindex="0" class="el-radio is-checked"><span
+																 class="el-radio__input is-checked"><span class="el-radio__inner"></span><input type="radio"
+																	 aria-hidden="true" tabindex="-1" class="el-radio__original" value="1"></span><span class="el-radio__label">男
+																	<!----></span></label> <label role="radio" tabindex="-1" class="el-radio"><span class="el-radio__input"><span
+																	 class="el-radio__inner"></span><input type="radio" aria-hidden="true" tabindex="-1" class="el-radio__original"
+																	 value="0"></span><span class="el-radio__label">女
+																	<!----></span></label></div>
+														<!---->
+													</div>
+												</div>
+												<div class="el-form-item is-required"><label for="firstWorkDate" class="el-form-item__label" style="width: 110px;">开始工作年月</label>
+													<div class="el-form-item__content" style="margin-left: 110px;">
+														<div class="el-date-editor el-input el-input--prefix el-input--suffix el-date-editor--month">
+															<!----><input type="text" autocomplete="off" name="" placeholder="选择日期" class="el-input__inner"><span
+															 class="el-input__prefix"><i class="el-input__icon el-icon-date"></i>
+																<!----></span><span class="el-input__suffix"><span class="el-input__suffix-inner"><i class="el-input__icon"></i>
+																	<!----></span>
+																<!----></span>
+															<!---->
+														</div>
+														<!---->
+													</div>
+												</div>
+												<div class="el-form-item is-required"><label for="email" class="el-form-item__label" style="width: 110px;">邮箱</label>
+													<div class="el-form-item__content" style="margin-left: 110px;">
+														<div class="wid220 el-input">
+															<!----><input type="text" autocomplete="off" class="el-input__inner">
+															<!---->
+															<!---->
+															<!---->
+														</div>
+														<!---->
+													</div>
+												</div>
+												<div class="el-form-item is-required"><label for="isOverseas" class="el-form-item__label" style="width: 110px;">海外经历</label>
+													<div class="el-form-item__content" style="margin-left: 110px;">
+														<div role="radiogroup" class="el-radio-group"><label role="radio" tabindex="-1" class="el-radio"><span
+																 class="el-radio__input"><span class="el-radio__inner"></span><input type="radio" aria-hidden="true"
+																	 tabindex="-1" class="el-radio__original" value="1"></span><span class="el-radio__label">是
+																	<!----></span></label> <label role="radio" aria-checked="true" tabindex="0" class="el-radio is-checked"><span
+																 class="el-radio__input is-checked"><span class="el-radio__inner"></span><input type="radio"
+																	 aria-hidden="true" tabindex="-1" class="el-radio__original" value="0"></span><span class="el-radio__label">否
+																	<!----></span></label></div>
+														<!---->
+													</div>
+												</div>
+											</form>
+										</div>
+									</div>
+									<div class="Ptp30 Pbm30 co_09f F20"><span class="iconfont icon-jobs F20"></span> <span>教育经历</span></div>
+									<div class="el-row">
+										<form class="el-form">
+											<div class="posr el-row" style="padding-top: 20px; border-top: none;"><button type="button" class="el-button el-button--default is-circle"
+												 style="position: absolute; right: 0px; z-index: 1; display: none;">
+													<!----><i class="el-icon-delete"></i>
+													<!----></button>
+												<div class="el-col el-col-14">
+													<div class="el-form-item is-required"><label for="educations.0.date" class="el-form-item__label" style="width: 110px;">时间</label>
+														<div class="el-form-item__content" style="margin-left: 110px;">
+															<div class="el-date-editor el-range-editor el-input__inner el-date-editor--daterange"><i class="el-input__icon el-range__icon el-icon-date"></i><input
+																 placeholder="开始时间" name="" class="el-range-input"><span class="el-range-separator">到</span><input
+																 placeholder="结束时间" name="" class="el-range-input"><i class="el-input__icon el-range__close-icon"></i></div>
+															<!---->
+														</div>
+													</div>
+													<div class="el-form-item is-required"><label for="educations.0.degree" class="el-form-item__label" style="width: 110px;">学历/学位</label>
+														<div class="el-form-item__content" style="margin-left: 110px;">
+															<div class="el-select wid220">
+																<!---->
+																<div class="el-input el-input--suffix">
+																	<!----><input type="text" autocomplete="off" placeholder="请选择" readonly="readonly" class="el-input__inner">
+																	<!----><span class="el-input__suffix"><span class="el-input__suffix-inner"><i class="el-select__caret el-input__icon el-icon-arrow-up"></i>
+																			<!----></span>
+																		<!----></span>
+																	<!---->
+																</div>
+																<div class="el-select-dropdown el-popper" style="display: none;">
+																	<div class="el-scrollbar" style="">
+																		<div class="el-select-dropdown__wrap el-scrollbar__wrap" style="margin-bottom: -17px; margin-right: -17px;">
+																			<ul class="el-scrollbar__view el-select-dropdown__list">
+																				<!---->
+																				<li class="el-select-dropdown__item"><span>高中及以下</span></li>
+																				<li class="el-select-dropdown__item"><span>大专</span></li>
+																				<li class="el-select-dropdown__item"><span>本科</span></li>
+																				<li class="el-select-dropdown__item"><span>硕士</span></li>
+																				<li class="el-select-dropdown__item"><span>博士及以上</span></li>
+																			</ul>
+																		</div>
+																		<div class="el-scrollbar__bar is-horizontal">
+																			<div class="el-scrollbar__thumb" style="transform: translateX(0%);"></div>
+																		</div>
+																		<div class="el-scrollbar__bar is-vertical">
+																			<div class="el-scrollbar__thumb" style="transform: translateY(0%);"></div>
+																		</div>
+																	</div>
+																	<!---->
+																</div>
+															</div>
+															<!---->
+														</div>
+													</div>
+													<div class="el-form-item is-required"><label for="educations.0.major" class="el-form-item__label" style="width: 110px;">专业</label>
+														<div class="el-form-item__content" style="margin-left: 110px;">
+															<div aria-haspopup="listbox" role="combobox" aria-owns="el-autocomplete-5812" class="el-autocomplete wid220">
+																<div class="el-input">
+																	<!----><input type="text" autocomplete="off" valuekey="value" fetchsuggestions="function () { [native code] }"
+																	 debounce="300" placement="bottom-start" class="el-input__inner" role="textbox" aria-autocomplete="list"
+																	 aria-controls="id" aria-activedescendant="el-autocomplete-5812-item--1">
+																	<!---->
+																	<!---->
+																	<!---->
+																</div>
+																<div role="region" class="el-autocomplete-suggestion el-popper" style="display: none;">
+																	<div class="el-scrollbar">
+																		<div class="el-autocomplete-suggestion__wrap el-scrollbar__wrap" style="margin-bottom: -17px; margin-right: -17px;">
+																			<ul class="el-scrollbar__view el-autocomplete-suggestion__list" role="listbox" id="el-autocomplete-5812"></ul>
+																		</div>
+																		<div class="el-scrollbar__bar is-horizontal">
+																			<div class="el-scrollbar__thumb" style="transform: translateX(0%);"></div>
+																		</div>
+																		<div class="el-scrollbar__bar is-vertical">
+																			<div class="el-scrollbar__thumb" style="transform: translateY(0%);"></div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<!---->
+														</div>
+													</div>
+												</div>
+												<div class="el-col el-col-10">
+													<div class="el-form-item is-required"><label for="educations.0.school" class="el-form-item__label" style="width: 110px;">学校</label>
+														<div class="el-form-item__content" style="margin-left: 110px;">
+															<div class="wid220 el-input">
+																<!----><input type="text" autocomplete="off" class="el-input__inner">
+																<!---->
+																<!---->
+																<!---->
+															</div>
+															<!---->
+														</div>
+													</div>
+													<div class="el-form-item is-required"><label for="educations.0.isRecruitment" class="el-form-item__label"
+														 style="width: 110px;">是否统招</label>
+														<div class="el-form-item__content" style="margin-left: 110px;">
+															<div role="radiogroup" class="el-radio-group"><label role="radio" aria-checked="true" tabindex="0" class="el-radio is-checked"><span
+																	 class="el-radio__input is-checked"><span class="el-radio__inner"></span><input type="radio"
+																		 aria-hidden="true" tabindex="-1" class="el-radio__original" value="1"></span><span class="el-radio__label">是
+																		<!----></span></label> <label role="radio" tabindex="-1" class="el-radio"><span class="el-radio__input"><span
+																		 class="el-radio__inner"></span><input type="radio" aria-hidden="true" tabindex="-1" class="el-radio__original"
+																		 value="0"></span><span class="el-radio__label">否
+																		<!----></span></label></div>
+															<!---->
+														</div>
+													</div>
+												</div>
+											</div>
+										</form>
+										<div><button type="button" class="el-button Mlf40 el-button--primary">
+												<!---->
+												<!----><span>继续添加</span></button></div>
+									</div>
+									<div class="Ptp30 Pbm30 co_09f F20"><span class="iconfont icon-crown F20"></span> <span>奖项/证书</span></div>
+									<form class="el-form">
+										<div class="posr el-row" style="padding-top: 20px; border-top: none;"><button type="button" class="el-button el-button--default is-circle"
+											 style="position: absolute; right: 0px; z-index: 1; display: none;">
+												<!----><i class="el-icon-delete"></i>
+												<!----></button>
+											<div class="el-col el-col-24">
+												<div class="el-form-item"><label for="awards.0.date" class="el-form-item__label" style="width: 110px;">时间</label>
+													<div class="el-form-item__content" style="margin-left: 110px;">
+														<div class="el-date-editor el-input el-input--prefix el-input--suffix el-date-editor--date">
+															<!----><input type="text" autocomplete="off" name="" placeholder="选择日期" class="el-input__inner"><span
+															 class="el-input__prefix"><i class="el-input__icon el-icon-date"></i>
+																<!----></span><span class="el-input__suffix"><span class="el-input__suffix-inner"><i class="el-input__icon"></i>
+																	<!----></span>
+																<!----></span>
+															<!---->
+														</div>
+														<!---->
+													</div>
+												</div>
+												<div class="el-form-item"><label for="awards.0.awards" class="el-form-item__label" style="width: 110px;">奖项/证书</label>
+													<div class="el-form-item__content" style="margin-left: 110px;">
+														<div class="wid220 el-input">
+															<!----><input type="text" autocomplete="off" class="el-input__inner">
+															<!---->
+															<!---->
+															<!---->
+														</div>
+														<!---->
+													</div>
+												</div>
+												<div class="el-form-item"><label for="awards.0.name" class="el-form-item__label" style="width: 110px;">大赛名称</label>
+													<div class="el-form-item__content" style="margin-left: 110px;">
+														<div class="wid220 el-input">
+															<!----><input type="text" autocomplete="off" class="el-input__inner">
+															<!---->
+															<!---->
+															<!---->
+														</div>
+														<!---->
+													</div>
+												</div>
+											</div>
+										</div>
+										<div><button type="button" class="el-button Mlf40 el-button--primary">
+												<!---->
+												<!----><span>继续添加</span></button></div>
+									</form>
+									<div class="Ptp30 Pbm30 co_09f F20"><span class="iconfont icon-template F20"></span> <span>个人经历</span></div>
+									<form class="el-form">
+										<div class="posr el-row" style="padding-top: 20px; border-top: none;"><button type="button" class="el-button el-button--default is-circle"
+											 style="position: absolute; right: 0px; z-index: 1; display: none;">
+												<!----><i class="el-icon-delete"></i>
+												<!----></button>
+											<div class="el-col el-col-24">
+												<div class="el-form-item"><label for="experiences.0.date" class="el-form-item__label" style="width: 110px;">时间</label>
+													<div class="el-form-item__content" style="margin-left: 110px;">
+														<div class="el-date-editor el-range-editor el-input__inner el-date-editor--daterange"><i class="el-input__icon el-range__icon el-icon-date"></i><input
+															 placeholder="开始时间" name="" class="el-range-input"><span class="el-range-separator">到</span><input
+															 placeholder="结束时间" name="" class="el-range-input"><i class="el-input__icon el-range__close-icon"></i></div>
+														<!---->
+													</div>
+												</div>
+												<div class="el-form-item"><label for="experiences.0.company" class="el-form-item__label" style="width: 110px;">任职公司</label>
+													<div class="el-form-item__content" style="margin-left: 110px;">
+														<div class="wid220 el-input">
+															<!----><input type="text" autocomplete="off" class="el-input__inner">
+															<!---->
+															<!---->
+															<!---->
+														</div>
+														<!---->
+													</div>
+												</div>
+												<div class="el-form-item"><label for="experiences.0.post" class="el-form-item__label" style="width: 110px;">岗位</label>
+													<div class="el-form-item__content" style="margin-left: 110px;">
+														<div class="wid220 el-input">
+															<!----><input type="text" autocomplete="off" class="el-input__inner">
+															<!---->
+															<!---->
+															<!---->
+														</div>
+														<!---->
+													</div>
+												</div>
+												<div class="el-form-item"><label for="experiences.0.achievement" class="el-form-item__label" style="width: 110px;">取得成果</label>
+													<div class="el-form-item__content" style="margin-left: 110px;">
+														<div class="wid220 el-input">
+															<!----><input type="text" autocomplete="off" class="el-input__inner">
+															<!---->
+															<!---->
+															<!---->
+														</div>
+														<!---->
+													</div>
+												</div>
+												<div class="el-form-item"><label for="experiences.0.intro" class="el-form-item__label" style="width: 110px;">工作简介</label>
+													<div class="el-form-item__content" style="margin-left: 110px;">
+														<div class="el-textarea"><textarea class="el-textarea__inner" style="min-height: 53.9916px; height: 53.9916px;"></textarea></div>
+														<!---->
+													</div>
+												</div>
+											</div>
+										</div>
+										<div><button type="button" class="el-button Mlf40 el-button--primary">
+												<!---->
+												<!----><span>继续添加</span></button></div>
+									</form>
+									<div class="Ptp30 Pbm30 co_09f F20"><span class="iconfont icon-word F20"></span> <span>个人简介</span></div>
+									<form class="el-form">
+										<div class="el-form-item"><label class="el-form-item__label" style="width: 100px;"> </label>
+											<div class="el-form-item__content" style="margin-left: 100px;">
+												<div class="el-textarea"><textarea class="el-textarea__inner" style="min-height: 74.9916px; height: 74.9916px;"></textarea></div>
+												<!---->
+											</div>
+										</div>
+									</form>
+									<div class="Pbm40 Center"><button type="button" class="el-button wid150 el-button--primary">
+											<!---->
+											<!----><span>保 存</span></button></div>
+								</div>
+								<div class="user_info_box" style="display: none;">
+									<div class="Center">
+										<div class="p_ibt Ptp60 Pbm40 Tleft">
+											<h1>欢迎使用智慧教学云平台</h1>
+											<div class="Mtp30">
+												<h3 class="Pbm10">为了更好的为您提供服务，请您先完善一下你的班级信息</h3>
+												<p>1、未选择班级信息不能使用平台的某些功能</p>
+												<p>2、选择班级后，需要班级管理老师审核，请选择自己所在班级</p>
+												<p>3、班级一旦选择后不允许再次修改，请谨慎选择</p>
+												<p>4、更多个人信息设置可以在个人中心设置</p>
+											</div>
+											<div class="Mtp40"><span>所在班级：</span>
+												<div class="el-select">
+													<!---->
+													<div class="el-input el-input--suffix">
+														<!----><input type="text" autocomplete="off" placeholder="请选择" readonly="readonly" class="el-input__inner">
+														<!----><span class="el-input__suffix"><span class="el-input__suffix-inner"><i class="el-select__caret el-input__icon el-icon-arrow-up"></i>
+																<!----></span>
+															<!----></span>
+														<!---->
+													</div>
+													<div class="el-select-dropdown el-popper" style="display: none;">
+														<div class="el-scrollbar" style="">
+															<div class="el-select-dropdown__wrap el-scrollbar__wrap" style="margin-bottom: -17px; margin-right: -17px;">
+																<ul class="el-scrollbar__view el-select-dropdown__list">
+																	<!---->
+																	<li class="el-select-dropdown__item"><span>教育科技</span></li>
+																	<li class="el-select-dropdown__item"><span>教学产品研发与提交中心</span></li>
+																	<li class="el-select-dropdown__item"><span>产品实施部门</span></li>
+																	<li class="el-select-dropdown__item"><span>卓越研究院</span></li>
+																	<li class="el-select-dropdown__item"><span>产品测试</span></li>
+																	<li class="el-select-dropdown__item"><span>产品研发部门</span></li>
+																	<li class="el-select-dropdown__item"><span>政企事业群</span></li>
+																	<li class="el-select-dropdown__item"><span>人才服务事业部</span></li>
+																	<li class="el-select-dropdown__item"><span>春季校园招聘</span></li>
+																	<li class="el-select-dropdown__item"><span>云智能业务集团</span></li>
+																	<li class="el-select-dropdown__item"><span>云课程研发部</span></li>
+																	<li class="el-select-dropdown__item"><span>内部成员</span></li>
+																	<li class="el-select-dropdown__item"><span>JAVA一期</span></li>
+																	<li class="el-select-dropdown__item"><span>Python一期</span></li>
+																	<li class="el-select-dropdown__item"><span>Web一期</span></li>
+																	<li class="el-select-dropdown__item"><span>软件测试一期</span></li>
+																	<li class="el-select-dropdown__item"><span>硬件开发一期</span></li>
+																	<li class="el-select-dropdown__item"><span>硬件开发二期</span></li>
+																	<li class="el-select-dropdown__item"><span>硬件测试二期</span></li>
+																	<li class="el-select-dropdown__item"><span>软件测试二期</span></li>
+																	<li class="el-select-dropdown__item"><span>Web二期</span></li>
+																	<li class="el-select-dropdown__item"><span>Python二期</span></li>
+																	<li class="el-select-dropdown__item"><span>JAVA二期</span></li>
+																	<li class="el-select-dropdown__item"><span>C++二期</span></li>
+																	<li class="el-select-dropdown__item"><span>IT培训事业部</span></li>
+																	<li class="el-select-dropdown__item"><span>厦门中心</span></li>
+																	<li class="el-select-dropdown__item"><span>浙江水利水电学院双创选拔班</span></li>
+																	<li class="el-select-dropdown__item"><span>重庆中心</span></li>
+																	<li class="el-select-dropdown__item"><span>CQETC-JY-JV--20191105-01</span></li>
+																	<li class="el-select-dropdown__item"><span>硬件测试三期</span></li>
+																	<li class="el-select-dropdown__item"><span>硬件开发三期</span></li>
+																	<li class="el-select-dropdown__item"><span>软件测试三期</span></li>
+																	<li class="el-select-dropdown__item"><span>WEB三期</span></li>
+																	<li class="el-select-dropdown__item"><span>Python三期</span></li>
+																	<li class="el-select-dropdown__item"><span>JAVA三期</span></li>
+																	<li class="el-select-dropdown__item"><span>C++ 三期</span></li>
+																	<li class="el-select-dropdown__item"><span>武汉中心</span></li>
+																	<li class="el-select-dropdown__item"><span>WHETC-SZ-JV-20191125-01</span></li>
+																	<li class="el-select-dropdown__item"><span>WHETC-SZ-JV-20191216-01</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2046-1政府转换辽科</span></li>
+																	<li class="el-select-dropdown__item"><span>BJETC-XZ-JV-20200721-01</span></li>
+																	<li class="el-select-dropdown__item"><span>BJETC-XZ-JV-20200721-02</span></li>
+																	<li class="el-select-dropdown__item"><span>BJETC-XZ-JV-20200721-03</span></li>
+																	<li class="el-select-dropdown__item"><span>BJETC-XZ-PW-20200721-01</span></li>
+																	<li class="el-select-dropdown__item"><span>BJETC-XZ-UXD-20200721-01</span></li>
+																	<li class="el-select-dropdown__item"><span>816C3BB1C478432FA1F38346A1A69DBF</span></li>
+																	<li class="el-select-dropdown__item"><span>XMETC-TEST</span></li>
+																	<li class="el-select-dropdown__item"><span>中软国际</span></li>
+																	<li class="el-select-dropdown__item"><span>中软国际内训班</span></li>
+																	<li class="el-select-dropdown__item"><span>洛阳理工学院</span></li>
+																	<li class="el-select-dropdown__item"><span>培训中心</span></li>
+																	<li class="el-select-dropdown__item"><span>温州商学院实训2班</span></li>
+																	<li class="el-select-dropdown__item"><span>测试组织</span></li>
+																	<li class="el-select-dropdown__item"><span>教师员工</span></li>
+																	<li class="el-select-dropdown__item"><span>教师员工</span></li>
+																	<li class="el-select-dropdown__item"><span>教师员工</span></li>
+																	<li class="el-select-dropdown__item"><span>教学实施</span></li>
+																	<li class="el-select-dropdown__item"><span>销售</span></li>
+																	<li class="el-select-dropdown__item"><span>sy1914</span></li>
+																	<li class="el-select-dropdown__item"><span>硬件测试</span></li>
+																	<li class="el-select-dropdown__item"><span>CCETC-JY-JV-20200308-01</span></li>
+																	<li class="el-select-dropdown__item"><span>BJETC-JY-JV-20200302-01</span></li>
+																	<li class="el-select-dropdown__item"><span>硬件开发</span></li>
+																	<li class="el-select-dropdown__item"><span>PMP1209</span></li>
+																	<li class="el-select-dropdown__item"><span>8.10武汉理工大学Python1班</span></li>
+																	<li class="el-select-dropdown__item"><span>中软国际-学徒制20班</span></li>
+																	<li class="el-select-dropdown__item"><span>Java1班</span></li>
+																	<li class="el-select-dropdown__item"><span>C营UXD 5期</span></li>
+																	<li class="el-select-dropdown__item"><span>C++</span></li>
+																	<li class="el-select-dropdown__item"><span>C++/.NET技术方向工程师</span></li>
+																	<li class="el-select-dropdown__item"><span>C营UI二期</span></li>
+																	<li class="el-select-dropdown__item"><span>C营JAVA六期</span></li>
+																	<li class="el-select-dropdown__item"><span>北京ETC 鲲鹏培训</span></li>
+																	<li class="el-select-dropdown__item"><span>温州商学院实训1班</span></li>
+																	<li class="el-select-dropdown__item"><span>大连中心</span></li>
+																	<li class="el-select-dropdown__item"><span>教师员工</span></li>
+																	<li class="el-select-dropdown__item"><span>4-7JAVA考试</span></li>
+																	<li class="el-select-dropdown__item"><span>IT支持部</span></li>
+																	<li class="el-select-dropdown__item"><span>试听学员</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2007</span></li>
+																	<li class="el-select-dropdown__item"><span>硬件开发</span></li>
+																	<li class="el-select-dropdown__item"><span>C营Java三期</span></li>
+																	<li class="el-select-dropdown__item"><span>软件测试</span></li>
+																	<li class="el-select-dropdown__item"><span>PMP四班合集</span></li>
+																	<li class="el-select-dropdown__item"><span>8.10武汉理工大学Python2班</span></li>
+																	<li class="el-select-dropdown__item"><span>中软国际-学徒制19班</span></li>
+																	<li class="el-select-dropdown__item"><span>Java2班</span></li>
+																	<li class="el-select-dropdown__item"><span>宁波中心Java全栈双师精英2101001预科班</span></li>
+																	<li class="el-select-dropdown__item"><span>中软国际Java全栈双师精英2101001预科班</span></li>
+																	<li class="el-select-dropdown__item"><span>XAETC-JY-PY-20200401-01</span></li>
+																	<li class="el-select-dropdown__item"><span>软件测试</span></li>
+																	<li class="el-select-dropdown__item"><span>杏林17级</span></li>
+																	<li class="el-select-dropdown__item"><span>java2001</span></li>
+																	<li class="el-select-dropdown__item"><span>长春ETC_UI56班</span></li>
+																	<li class="el-select-dropdown__item"><span>JAVA技术方向工程师</span></li>
+																	<li class="el-select-dropdown__item"><span>XMETC-JY-JV-20200217-01</span></li>
+																	<li class="el-select-dropdown__item"><span>唐山国创1班</span></li>
+																	<li class="el-select-dropdown__item"><span>唐山国创2班</span></li>
+																	<li class="el-select-dropdown__item"><span>TJETC-JY-JV-20191112-01</span></li>
+																	<li class="el-select-dropdown__item"><span>仁爱学院新工科班</span></li>
+																	<li class="el-select-dropdown__item"><span>胜利学院新工科班</span></li>
+																	<li class="el-select-dropdown__item"><span>BJETC-JY-JV-20200427-01</span></li>
+																	<li class="el-select-dropdown__item"><span>高职升本19JAVA1+2班</span></li>
+																	<li class="el-select-dropdown__item"><span>TYETC-JY-JV-20191223-01</span></li>
+																	<li class="el-select-dropdown__item"><span>重庆文理学院-鲲鹏培训</span></li>
+																	<li class="el-select-dropdown__item"><span>鲲鹏-HCIA</span></li>
+																	<li class="el-select-dropdown__item"><span>大连技术部</span></li>
+																	<li class="el-select-dropdown__item"><span>华北科技学院实训班</span></li>
+																	<li class="el-select-dropdown__item"><span>温州商学院实训3班</span></li>
+																	<li class="el-select-dropdown__item"><span>厦门演示班级</span></li>
+																	<li class="el-select-dropdown__item"><span>重庆AI教师培训</span></li>
+																	<li class="el-select-dropdown__item"><span>天津中心</span></li>
+																	<li class="el-select-dropdown__item"><span>班级1</span></li>
+																	<li class="el-select-dropdown__item"><span>人工智能师资培训2.0</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2008</span></li>
+																	<li class="el-select-dropdown__item"><span>GZETC-WEB-BZ-20200720-01（百色职业)</span></li>
+																	<li class="el-select-dropdown__item"><span>4-16考试</span></li>
+																	<li class="el-select-dropdown__item"><span>软件测试</span></li>
+																	<li class="el-select-dropdown__item"><span>WHETC-JY-JV-20200106-01</span></li>
+																	<li class="el-select-dropdown__item"><span>硬件测试</span></li>
+																	<li class="el-select-dropdown__item"><span>pmp0104</span></li>
+																	<li class="el-select-dropdown__item"><span>中软国际-学徒制18班</span></li>
+																	<li class="el-select-dropdown__item"><span>Java3班</span></li>
+																	<li class="el-select-dropdown__item"><span>XAETC-JY-JV-20200308-01</span></li>
+																	<li class="el-select-dropdown__item"><span>硬件测试</span></li>
+																	<li class="el-select-dropdown__item"><span>中软国际UXD全能设计师双师精英2101001预科班</span></li>
+																	<li class="el-select-dropdown__item"><span>盐城师范17级</span></li>
+																	<li class="el-select-dropdown__item"><span>UI2001</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2013</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2022</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2021</span></li>
+																	<li class="el-select-dropdown__item"><span>DL1996</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2002</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2011</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2020</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2012</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2023</span></li>
+																	<li class="el-select-dropdown__item"><span>WEB前端技术方向工程师</span></li>
+																	<li class="el-select-dropdown__item"><span>XMETC-JY-JV-20200309-01</span></li>
+																	<li class="el-select-dropdown__item"><span>17级工大企业级开发1班</span></li>
+																	<li class="el-select-dropdown__item"><span>TYETC-JY-UI-20191210-01</span></li>
+																	<li class="el-select-dropdown__item"><span>GaussDB-HCIP</span></li>
+																	<li class="el-select-dropdown__item"><span>CCT012008002</span></li>
+																	<li class="el-select-dropdown__item"><span>WHETC-JY-JV-20200525-01</span></li>
+																	<li class="el-select-dropdown__item"><span>TYETC-JY-JV-20200608-01</span></li>
+																	<li class="el-select-dropdown__item"><span>华北科技学院实训班-1班</span></li>
+																	<li class="el-select-dropdown__item"><span>温州商学院17电气JAVA班</span></li>
+																	<li class="el-select-dropdown__item"><span>广州中心</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2006</span></li>
+																	<li class="el-select-dropdown__item"><span>GZETC-JV-BZ-20200720-01(百色职业)</span></li>
+																	<li class="el-select-dropdown__item"><span>web</span></li>
+																	<li class="el-select-dropdown__item"><span>4-21日考试</span></li>
+																	<li class="el-select-dropdown__item"><span>WEB</span></li>
+																	<li class="el-select-dropdown__item"><span>中软国际-学徒制17班</span></li>
+																	<li class="el-select-dropdown__item"><span>Java4班</span></li>
+																	<li class="el-select-dropdown__item"><span>宅客学院</span></li>
+																	<li class="el-select-dropdown__item"><span>技术支持</span></li>
+																	<li class="el-select-dropdown__item"><span>测试班</span></li>
+																	<li class="el-select-dropdown__item"><span>java周末班</span></li>
+																	<li class="el-select-dropdown__item"><span>Java全栈双师2101001预科班-太原</span></li>
+																	<li class="el-select-dropdown__item"><span>软件测试方向工程师</span></li>
+																	<li class="el-select-dropdown__item"><span>XMETC-JY-JV-20200324-01</span></li>
+																	<li class="el-select-dropdown__item"><span>师大18级1班</span></li>
+																	<li class="el-select-dropdown__item"><span>C营JAVA五期</span></li>
+																	<li class="el-select-dropdown__item"><span>西安鲲鹏培训院校</span></li>
+																	<li class="el-select-dropdown__item"><span>PMP0907</span></li>
+																	<li class="el-select-dropdown__item"><span>CCT032009001</span></li>
+																	<li class="el-select-dropdown__item"><span>教育科技人工智能班</span></li>
+																	<li class="el-select-dropdown__item"><span>TYETC-JY-UI-20200615-01</span></li>
+																	<li class="el-select-dropdown__item"><span>华北科技学院实训班-2班</span></li>
+																	<li class="el-select-dropdown__item"><span>温州商学院18电气Python班</span></li>
+																	<li class="el-select-dropdown__item"><span>WHETC-SZ-JV-20200701</span></li>
+																	<li class="el-select-dropdown__item"><span>西安中心</span></li>
+																	<li class="el-select-dropdown__item"><span>CQETC-JY-JV-20200720-01</span></li>
+																	<li class="el-select-dropdown__item"><span>python</span></li>
+																	<li class="el-select-dropdown__item"><span>GZE-JV-20200803</span></li>
+																	<li class="el-select-dropdown__item"><span>Python</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2015</span></li>
+																	<li class="el-select-dropdown__item"><span>中软国际-学徒制16班</span></li>
+																	<li class="el-select-dropdown__item"><span>4-29日考试</span></li>
+																	<li class="el-select-dropdown__item"><span>JAVA技术</span></li>
+																	<li class="el-select-dropdown__item"><span>起航3班</span></li>
+																	<li class="el-select-dropdown__item"><span>硬件测试工程师</span></li>
+																	<li class="el-select-dropdown__item"><span>XMETC-JY-PH-20200227-01</span></li>
+																	<li class="el-select-dropdown__item"><span>高职升本19级大前端1+2班</span></li>
+																	<li class="el-select-dropdown__item"><span>C营Python一期</span></li>
+																	<li class="el-select-dropdown__item"><span>黑河学院外语学院17商务英语考研java班</span></li>
+																	<li class="el-select-dropdown__item"><span>运营管理中心</span></li>
+																	<li class="el-select-dropdown__item"><span>CCETC-JAVA57</span></li>
+																	<li class="el-select-dropdown__item"><span>XAETC-JY-JV-20200529-01</span></li>
+																	<li class="el-select-dropdown__item"><span>TYETC-JY-JV-20191015-01</span></li>
+																	<li class="el-select-dropdown__item"><span>华北科技学院实训班-3班</span></li>
+																	<li class="el-select-dropdown__item"><span>WHETC-JY-JV-20200702</span></li>
+																	<li class="el-select-dropdown__item"><span>软件zy1701班</span></li>
+																	<li class="el-select-dropdown__item"><span>沈阳中心</span></li>
+																	<li class="el-select-dropdown__item"><span>用户中心</span></li>
+																	<li class="el-select-dropdown__item"><span>java</span></li>
+																	<li class="el-select-dropdown__item"><span>GZE-JV-KD-20200729科大</span></li>
+																	<li class="el-select-dropdown__item"><span>JAVA</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2014</span></li>
+																	<li class="el-select-dropdown__item"><span>中软国际-学徒制15班</span></li>
+																	<li class="el-select-dropdown__item"><span>WEB前端技术</span></li>
+																	<li class="el-select-dropdown__item"><span>5月9日考试</span></li>
+																	<li class="el-select-dropdown__item"><span>硬件开发方向工程师</span></li>
+																	<li class="el-select-dropdown__item"><span>重庆经贸职业学院-云计算-20200916</span></li>
+																	<li class="el-select-dropdown__item"><span>XMETC-JY-PH-20200427-01</span></li>
+																	<li class="el-select-dropdown__item"><span>高职升本19级大前端3+4班</span></li>
+																	<li class="el-select-dropdown__item"><span>黑河商务英语17级ui班</span></li>
+																	<li class="el-select-dropdown__item"><span>江苏财经18级</span></li>
+																	<li class="el-select-dropdown__item"><span>sy2005东北大学全栈班</span></li>
+																	<li class="el-select-dropdown__item"><span>CCT012009001</span></li>
+																	<li class="el-select-dropdown__item"><span>三江学院17级</span></li>
+																	<li class="el-select-dropdown__item"><span>C营Java1期</span></li>
+																	<li class="el-select-dropdown__item"><span>TYETC-JY-UI-20191106-02</span></li>
+																	<li class="el-select-dropdown__item"><span>华北科技学院实训班-4班</span></li>
+																	<li class="el-select-dropdown__item"><span>软件zy1702班</span></li>
+																	<li class="el-select-dropdown__item"><span>睡前</span></li>
+																	<li class="el-select-dropdown__item"><span>WHETC-JY-UI-20200721-01</span></li>
+																	<li class="el-select-dropdown__item"><span>c++</span></li>
+																	<li class="el-select-dropdown__item"><span>sy1916</span></li>
+																	<li class="el-select-dropdown__item"><span>sy1917</span></li>
+																	<li class="el-select-dropdown__item"><span>sy1919</span></li>
+																	<li class="el-select-dropdown__item"><span>沈阳工业移动互联</span></li>
+																	<li class="el-select-dropdown__item"><span>沈阳工业大数据</span></li>
+																	<li class="el-select-dropdown__item"><span>北京中心</span></li>
+																	<li class="el-select-dropdown__item"><span>C++</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2018</span></li>
+																	<li class="el-select-dropdown__item"><span>中软国际-学徒制14班</span></li>
+																	<li class="el-select-dropdown__item"><span>WEB0828广工商实训班</span></li>
+																	<li class="el-select-dropdown__item"><span>网络技术服务</span></li>
+																	<li class="el-select-dropdown__item"><span>重庆经贸职业学院-大数据-20200916</span></li>
+																	<li class="el-select-dropdown__item"><span>XMETC-JY-IO-20200217-01</span></li>
+																	<li class="el-select-dropdown__item"><span>17级工大企业级开发2班</span></li>
+																	<li class="el-select-dropdown__item"><span>17级黑河计算机学院JAVA班</span></li>
+																	<li class="el-select-dropdown__item"><span>卓越一班</span></li>
+																	<li class="el-select-dropdown__item"><span>C营Java2期</span></li>
+																	<li class="el-select-dropdown__item"><span>重庆文理学院-2018级数学与大数据</span></li>
+																	<li class="el-select-dropdown__item"><span>C营4567期</span></li>
+																	<li class="el-select-dropdown__item"><span>CCETC-20201123</span></li>
+																	<li class="el-select-dropdown__item"><span>武汉理工大学软件Java1班</span></li>
+																	<li class="el-select-dropdown__item"><span>ETC</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2010</span></li>
+																	<li class="el-select-dropdown__item"><span>测试学员</span></li>
+																	<li class="el-select-dropdown__item"><span>中软国际-学徒制13班</span></li>
+																	<li class="el-select-dropdown__item"><span>TYETC-JY-JV-20200720-01</span></li>
+																	<li class="el-select-dropdown__item"><span>长春中心</span></li>
+																	<li class="el-select-dropdown__item"><span>PYTHON技术</span></li>
+																	<li class="el-select-dropdown__item"><span>GZE-WEB-20201019</span></li>
+																	<li class="el-select-dropdown__item"><span>BJETC-JY-web-20200302-01</span></li>
+																	<li class="el-select-dropdown__item"><span>C营JAVA一期</span></li>
+																	<li class="el-select-dropdown__item"><span>师大18级2班</span></li>
+																	<li class="el-select-dropdown__item"><span>C营UI三期</span></li>
+																	<li class="el-select-dropdown__item"><span>17级黑河计算机学院UI就业班</span></li>
+																	<li class="el-select-dropdown__item"><span>1027广东海洋大学8+4实训</span></li>
+																	<li class="el-select-dropdown__item"><span>sy2003沈阳工业移动互联</span></li>
+																	<li class="el-select-dropdown__item"><span>常州信息职业技术学院18级04</span></li>
+																	<li class="el-select-dropdown__item"><span>C营Java3期</span></li>
+																	<li class="el-select-dropdown__item"><span>未上过C营</span></li>
+																	<li class="el-select-dropdown__item"><span>武汉理工大学软件Java2班</span></li>
+																	<li class="el-select-dropdown__item"><span>CCT032010001</span></li>
+																	<li class="el-select-dropdown__item"><span>招聘会</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2016</span></li>
+																	<li class="el-select-dropdown__item"><span>中软国际-学徒制12班</span></li>
+																	<li class="el-select-dropdown__item"><span>WHETC-JY-JV-20200824</span></li>
+																	<li class="el-select-dropdown__item"><span>哈尔滨中心</span></li>
+																	<li class="el-select-dropdown__item"><span>硬件开发</span></li>
+																	<li class="el-select-dropdown__item"><span>TYETC-JY-UI-20200909-01</span></li>
+																	<li class="el-select-dropdown__item"><span>C营UI一期</span></li>
+																	<li class="el-select-dropdown__item"><span>师大17级1班</span></li>
+																	<li class="el-select-dropdown__item"><span>BJETC-JY-JV-20200302-02</span></li>
+																	<li class="el-select-dropdown__item"><span>java2002</span></li>
+																	<li class="el-select-dropdown__item"><span>C营JAVA七期</span></li>
+																	<li class="el-select-dropdown__item"><span>常州信息职业技术学院18级05</span></li>
+																	<li class="el-select-dropdown__item"><span>C营JAVA一期</span></li>
+																	<li class="el-select-dropdown__item"><span>C营Java4期</span></li>
+																	<li class="el-select-dropdown__item"><span>黑民族19级网络技术一班</span></li>
+																	<li class="el-select-dropdown__item"><span>仁爱胜利新工科班与C营一二三期</span></li>
+																	<li class="el-select-dropdown__item"><span>武汉理工大学软件Java3班</span></li>
+																	<li class="el-select-dropdown__item"><span>智慧教学云</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2017</span></li>
+																	<li class="el-select-dropdown__item"><span>中软国际-学徒制11班</span></li>
+																	<li class="el-select-dropdown__item"><span>长春中心Java全栈双师精英2101001</span></li>
+																	<li class="el-select-dropdown__item"><span>太原中心</span></li>
+																	<li class="el-select-dropdown__item"><span>GZE-JY-JV-20201228</span></li>
+																	<li class="el-select-dropdown__item"><span>WHETC-JY-JV-20200907</span></li>
+																	<li class="el-select-dropdown__item"><span>TYETC-JY-JV-20201020-01</span></li>
+																	<li class="el-select-dropdown__item"><span>C营JAVA二期</span></li>
+																	<li class="el-select-dropdown__item"><span>大软三校班</span></li>
+																	<li class="el-select-dropdown__item"><span>TYETC-JY-UI-20201109-01</span></li>
+																	<li class="el-select-dropdown__item"><span>C营JAVA二期</span></li>
+																	<li class="el-select-dropdown__item"><span>C营Java5期</span></li>
+																	<li class="el-select-dropdown__item"><span>黑民族19级网络技术二班</span></li>
+																	<li class="el-select-dropdown__item"><span>武汉理工大学软件Python1班</span></li>
+																	<li class="el-select-dropdown__item"><span>UI202007131</span></li>
+																	<li class="el-select-dropdown__item"><span>常熟理工17级第一批</span></li>
+																	<li class="el-select-dropdown__item"><span>AI在线实验室</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2019</span></li>
+																	<li class="el-select-dropdown__item"><span>中软国际-学徒制</span></li>
+																	<li class="el-select-dropdown__item"><span>BJETC-XZ-BD-20200803</span></li>
+																	<li class="el-select-dropdown__item"><span>中软国际-学徒制10班</span></li>
+																	<li class="el-select-dropdown__item"><span>如皋中心</span></li>
+																	<li class="el-select-dropdown__item"><span>GZ-JV-20210105(韶关)</span></li>
+																	<li class="el-select-dropdown__item"><span>CCETC-SZ-JV-20201221-01</span></li>
+																	<li class="el-select-dropdown__item"><span>WHETC-JY-JV-20200921</span></li>
+																	<li class="el-select-dropdown__item"><span>C营JAVA三期</span></li>
+																	<li class="el-select-dropdown__item"><span>18级工大企业级开发1班</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2025</span></li>
+																	<li class="el-select-dropdown__item"><span>ACP200210班</span></li>
+																	<li class="el-select-dropdown__item"><span>C营JAVA三期</span></li>
+																	<li class="el-select-dropdown__item"><span>C营Java6期</span></li>
+																	<li class="el-select-dropdown__item"><span>黑民族20级网络技术一班</span></li>
+																	<li class="el-select-dropdown__item"><span>实训班</span></li>
+																	<li class="el-select-dropdown__item"><span>武汉理工大学软件Python2班</span></li>
+																	<li class="el-select-dropdown__item"><span>第二师范17级第一批</span></li>
+																	<li class="el-select-dropdown__item"><span>JA202007151</span></li>
+																	<li class="el-select-dropdown__item"><span>JA202002245班</span></li>
+																	<li class="el-select-dropdown__item"><span>天河科技园</span></li>
+																	<li class="el-select-dropdown__item"><span>太原中心Java全栈双师精英2101001预科班</span></li>
+																	<li class="el-select-dropdown__item"><span>中软国际-学徒制09班</span></li>
+																	<li class="el-select-dropdown__item"><span>宁波中心</span></li>
+																	<li class="el-select-dropdown__item"><span>C营JAVA四期</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2027</span></li>
+																	<li class="el-select-dropdown__item"><span>中软国际华为业务线</span></li>
+																	<li class="el-select-dropdown__item"><span>C营JAVA四期</span></li>
+																	<li class="el-select-dropdown__item"><span>XAETC-JY-WJ-20200611-01</span></li>
+																	<li class="el-select-dropdown__item"><span>黑民族20级网络技术二班</span></li>
+																	<li class="el-select-dropdown__item"><span>就业班</span></li>
+																	<li class="el-select-dropdown__item"><span>南通职大18级</span></li>
+																	<li class="el-select-dropdown__item"><span>武汉理工大学物联网实训班</span></li>
+																	<li class="el-select-dropdown__item"><span>JA202006151班</span></li>
+																	<li class="el-select-dropdown__item"><span>人才服务平台</span></li>
+																	<li class="el-select-dropdown__item"><span>中软国际-学徒制08班</span></li>
+																	<li class="el-select-dropdown__item"><span>河工院</span></li>
+																	<li class="el-select-dropdown__item"><span>总部</span></li>
+																	<li class="el-select-dropdown__item"><span>武昌工学院软工1801</span></li>
+																	<li class="el-select-dropdown__item"><span>XMETC-JY-JV-20200509-01</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2028</span></li>
+																	<li class="el-select-dropdown__item"><span>C营JAVA五期</span></li>
+																	<li class="el-select-dropdown__item"><span>PMP学员</span></li>
+																	<li class="el-select-dropdown__item"><span>黑民族20级软件技术班</span></li>
+																	<li class="el-select-dropdown__item"><span>深度合作班</span></li>
+																	<li class="el-select-dropdown__item"><span>卓越二班</span></li>
+																	<li class="el-select-dropdown__item"><span>XAETC-JY-JV-20200720-01</span></li>
+																	<li class="el-select-dropdown__item"><span>燕大实训班</span></li>
+																	<li class="el-select-dropdown__item"><span>8.10武汉理工大学Java实训班（总）</span></li>
+																	<li class="el-select-dropdown__item"><span>中软国际-学徒制07班</span></li>
+																	<li class="el-select-dropdown__item"><span>教学管理部</span></li>
+																	<li class="el-select-dropdown__item"><span>BJECT-XZ-JV-20200921-01</span></li>
+																	<li class="el-select-dropdown__item"><span>XMETC-JY-JV-20200407-01</span></li>
+																	<li class="el-select-dropdown__item"><span>WHETC-JY-JV-20201029</span></li>
+																	<li class="el-select-dropdown__item"><span>WHETC-JY-JV-20201109</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2029</span></li>
+																	<li class="el-select-dropdown__item"><span>C营JAVA六期</span></li>
+																	<li class="el-select-dropdown__item"><span>XMETC-JY-JV-20200622-01</span></li>
+																	<li class="el-select-dropdown__item"><span>黑民族19级软件技术班</span></li>
+																	<li class="el-select-dropdown__item"><span>测试班级</span></li>
+																	<li class="el-select-dropdown__item"><span>XAETC-JY-PY-20200727-01</span></li>
+																	<li class="el-select-dropdown__item"><span>南通理工17级</span></li>
+																	<li class="el-select-dropdown__item"><span>8.10武汉理工大学Python实训班（总）</span></li>
+																	<li class="el-select-dropdown__item"><span>ITSS师资班</span></li>
+																	<li class="el-select-dropdown__item"><span>中软国际-学徒制06班</span></li>
+																	<li class="el-select-dropdown__item"><span>TJETC-大软20级-前端-20201220-01</span></li>
+																	<li class="el-select-dropdown__item"><span>TJETC-大软20级-前端-20201220-03</span></li>
+																	<li class="el-select-dropdown__item"><span>BJETC-JY-JV-20201030-01</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2030</span></li>
+																	<li class="el-select-dropdown__item"><span>首义学院软件工程（中软）1701班</span></li>
+																	<li class="el-select-dropdown__item"><span>XMETC-JY-PH-20200622-01</span></li>
+																	<li class="el-select-dropdown__item"><span>浙江工贸职业技术学院-Python课设（2020年11月）</span></li>
+																	<li class="el-select-dropdown__item"><span>BJETC-XZ-SEJV-20210107-01</span></li>
+																	<li class="el-select-dropdown__item"><span>哈尔滨中心Java全栈双师精英2101001预科班</span></li>
+																	<li class="el-select-dropdown__item"><span>卓越三班</span></li>
+																	<li class="el-select-dropdown__item"><span>中软国际-学徒制05班</span></li>
+																	<li class="el-select-dropdown__item"><span>商业智能</span></li>
+																	<li class="el-select-dropdown__item"><span>XAETC-JY-JV-20200831-01</span></li>
+																	<li class="el-select-dropdown__item"><span>TJETC-大软20级-Java-20201220-01</span></li>
+																	<li class="el-select-dropdown__item"><span>河北工业大学计科专业</span></li>
+																	<li class="el-select-dropdown__item"><span>湖北工业大学18级软件1班</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2006新</span></li>
+																	<li class="el-select-dropdown__item"><span>BJETC-XZ-SEJV-20210107-02</span></li>
+																	<li class="el-select-dropdown__item"><span>sy2007</span></li>
+																	<li class="el-select-dropdown__item"><span>项目班</span></li>
+																	<li class="el-select-dropdown__item"><span>中软国际-学徒制04班</span></li>
+																	<li class="el-select-dropdown__item"><span>R语言</span></li>
+																	<li class="el-select-dropdown__item"><span>XAETC-JY-UI-20200904-01</span></li>
+																	<li class="el-select-dropdown__item"><span>河北工业大学 信息与计算科学1班</span></li>
+																	<li class="el-select-dropdown__item"><span>武昌首义学院软工中软1702班</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2007新</span></li>
+																	<li class="el-select-dropdown__item"><span>BJETC-XZ-DBJV-20210107-01</span></li>
+																	<li class="el-select-dropdown__item"><span>sy2008</span></li>
+																	<li class="el-select-dropdown__item"><span>中软国际-学徒制03班</span></li>
+																	<li class="el-select-dropdown__item"><span>定制班2020</span></li>
+																	<li class="el-select-dropdown__item"><span>河北工业大学 信息与计算科学2班</span></li>
+																	<li class="el-select-dropdown__item"><span>软考-建行东北学院</span></li>
+																	<li class="el-select-dropdown__item"><span>XAETC-JY-JV-20201026-01</span></li>
+																	<li class="el-select-dropdown__item"><span>金陵科技17级</span></li>
+																	<li class="el-select-dropdown__item"><span>湖北工业大学工程技术学院18gb计算3班</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2008新</span></li>
+																	<li class="el-select-dropdown__item"><span>西北工业大学软件应用能力训练</span></li>
+																	<li class="el-select-dropdown__item"><span>BJETC-XZ-DBJV-20210107-02</span></li>
+																	<li class="el-select-dropdown__item"><span>赣南师大考研0727班</span></li>
+																	<li class="el-select-dropdown__item"><span>sy2009</span></li>
+																	<li class="el-select-dropdown__item"><span>中软国际-学徒制02班</span></li>
+																	<li class="el-select-dropdown__item"><span>JA202008181</span></li>
+																	<li class="el-select-dropdown__item"><span>17级金科（毕业实习第一批）</span></li>
+																	<li class="el-select-dropdown__item"><span>湖北工业大学工程技术学院18gb计算2班</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2014新</span></li>
+																	<li class="el-select-dropdown__item"><span>XAETC-JY-PY-20201201-01</span></li>
+																	<li class="el-select-dropdown__item"><span>赣南师大非考研0727班</span></li>
+																	<li class="el-select-dropdown__item"><span>sy2010</span></li>
+																	<li class="el-select-dropdown__item"><span>北京中心Java全栈双师精英2101001预科班</span></li>
+																	<li class="el-select-dropdown__item"><span>中软国际-学徒制01班</span></li>
+																	<li class="el-select-dropdown__item"><span>JA202009291</span></li>
+																	<li class="el-select-dropdown__item"><span>科大17级实训1、2班</span></li>
+																	<li class="el-select-dropdown__item"><span>中软国际-学徒制-旁听班</span></li>
+																	<li class="el-select-dropdown__item"><span>盐城师范18级</span></li>
+																	<li class="el-select-dropdown__item"><span>湖北工业大学工程技术学院17gb计算1班</span></li>
+																	<li class="el-select-dropdown__item"><span>湖北工业大学工程技术学院20gb计算1班</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2015新</span></li>
+																	<li class="el-select-dropdown__item"><span>XMETC-JY-JV-20200727-01</span></li>
+																	<li class="el-select-dropdown__item"><span>sy2006</span></li>
+																	<li class="el-select-dropdown__item"><span>西安中心Java全栈双师精英2101001预科班</span></li>
+																	<li class="el-select-dropdown__item"><span>BJETC-GJ-DAWB-20210302-01</span></li>
+																	<li class="el-select-dropdown__item"><span>科大17级实训3、4班</span></li>
+																	<li class="el-select-dropdown__item"><span>湖北工业大学工程技术学院20gb计算2班</span></li>
+																	<li class="el-select-dropdown__item"><span>湖北工业大学工程技术学院17gb计算2班</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2017新</span></li>
+																	<li class="el-select-dropdown__item"><span>卓越python班</span></li>
+																	<li class="el-select-dropdown__item"><span>XMETC-JY-IO-20200728-01</span></li>
+																	<li class="el-select-dropdown__item"><span>sy2011</span></li>
+																	<li class="el-select-dropdown__item"><span>XAETC-JY-JV-20201228-01</span></li>
+																	<li class="el-select-dropdown__item"><span>BJETC-GJ-CTJV-20210302-03</span></li>
+																	<li class="el-select-dropdown__item"><span>湖北工业大学工程技术学院20gb计算3班</span></li>
+																	<li class="el-select-dropdown__item"><span>湖北工业大学工程技术学院17gb软件1班</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2019新</span></li>
+																	<li class="el-select-dropdown__item"><span>南大滨海实训</span></li>
+																	<li class="el-select-dropdown__item"><span>金科18级5班</span></li>
+																	<li class="el-select-dropdown__item"><span>XMETC-JY-韩师-20200901-01</span></li>
+																	<li class="el-select-dropdown__item"><span>BJETC-GJ-DBBD-20210302-01</span></li>
+																	<li class="el-select-dropdown__item"><span>沈工业计算科学</span></li>
+																	<li class="el-select-dropdown__item"><span>湖北工业大学工程技术学院17gb软件2班</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2031</span></li>
+																	<li class="el-select-dropdown__item"><span>金科18级6班</span></li>
+																	<li class="el-select-dropdown__item"><span>JA202012221</span></li>
+																	<li class="el-select-dropdown__item"><span>BJETC-GJ-SOJV-20210302-01</span></li>
+																	<li class="el-select-dropdown__item"><span>XMETC-JY-BD-20200907-01</span></li>
+																	<li class="el-select-dropdown__item"><span>sy2013</span></li>
+																	<li class="el-select-dropdown__item"><span>湖北工业大学工程技术学院17gb计职1班</span></li>
+																	<li class="el-select-dropdown__item"><span>湖北工业大学工程技术学院20gb软件1班</span></li>
+																	<li class="el-select-dropdown__item"><span>信院软件20班</span></li>
+																	<li class="el-select-dropdown__item"><span>第二师范17级第二批</span></li>
+																	<li class="el-select-dropdown__item"><span>天津中心Java全栈双师精英2101001预科班</span></li>
+																	<li class="el-select-dropdown__item"><span>BJETC-GJ-SOJV-20210302-02</span></li>
+																	<li class="el-select-dropdown__item"><span>XMETC-JY-PH-20200907-01</span></li>
+																	<li class="el-select-dropdown__item"><span>sy2019</span></li>
+																	<li class="el-select-dropdown__item"><span>sy2012</span></li>
+																	<li class="el-select-dropdown__item"><span>湖北工业大学工程技术学院20gb软件2班</span></li>
+																	<li class="el-select-dropdown__item"><span>信院软件11班</span></li>
+																	<li class="el-select-dropdown__item"><span>常熟理工17级第二批</span></li>
+																	<li class="el-select-dropdown__item"><span>BJETC-GJ-CTJV-20210302-01</span></li>
+																	<li class="el-select-dropdown__item"><span>XMETC-JY-Web-20200907-01</span></li>
+																	<li class="el-select-dropdown__item"><span>TJETC-大软20级-前端-20201220-02</span></li>
+																	<li class="el-select-dropdown__item"><span>湖北工业大学工程技术学院20gb计职1班</span></li>
+																	<li class="el-select-dropdown__item"><span>信院软件14班</span></li>
+																	<li class="el-select-dropdown__item"><span>sy2022</span></li>
+																	<li class="el-select-dropdown__item"><span>江苏理工17级第二批</span></li>
+																	<li class="el-select-dropdown__item"><span>BJETC-GJ-CTJV-20210302-02</span></li>
+																	<li class="el-select-dropdown__item"><span>XMETC-JY-JV-20200928-01</span></li>
+																	<li class="el-select-dropdown__item"><span>TJETC-大软20级-后端-20201220-02</span></li>
+																	<li class="el-select-dropdown__item"><span>湖北工业大学工程技术学院20gz计应1班</span></li>
+																	<li class="el-select-dropdown__item"><span>信院软件18班</span></li>
+																	<li class="el-select-dropdown__item"><span>中软国际Java全栈双师精英2101001</span></li>
+																	<li class="el-select-dropdown__item"><span>sy2014</span></li>
+																	<li class="el-select-dropdown__item"><span>XMETC-JY-PH-20200901-01</span></li>
+																	<li class="el-select-dropdown__item"><span>武昌首义学院计科中软1701班</span></li>
+																	<li class="el-select-dropdown__item"><span>信院软件9班</span></li>
+																	<li class="el-select-dropdown__item"><span>江苏城市18级</span></li>
+																	<li class="el-select-dropdown__item"><span>sy2016</span></li>
+																	<li class="el-select-dropdown__item"><span>XMETC-JY-IO-20200914-03</span></li>
+																	<li class="el-select-dropdown__item"><span>武昌首义学院计科中软1702班</span></li>
+																	<li class="el-select-dropdown__item"><span>信院软件15班</span></li>
+																	<li class="el-select-dropdown__item"><span>sy2017</span></li>
+																	<li class="el-select-dropdown__item"><span>XMETC-JY-DS-20200914-01</span></li>
+																	<li class="el-select-dropdown__item"><span>武昌首义学院计科中软1801班</span></li>
+																	<li class="el-select-dropdown__item"><span>信院软件17班</span></li>
+																	<li class="el-select-dropdown__item"><span>sy2021</span></li>
+																	<li class="el-select-dropdown__item"><span>XMETC-JY-IO-20200914-04</span></li>
+																	<li class="el-select-dropdown__item"><span>武昌首义学院软工中软1801班</span></li>
+																	<li class="el-select-dropdown__item"><span>信院软件16班</span></li>
+																	<li class="el-select-dropdown__item"><span>sy2020</span></li>
+																	<li class="el-select-dropdown__item"><span>XMETC-JY-DS-20200914-02</span></li>
+																	<li class="el-select-dropdown__item"><span>武昌首义学院计科中软1901班</span></li>
+																	<li class="el-select-dropdown__item"><span>信院软件10班</span></li>
+																	<li class="el-select-dropdown__item"><span>sy2024</span></li>
+																	<li class="el-select-dropdown__item"><span>XMETC-JY-JV-20200914-11</span></li>
+																	<li class="el-select-dropdown__item"><span>武昌首义学院计科中软1902班</span></li>
+																	<li class="el-select-dropdown__item"><span>信院软件13班</span></li>
+																	<li class="el-select-dropdown__item"><span>sy2018</span></li>
+																	<li class="el-select-dropdown__item"><span>XMETC-JY-JG-20200914-01</span></li>
+																	<li class="el-select-dropdown__item"><span>武昌首义学院软工中软1901班</span></li>
+																	<li class="el-select-dropdown__item"><span>信院软件12班</span></li>
+																	<li class="el-select-dropdown__item"><span>sy2015</span></li>
+																	<li class="el-select-dropdown__item"><span>XMETC-JY-PH-20200914-06</span></li>
+																	<li class="el-select-dropdown__item"><span>武昌首义学院计科中软2001班</span></li>
+																	<li class="el-select-dropdown__item"><span>信院软件19班</span></li>
+																	<li class="el-select-dropdown__item"><span>XMETC-JY-JV-20200914-12</span></li>
+																	<li class="el-select-dropdown__item"><span>武昌首义学院计科中软2002班</span></li>
+																	<li class="el-select-dropdown__item"><span>信院软件21班</span></li>
+																	<li class="el-select-dropdown__item"><span>XMETC-JY-JG-20200914-02</span></li>
+																	<li class="el-select-dropdown__item"><span>武昌首义学院软工中软2001班</span></li>
+																	<li class="el-select-dropdown__item"><span>信院软件8班</span></li>
+																	<li class="el-select-dropdown__item"><span>XMETC-SX-闽师-20200901-01</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2034</span></li>
+																	<li class="el-select-dropdown__item"><span>XMETC-SX-福工-20200914-01</span></li>
+																	<li class="el-select-dropdown__item"><span>XMETC-JY-UXD-20200817-01</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2039</span></li>
+																	<li class="el-select-dropdown__item"><span>XMETC-JY-UXD-20201116-01</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2040</span></li>
+																	<li class="el-select-dropdown__item"><span>XMETC-JY-JV-20201123-01</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2030-1</span></li>
+																	<li class="el-select-dropdown__item"><span>武昌工学院计科中软1901班</span></li>
+																	<li class="el-select-dropdown__item"><span>XMETC-JY-PH-20201123-01</span></li>
+																	<li class="el-select-dropdown__item"><span>武昌工学院软工中软1901班</span></li>
+																	<li class="el-select-dropdown__item"><span>武昌工学院计科中软2001班</span></li>
+																	<li class="el-select-dropdown__item"><span>武昌工学院计科中软2002班</span></li>
+																	<li class="el-select-dropdown__item"><span>武昌工学院软工中软2001班</span></li>
+																	<li class="el-select-dropdown__item"><span>湖北商贸学院18计科本1班</span></li>
+																	<li class="el-select-dropdown__item"><span>湖北商贸学院18计科本2班</span></li>
+																	<li class="el-select-dropdown__item"><span>湖北商贸学院19计科本1班</span></li>
+																	<li class="el-select-dropdown__item"><span>湖北商贸学院19计科本2班</span></li>
+																	<li class="el-select-dropdown__item"><span>湖北商贸学院20计科本1班</span></li>
+																	<li class="el-select-dropdown__item"><span>湖北商贸学院20计科本2班</span></li>
+																	<li class="el-select-dropdown__item"><span>test1</span></li>
+																	<li class="el-select-dropdown__item"><span>湖北商贸学院17计科本1班</span></li>
+																	<li class="el-select-dropdown__item"><span>湖北商贸学院17计科本2班</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2052</span></li>
+																	<li class="el-select-dropdown__item"><span>湖北工业大学工程技术学院19gb软件2班</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2069</span></li>
+																	<li class="el-select-dropdown__item"><span>湖北工业大学工程技术学院19gb计职1班</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2050</span></li>
+																	<li class="el-select-dropdown__item"><span>湖北工业大学工程技术学院19gb计算1班</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2053</span></li>
+																	<li class="el-select-dropdown__item"><span>湖北工业大学工程技术学院19gb计算2班</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2054</span></li>
+																	<li class="el-select-dropdown__item"><span>湖北工业大学工程技术学院19gb计算3班</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2055</span></li>
+																	<li class="el-select-dropdown__item"><span>湖北工业大学工程技术学院19gb计算4班</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2056</span></li>
+																	<li class="el-select-dropdown__item"><span>湖北工业大学工程技术学院19gb软件1班</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2071</span></li>
+																	<li class="el-select-dropdown__item"><span>湖北工业大学工程技术学院19gb软件3班</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2051</span></li>
+																	<li class="el-select-dropdown__item"><span>湖北工业大学工程技术学院18gb计算1班</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2046-2</span></li>
+																	<li class="el-select-dropdown__item"><span>湖北工业大学工程技术学院18gb软件1班</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2043</span></li>
+																	<li class="el-select-dropdown__item"><span>湖北工业大学工程技术学院18gb软件2班</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2067</span></li>
+																	<li class="el-select-dropdown__item"><span>湖北工业大学工程技术学院18级gb计职1班</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2042</span></li>
+																	<li class="el-select-dropdown__item"><span>湖北工业大学工程技术学院18gb计算4班</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2063</span></li>
+																	<li class="el-select-dropdown__item"><span>WHETC-JY-JV-20201201</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2049</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2062</span></li>
+																	<li class="el-select-dropdown__item"><span>武汉ETC中心Java全栈双师精英2101001预科班</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2041</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2070</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2045</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2057</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2058</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2074</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2072</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2073</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2044</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2046-1</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2066</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2079</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2059</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2060</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2061</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2064</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2065</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2068</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2040新</span></li>
+																	<li class="el-select-dropdown__item"><span>大连中心Java全栈双师精英2101001预科班</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2101</span></li>
+																	<li class="el-select-dropdown__item"><span>DL2102</span></li>
+																</ul>
+															</div>
+															<div class="el-scrollbar__bar is-horizontal">
+																<div class="el-scrollbar__thumb" style="transform: translateX(0%);"></div>
+															</div>
+															<div class="el-scrollbar__bar is-vertical">
+																<div class="el-scrollbar__thumb" style="transform: translateY(0%);"></div>
+															</div>
+														</div>
+														<!---->
+													</div>
+												</div>
+											</div>
+											<div class="Mtp60" style="padding-left: 75px;"><button type="button" class="el-button wid200 el-button--primary is-disabled"
+												 disabled="disabled">
+													<!---->
+													<!----><span>确 定</span></button></div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- 中间右半部分结束 -->
+
+						</div>
+					</article>
+					<!-- 中间部分结束 -->
+				</header>
+			</div>
+		</div>
+
+		<!-- 底部开始 -->
+		<div th:replace="~{common::footerbar}"></div>
+		<!-- 底部结束 -->
+	</body>
+</html>

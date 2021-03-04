@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>管理中心-首页</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link href="/css/public_style.css?v=20160630" type="text/css" rel="stylesheet" />
+		<link type="text/css" rel="stylesheet" href="/css/qqlogin.css" />
+		<link type="text/css" rel="stylesheet" href="/css/menu.css" />
+		<link type="text/css" rel="stylesheet" href="/css/academy_school.css" />
+		<link type="text/css" rel="stylesheet" href="/css/cms.css" />
+		<link type="text/css" rel="stylesheet" href="/css/common.css" />
+		<link type="text/css" rel="stylesheet" href="/css/elementUI.2.13.0.css" />
+		<script type="text/javascript">
+			var schoolVerFlag = "false" == "true";
+			var ctx = "/portal-web";
+			// itp 前端项目访问地址
+			var domain = 'https://zhjxy.kp.futurelab.tv'
+			var resourceHost = 'https://zhjxy.kp.futurelab.tv:18087'
+			var sessionid = "6b994432-a150-4946-92aa-3a4a13bccf16";
+			if (typeof String.prototype.startsWith != 'function') {
+				String.prototype.startsWith = function(prefix) {
+					return this.slice(0, prefix.length) === prefix;
+				};
+			}
+		</script>
+		<script type="text/javascript" src="/js/lodash.js"></script>
+		<script type="text/javascript" src="/js/jquery-1.12.0.min.js"></script>
+		<script type="text/javascript" src="/js/jquery.placeholder.min.js"></script>
+		<script type="text/javascript" src="/js/remoteCall.js"></script>
+		<!-- jQuery-Impromptu-master Start -->
+		<link href="/js/jquery-impromptu.min.css" type="text/css" rel="stylesheet" />
+		<script src="/js/jquery-impromptu.min.js" type="text/javascript"></script>
+		<!-- jQuery-Impromptu-master End -->
+		<script type="text/javascript" src="/js/jquery.lazyload.js"></script>
+		<script type="text/javascript" src="/js/ResizeSensor.js"></script>
+		<script type="text/javascript" src="/js/jquery.publicAlert.js"></script>
+		<script type="text/javascript" src="/js/util.js"></script>
+		<script type="text/javascript" src="/js/qqlogin.js?v=20160630"></script>
+		<script type="text/javascript">
+			jQuery.extend({
+				escapeXML: function(content) {
+					return $('<span></span>').text(content).html();
+				},
+				newline2br: function(content) {
+					return content.replace(/\r\n/g, "<br/>").replace(/\r/g, "<br/>").replace(/\n/g, "<br/>");
+				},
+			});
+			jQuery.prompt.setDefaults({
+				top: '30%',
+				persistent: false,
+				buttons: {
+					'确定': true
+				}
+			});
+			window.alert = function(info, func) {
+				if (!isNaN(parseInt(info))) {
+					info = info + "";
+				}
+				$.prompt(info, {
+					close: func
+				});
+			};
+
+			// 跳转页面
+			function gotoURL(targetUTL) {
+				window.location.href = targetUTL;
+			}
+		</script>
+		<!-- 图片懒加载 -->
+		<!-- <script type="text/javascript">
+$(function() {
+$("img.lazy").lazyload();
+$('input, textarea').placeholder();
+});
+</script> -->
+		<!-- Logo -->
+		<link href="img/favicon.ico" rel="icon" type="image/x-icon" />
+		<link href="img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+		<link type="text/css" rel="stylesheet" href="/css/iconfont.css">
+		<link type="text/css" rel="stylesheet" href="/css/common_alert.css">
+		<link type="text/css" rel="stylesheet" href="/css/login_bomb.css">
+		<link type="text/css" rel="stylesheet" href="/css/header.css">
+		<link rel="stylesheet" type="text/css" href="/css/academy_school.css">
+		<script type="text/javascript">
+			$(function() {
+				$('.work_item').click(function() {
+					location.href = $(this).data('url');
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<!-- header部分 -->
+		<script type="text/javascript">
+			$(function() {
+				//消息处理
+				$('#msg_note_list_source ul li').each(function() {
+					$('#msg_note_list ul li').eq($(this).index()).children().text($(this).text());
+				});
+				$('.msg_box1').one('mouseover', function() {
+					$('#msg_note_list ul li a').each(function() {
+						var $a = $(this);
+						while ($a.outerHeight() > 44) {
+							$a.text($a.text().replace(/(\s)*([a-zA-Z0-9]+|\W|_)(\.\.\.)?$/, "..."));
+						}
+					});
+				});
+				// 注销
+				$("#logout").click(function() {
+					$.publicAlert({
+						text: "是否要退出系统?",
+						callBack: function() {
+							// window.location.href = ctx + "/u/logout";
+							$.getJSON(ctx + '/u/logout', {}, function(result) {
+								if (result && result.status == 200) {
+									window.location.reload(true);
+									return !1;
+								} else {
+									$.publicAlert("退出失败，重试！");
+								}
+							});
+						}
+					})
+				});
+				$("#goto_index_label").click(function() {
+					location.href = domain
+				})
+				// 菜单显示
+				if (location.pathname.indexOf("mgtExperiments") > -1) {
+					localStorage.setItem("mgtExperimentPage", "true");
+				} else if (location.pathname.indexOf("mgtIndex.do") > -1) {
+					localStorage.removeItem("mgtExperimentPage");
+				}
+				var mgtExperimentPage = localStorage.getItem("mgtExperimentPage") != null;
+				if (mgtExperimentPage) {
+					$(".logo_txt").text("在线实验管理后台");
+				}
+				window.health = setInterval(function() {
+					$.get(ctx + '/api/v1/health');
+				}, 1000 * 60 * 5);
+			});
+		</script>
+		<!--头部导航栏-->
+		<div th:replace="~{common::topbar}"></div>
+		<!-- 左侧导航部分 -->
+		<script type="text/javascript" src="/js/jquery_nicescroll_min.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				var mgtExperimentPage = localStorage.getItem("mgtExperimentPage") != null;
+				if (mgtExperimentPage) {
+					var menu = document.getElementById("menu");
+					var parent = menu.parentElement;
+					parent.innerHTML = '';
+					parent.append(menu);
+
+					var menus = document.getElementsByClassName("Select");
+					_.each(menus, function(menu) {
+						var url = menu.getAttribute("data-menu-url");
+						if (location.pathname == url) {
+							menu.classList.add("S_on")
+						}
+					});
+				} else {
+					document.getElementById("menu").remove();
+
+					$("#Loms").niceScroll({
+						cursorcolor: "#808080",
+						cursorwidth: "5px",
+						background: "none",
+						cursorborder: "1px solid #808080",
+						autohidemode: "leave",
+						horizrailenabled: false,
+						hidecursordelay: 0,
+						iframeautoresize: true
+					});
+					// 默认被激活的左侧菜单class名称
+					var level = parseInt("1");
+					var menuUrl = "/portal-web/mgt/mgtIndex.do";
+					if (typeof(menuUrl) == "undefined" || "" == menuUrl) {
+						menuUrl = location.pathname;
+					}
+					if (!isNaN(level) && level == 2) {
+						var $parentMenu = $('.sub_menu[data-menu-url="' + menuUrl + '"]').parents(".Ul").prev();
+						$parentMenu.addClass('S_on');
+						$('.sub_menu[data-menu-url="' + menuUrl + '"]').addClass('Li');
+						var height = $parentMenu.next("ul").find("li").length;
+						$parentMenu.data("ishide", 1);
+						$parentMenu.next("ul").css("height", height * 51 + "px");
+					} else {
+						//menuUrl += location.search;
+						$('.menu_root[data-menu-url="' + menuUrl + '"]').addClass('S_on');
+					}
+					if ($('.S_on').length > 0) {
+						$('#Loms').animate({
+							scrollTop: $('.S_on').offset().top
+						}, 0);
+					}
+					// 头部active 暂时只有宅客云 先注掉
+					/* $(".header_ul li").click(function() {
+					    $(this).addClass("active").siblings().removeClass("active");
+					}); */
+				}
+				// 收起、展开左侧导航
+				$("#adv_btn").click(function() {
+					var _this = $(this);
+					var isshow = _this.data("isshow");
+					if (isshow) {
+						$("#Loms").hide();
+						$("#Lomss").show();
+						$("#Roms").css("left", "70px");
+						_this.data("isshow", 0);
+					} else {
+						$("#Loms").show();
+						$("#Lomss").hide();
+						$("#Roms").css("left", "220px");
+						_this.data("isshow", 1);
+					}
+				});
+				// 左侧导航
+				var animationTime = parseFloat(window.getComputedStyle($('#Loms .Ul')[0])['transition-duration']) * 1000;
+				animationTime = animationTime ? animationTime : 500;
+				$(".Select").click(function() {
+					var _this = $(this);
+					var ishide = _this.data("ishide");
+					var height = _this.next("ul").find("li").length;
+					$(".Select").data("ishide", 0);
+					$(".Select").removeClass("S_on");
+					$(".Ul").css("height", "0px");
+					if (ishide) {
+						_this.children(".lab3").css("background-position", "-44px -21px");
+						_this.data("ishide", 0);
+						_this.next("ul").css("height", "0px");
+					} else {
+						_this.children(".lab3").css("background-position", "-35px -21px");
+						_this.data("ishide", 1);
+						_this.next("ul").css("height", height * 51 + "px");
+					}
+					setTimeout(function() {
+						$("#Loms").getNiceScroll().resize();
+					}, animationTime);
+					_this.addClass("S_on");
+				});
+				// 左侧hover效果
+				$(".Ul li").click(function() {
+					$(this).addClass("Li").siblings().removeClass("Li");
+				});
+
+				$(".Ul").each(function() {
+					if ($(this).html().trim() == "") {
+						$(this).parent().find(".lab3").remove();
+					}
+				});
+
+			});
+		</script>
+		<!-- 左侧导航部分 -->
+		<div th:replace="~{common::sidebar}"></div>
+
+		<!-- 右侧部分开始 -->
+		<div id="app" class="Roms">
+			<div class="rom_title_box">
+				<div aria-label="Breadcrumb" role="navigation" class="el-breadcrumb p_ibm F16"><span class="el-breadcrumb__item"><span
+						 role="link" class="el-breadcrumb__inner">系统管理</span><i class="el-breadcrumb__separator el-icon-arrow-right"></i></span>
+					<span class="el-breadcrumb__item" aria-current="page"><span role="link" class="el-breadcrumb__inner">反馈中心</span><i
+						 class="el-breadcrumb__separator el-icon-arrow-right"></i></span></div>
+			</div>
+			<div class="Plf20 Prt20">
+				<div class="Ptp20">
+					<div class="p_ibt"><span>反馈时间：</span>
+						<div class="el-date-editor el-range-editor el-input__inner el-date-editor--daterange"><i class="el-input__icon el-range__icon el-icon-date"></i><input
+							 autocomplete="off" placeholder="开始日期" name="" class="el-range-input"><span class="el-range-separator">至</span><input
+							 autocomplete="off" placeholder="结束日期" name="" class="el-range-input"><i class="el-input__icon el-range__close-icon"></i></div>
+					</div>
+					<div class="p_ibt Mlf10"><span>反馈状态：</span>
+						<div class="el-select wid200">
+							<!---->
+							<div class="el-input el-input--suffix">
+								<!----><input type="text" readonly="readonly" autocomplete="off" placeholder="请选择" class="el-input__inner">
+								<!----><span class="el-input__suffix"><span class="el-input__suffix-inner"><i class="el-select__caret el-input__icon el-icon-arrow-up"></i>
+										<!---->
+										<!---->
+										<!---->
+										<!---->
+										<!----></span>
+									<!----></span>
+								<!---->
+								<!---->
+							</div>
+							<div class="el-select-dropdown el-popper" style="display: none; min-width: 199.992px;">
+								<div class="el-scrollbar" style="">
+									<div class="el-select-dropdown__wrap el-scrollbar__wrap" style="margin-bottom: -17px; margin-right: -17px;">
+										<ul class="el-scrollbar__view el-select-dropdown__list">
+											<!---->
+											<li class="el-select-dropdown__item"><span>未查看</span></li>
+											<li class="el-select-dropdown__item"><span>已查看</span></li>
+											<li class="el-select-dropdown__item"><span>已处理</span></li>
+											<li class="el-select-dropdown__item"><span>延期处理</span></li>
+											<li class="el-select-dropdown__item"><span>无效反馈</span></li>
+										</ul>
+									</div>
+									<div class="el-scrollbar__bar is-horizontal">
+										<div class="el-scrollbar__thumb" style="transform: translateX(0%);"></div>
+									</div>
+									<div class="el-scrollbar__bar is-vertical">
+										<div class="el-scrollbar__thumb" style="transform: translateY(0%);"></div>
+									</div>
+								</div>
+								<!---->
+							</div>
+						</div>
+					</div>
+					<div class="p_ibt Mlf10"><button type="button" class="el-button el-button--primary">
+							<!---->
+							<!----><span>搜索</span></button> <button type="button" class="el-button el-button--primary">
+							<!---->
+							<!----><span>清空</span></button></div>
+				</div>
+				<div class="Mtp10"><button type="button" class="el-button el-button--success el-button--medium">
+						<!----><i class="el-icon-download"></i><span>导出反馈</span></button> <button disabled="disabled" type="button" class="el-button el-button--danger el-button--small is-disabled">
+						<!----><i class="el-icon-delete"></i><span>删除反馈</span></button></div>
+				<div class="Ptp20">
+					<div class="el-table el-table--fit el-table--enable-row-hover el-table--enable-row-transition">
+						<div class="hidden-columns">
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+						</div>
+						<div class="el-table__header-wrapper">
+							<table cellspacing="0" cellpadding="0" border="0" class="el-table__header" style="width: 1273px;">
+								<colgroup>
+									<col name="el-table_1_column_1" width="50">
+									<col name="el-table_1_column_2" width="261">
+									<col name="el-table_1_column_3" width="127">
+									<col name="el-table_1_column_4" width="127">
+									<col name="el-table_1_column_5" width="127">
+									<col name="el-table_1_column_6" width="127">
+									<col name="el-table_1_column_7" width="127">
+									<col name="el-table_1_column_8" width="127">
+									<col name="el-table_1_column_9" width="200">
+									<col name="gutter" width="0">
+								</colgroup>
+								<thead class="has-gutter">
+									<tr class="">
+										<th colspan="1" rowspan="1" class="el-table_1_column_1   el-table-column--selection  is-leaf">
+											<div class="cell"><label class="el-checkbox"><span class="el-checkbox__input"><span class="el-checkbox__inner"></span><input
+														 type="checkbox" aria-hidden="false" class="el-checkbox__original" value=""></span>
+													<!----></label></div>
+										</th>
+										<th colspan="1" rowspan="1" class="el-table_1_column_2     is-leaf">
+											<div class="cell">问题描述</div>
+										</th>
+										<th colspan="1" rowspan="1" class="el-table_1_column_3     is-leaf">
+											<div class="cell">服务器ID</div>
+										</th>
+										<th colspan="1" rowspan="1" class="el-table_1_column_4     is-leaf">
+											<div class="cell">姓名</div>
+										</th>
+										<th colspan="1" rowspan="1" class="el-table_1_column_5     is-leaf">
+											<div class="cell">提交时间</div>
+										</th>
+										<th colspan="1" rowspan="1" class="el-table_1_column_6     is-leaf">
+											<div class="cell">状态</div>
+										</th>
+										<th colspan="1" rowspan="1" class="el-table_1_column_7     is-leaf">
+											<div class="cell">IP地址</div>
+										</th>
+										<th colspan="1" rowspan="1" class="el-table_1_column_8     is-leaf">
+											<div class="cell">浏览器</div>
+										</th>
+										<th colspan="1" rowspan="1" class="el-table_1_column_9     is-leaf">
+											<div class="cell">操作</div>
+										</th>
+										<th class="gutter" style="width: 0px; display: none;"></th>
+									</tr>
+								</thead>
+							</table>
+						</div>
+						<div class="el-table__body-wrapper is-scrolling-none">
+							<table cellspacing="0" cellpadding="0" border="0" class="el-table__body" style="width: 1273px;">
+								<colgroup>
+									<col name="el-table_1_column_1" width="50">
+									<col name="el-table_1_column_2" width="261">
+									<col name="el-table_1_column_3" width="127">
+									<col name="el-table_1_column_4" width="127">
+									<col name="el-table_1_column_5" width="127">
+									<col name="el-table_1_column_6" width="127">
+									<col name="el-table_1_column_7" width="127">
+									<col name="el-table_1_column_8" width="127">
+									<col name="el-table_1_column_9" width="200">
+								</colgroup>
+								<tbody>
+									<tr class="el-table__row">
+										<td rowspan="1" colspan="1" class="el-table_1_column_1  el-table-column--selection">
+											<div class="cell"><label class="el-checkbox"><span class="el-checkbox__input"><span class="el-checkbox__inner"></span><input
+														 type="checkbox" aria-hidden="false" class="el-checkbox__original" value=""></span>
+													<!----></label></div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_2  ">
+											<div class="cell el-tooltip" style="width: 259px;">JavaSE第三周0:</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_3  ">
+											<div class="cell">etc-app-itp-2</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_4  ">
+											<div class="cell">
+												<div class="left Mlf5">
+													<p>高梦新</p>
+													<p>18406598231</p>
+												</div>
+											</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_5  ">
+											<div class="cell">2021-01-15 17:56:53</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_6  ">
+											<div class="cell">未查看</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_7  ">
+											<div class="cell">1.86.240.19</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_8  ">
+											<div class="cell el-tooltip" style="width: 125px;">Chrome version 87.0.4280.141</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_9  ">
+											<div class="cell"><button type="button" class="el-button el-button--primary el-button--small">
+													<!----><i class="el-icon-view"></i><span>查看</span></button> <button type="button" class="el-button el-button--danger el-button--small">
+													<!----><i class="el-icon-delete"></i><span>删除</span></button></div>
+										</td>
+									</tr>
+									<tr class="el-table__row">
+										<td rowspan="1" colspan="1" class="el-table_1_column_1  el-table-column--selection">
+											<div class="cell"><label class="el-checkbox"><span class="el-checkbox__input"><span class="el-checkbox__inner"></span><input
+														 type="checkbox" aria-hidden="false" class="el-checkbox__original" value=""></span>
+													<!----></label></div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_2  ">
+											<div class="cell el-tooltip" style="width: 259px;">JavaSE第三周0:</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_3  ">
+											<div class="cell">etc-app-itp-2</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_4  ">
+											<div class="cell">
+												<div class="left Mlf5">
+													<p>高梦新</p>
+													<p>18406598231</p>
+												</div>
+											</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_5  ">
+											<div class="cell">2021-01-15 17:56:06</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_6  ">
+											<div class="cell">未查看</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_7  ">
+											<div class="cell">1.86.240.19</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_8  ">
+											<div class="cell el-tooltip" style="width: 125px;">Chrome version 87.0.4280.141</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_9  ">
+											<div class="cell"><button type="button" class="el-button el-button--primary el-button--small">
+													<!----><i class="el-icon-view"></i><span>查看</span></button> <button type="button" class="el-button el-button--danger el-button--small">
+													<!----><i class="el-icon-delete"></i><span>删除</span></button></div>
+										</td>
+									</tr>
+									<tr class="el-table__row">
+										<td rowspan="1" colspan="1" class="el-table_1_column_1  el-table-column--selection">
+											<div class="cell"><label class="el-checkbox"><span class="el-checkbox__input"><span class="el-checkbox__inner"></span><input
+														 type="checkbox" aria-hidden="false" class="el-checkbox__original" value=""></span>
+													<!----></label></div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_2  ">
+											<div class="cell el-tooltip" style="width: 259px;">JavaSE第三周0:</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_3  ">
+											<div class="cell">etc-app-itp-2</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_4  ">
+											<div class="cell">
+												<div class="left Mlf5">
+													<p>高梦新</p>
+													<p>18406598231</p>
+												</div>
+											</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_5  ">
+											<div class="cell">2021-01-15 17:55:54</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_6  ">
+											<div class="cell">未查看</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_7  ">
+											<div class="cell">1.86.240.19</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_8  ">
+											<div class="cell el-tooltip" style="width: 125px;">Chrome version 87.0.4280.141</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_9  ">
+											<div class="cell"><button type="button" class="el-button el-button--primary el-button--small">
+													<!----><i class="el-icon-view"></i><span>查看</span></button> <button type="button" class="el-button el-button--danger el-button--small">
+													<!----><i class="el-icon-delete"></i><span>删除</span></button></div>
+										</td>
+									</tr>
+									<tr class="el-table__row">
+										<td rowspan="1" colspan="1" class="el-table_1_column_1  el-table-column--selection">
+											<div class="cell"><label class="el-checkbox"><span class="el-checkbox__input"><span class="el-checkbox__inner"></span><input
+														 type="checkbox" aria-hidden="false" class="el-checkbox__original" value=""></span>
+													<!----></label></div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_2  ">
+											<div class="cell el-tooltip" style="width: 259px;">JavaSE第三周0:</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_3  ">
+											<div class="cell">etc-app-itp-2</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_4  ">
+											<div class="cell">
+												<div class="left Mlf5">
+													<p>高梦新</p>
+													<p>18406598231</p>
+												</div>
+											</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_5  ">
+											<div class="cell">2021-01-15 17:55:50</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_6  ">
+											<div class="cell">未查看</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_7  ">
+											<div class="cell">1.86.240.19</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_8  ">
+											<div class="cell el-tooltip" style="width: 125px;">Chrome version 87.0.4280.141</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_9  ">
+											<div class="cell"><button type="button" class="el-button el-button--primary el-button--small">
+													<!----><i class="el-icon-view"></i><span>查看</span></button> <button type="button" class="el-button el-button--danger el-button--small">
+													<!----><i class="el-icon-delete"></i><span>删除</span></button></div>
+										</td>
+									</tr>
+									<tr class="el-table__row">
+										<td rowspan="1" colspan="1" class="el-table_1_column_1  el-table-column--selection">
+											<div class="cell"><label class="el-checkbox"><span class="el-checkbox__input"><span class="el-checkbox__inner"></span><input
+														 type="checkbox" aria-hidden="false" class="el-checkbox__original" value=""></span>
+													<!----></label></div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_2  ">
+											<div class="cell el-tooltip" style="width: 259px;">JavaSE第三周0:</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_3  ">
+											<div class="cell">etc-app-itp-2</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_4  ">
+											<div class="cell">
+												<div class="left Mlf5">
+													<p>高梦新</p>
+													<p>18406598231</p>
+												</div>
+											</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_5  ">
+											<div class="cell">2021-01-15 17:55:46</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_6  ">
+											<div class="cell">未查看</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_7  ">
+											<div class="cell">1.86.240.19</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_8  ">
+											<div class="cell el-tooltip" style="width: 125px;">Chrome version 87.0.4280.141</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_9  ">
+											<div class="cell"><button type="button" class="el-button el-button--primary el-button--small">
+													<!----><i class="el-icon-view"></i><span>查看</span></button> <button type="button" class="el-button el-button--danger el-button--small">
+													<!----><i class="el-icon-delete"></i><span>删除</span></button></div>
+										</td>
+									</tr>
+									<tr class="el-table__row">
+										<td rowspan="1" colspan="1" class="el-table_1_column_1  el-table-column--selection">
+											<div class="cell"><label class="el-checkbox"><span class="el-checkbox__input"><span class="el-checkbox__inner"></span><input
+														 type="checkbox" aria-hidden="false" class="el-checkbox__original" value=""></span>
+													<!----></label></div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_2  ">
+											<div class="cell el-tooltip" style="width: 259px;">JavaSE第三周0:</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_3  ">
+											<div class="cell">etc-app-itp-2</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_4  ">
+											<div class="cell">
+												<div class="left Mlf5">
+													<p>高梦新</p>
+													<p>18406598231</p>
+												</div>
+											</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_5  ">
+											<div class="cell">2021-01-15 17:55:42</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_6  ">
+											<div class="cell">未查看</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_7  ">
+											<div class="cell">1.86.240.19</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_8  ">
+											<div class="cell el-tooltip" style="width: 125px;">Chrome version 87.0.4280.141</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_9  ">
+											<div class="cell"><button type="button" class="el-button el-button--primary el-button--small">
+													<!----><i class="el-icon-view"></i><span>查看</span></button> <button type="button" class="el-button el-button--danger el-button--small">
+													<!----><i class="el-icon-delete"></i><span>删除</span></button></div>
+										</td>
+									</tr>
+									<tr class="el-table__row">
+										<td rowspan="1" colspan="1" class="el-table_1_column_1  el-table-column--selection">
+											<div class="cell"><label class="el-checkbox"><span class="el-checkbox__input"><span class="el-checkbox__inner"></span><input
+														 type="checkbox" aria-hidden="false" class="el-checkbox__original" value=""></span>
+													<!----></label></div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_2  ">
+											<div class="cell el-tooltip" style="width: 259px;">JavaSE第三周0:</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_3  ">
+											<div class="cell">etc-app-itp-2</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_4  ">
+											<div class="cell">
+												<div class="left Mlf5">
+													<p>高梦新</p>
+													<p>18406598231</p>
+												</div>
+											</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_5  ">
+											<div class="cell">2021-01-15 17:55:30</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_6  ">
+											<div class="cell">未查看</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_7  ">
+											<div class="cell">1.86.240.19</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_8  ">
+											<div class="cell el-tooltip" style="width: 125px;">Chrome version 87.0.4280.141</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_9  ">
+											<div class="cell"><button type="button" class="el-button el-button--primary el-button--small">
+													<!----><i class="el-icon-view"></i><span>查看</span></button> <button type="button" class="el-button el-button--danger el-button--small">
+													<!----><i class="el-icon-delete"></i><span>删除</span></button></div>
+										</td>
+									</tr>
+									<tr class="el-table__row">
+										<td rowspan="1" colspan="1" class="el-table_1_column_1  el-table-column--selection">
+											<div class="cell"><label class="el-checkbox"><span class="el-checkbox__input"><span class="el-checkbox__inner"></span><input
+														 type="checkbox" aria-hidden="false" class="el-checkbox__original" value=""></span>
+													<!----></label></div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_2  ">
+											<div class="cell el-tooltip" style="width: 259px;">JavaSE第三周0:</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_3  ">
+											<div class="cell">etc-app-itp-2</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_4  ">
+											<div class="cell">
+												<div class="left Mlf5">
+													<p>高梦新</p>
+													<p>18406598231</p>
+												</div>
+											</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_5  ">
+											<div class="cell">2021-01-15 17:55:30</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_6  ">
+											<div class="cell">未查看</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_7  ">
+											<div class="cell">1.86.240.19</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_8  ">
+											<div class="cell el-tooltip" style="width: 125px;">Chrome version 87.0.4280.141</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_9  ">
+											<div class="cell"><button type="button" class="el-button el-button--primary el-button--small">
+													<!----><i class="el-icon-view"></i><span>查看</span></button> <button type="button" class="el-button el-button--danger el-button--small">
+													<!----><i class="el-icon-delete"></i><span>删除</span></button></div>
+										</td>
+									</tr>
+									<tr class="el-table__row">
+										<td rowspan="1" colspan="1" class="el-table_1_column_1  el-table-column--selection">
+											<div class="cell"><label class="el-checkbox"><span class="el-checkbox__input"><span class="el-checkbox__inner"></span><input
+														 type="checkbox" aria-hidden="false" class="el-checkbox__original" value=""></span>
+													<!----></label></div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_2  ">
+											<div class="cell el-tooltip" style="width: 259px;">JavaSE第三周0:</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_3  ">
+											<div class="cell">etc-app-itp-2</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_4  ">
+											<div class="cell">
+												<div class="left Mlf5">
+													<p>高梦新</p>
+													<p>18406598231</p>
+												</div>
+											</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_5  ">
+											<div class="cell">2021-01-15 17:55:29</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_6  ">
+											<div class="cell">未查看</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_7  ">
+											<div class="cell">1.86.240.19</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_8  ">
+											<div class="cell el-tooltip" style="width: 125px;">Chrome version 87.0.4280.141</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_9  ">
+											<div class="cell"><button type="button" class="el-button el-button--primary el-button--small">
+													<!----><i class="el-icon-view"></i><span>查看</span></button> <button type="button" class="el-button el-button--danger el-button--small">
+													<!----><i class="el-icon-delete"></i><span>删除</span></button></div>
+										</td>
+									</tr>
+									<tr class="el-table__row">
+										<td rowspan="1" colspan="1" class="el-table_1_column_1  el-table-column--selection">
+											<div class="cell"><label class="el-checkbox"><span class="el-checkbox__input"><span class="el-checkbox__inner"></span><input
+														 type="checkbox" aria-hidden="false" class="el-checkbox__original" value=""></span>
+													<!----></label></div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_2  ">
+											<div class="cell el-tooltip" style="width: 259px;">JavaSE第三周0:</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_3  ">
+											<div class="cell">etc-app-itp-2</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_4  ">
+											<div class="cell">
+												<div class="left Mlf5">
+													<p>高梦新</p>
+													<p>18406598231</p>
+												</div>
+											</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_5  ">
+											<div class="cell">2021-01-15 17:55:25</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_6  ">
+											<div class="cell">未查看</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_7  ">
+											<div class="cell">1.86.240.19</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_8  ">
+											<div class="cell el-tooltip" style="width: 125px;">Chrome version 87.0.4280.141</div>
+										</td>
+										<td rowspan="1" colspan="1" class="el-table_1_column_9  ">
+											<div class="cell"><button type="button" class="el-button el-button--primary el-button--small">
+													<!----><i class="el-icon-view"></i><span>查看</span></button> <button type="button" class="el-button el-button--danger el-button--small">
+													<!----><i class="el-icon-delete"></i><span>删除</span></button></div>
+										</td>
+									</tr>
+									<!---->
+								</tbody>
+							</table>
+							<!---->
+							<!---->
+						</div>
+						<!---->
+						<!---->
+						<!---->
+						<!---->
+						<div class="el-table__column-resize-proxy" style="display: none;"></div>
+					</div>
+				</div>
+				<div class="Ptp20 Pbm20 Center" style="">
+					<div class="el-pagination"><span class="el-pagination__total">共 75057 条</span><span class="el-pagination__sizes">
+							<div class="el-select el-select--mini">
+								<!---->
+								<div class="el-input el-input--mini el-input--suffix">
+									<!----><input type="text" readonly="readonly" autocomplete="off" placeholder="请选择" class="el-input__inner">
+									<!----><span class="el-input__suffix"><span class="el-input__suffix-inner"><i class="el-select__caret el-input__icon el-icon-arrow-up"></i>
+											<!---->
+											<!---->
+											<!---->
+											<!---->
+											<!----></span>
+										<!----></span>
+									<!---->
+									<!---->
+								</div>
+								<div class="el-select-dropdown el-popper" style="display: none; min-width: 109.979px;">
+									<div class="el-scrollbar" style="">
+										<div class="el-select-dropdown__wrap el-scrollbar__wrap" style="margin-bottom: -17px; margin-right: -17px;">
+											<ul class="el-scrollbar__view el-select-dropdown__list">
+												<!---->
+												<li class="el-select-dropdown__item selected"><span>10条/页</span></li>
+												<li class="el-select-dropdown__item"><span>50条/页</span></li>
+												<li class="el-select-dropdown__item"><span>100条/页</span></li>
+												<li class="el-select-dropdown__item"><span>500条/页</span></li>
+											</ul>
+										</div>
+										<div class="el-scrollbar__bar is-horizontal">
+											<div class="el-scrollbar__thumb" style="transform: translateX(0%);"></div>
+										</div>
+										<div class="el-scrollbar__bar is-vertical">
+											<div class="el-scrollbar__thumb" style="transform: translateY(0%);"></div>
+										</div>
+									</div>
+									<!---->
+								</div>
+							</div>
+						</span><button type="button" disabled="disabled" class="btn-prev"><i class="el-icon el-icon-arrow-left"></i></button>
+						<ul class="el-pager">
+							<li class="number active">1</li>
+							<!---->
+							<li class="number">2</li>
+							<li class="number">3</li>
+							<li class="number">4</li>
+							<li class="number">5</li>
+							<li class="number">6</li>
+							<li class="el-icon more btn-quicknext el-icon-more"></li>
+							<li class="number">7506</li>
+						</ul><button type="button" class="btn-next"><i class="el-icon el-icon-arrow-right"></i></button><span class="el-pagination__jump">前往<div
+							 class="el-input el-pagination__editor is-in-pagination">
+								<!----><input type="number" autocomplete="off" min="1" max="7506" class="el-input__inner">
+								<!---->
+								<!---->
+								<!---->
+								<!---->
+							</div>页</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 右侧部分结束 -->
+
+	</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--头部导航栏-->
+<div class="Toms" th:fragment="topbar">
+    <div class="p_ibm logo_box">
+        <ul class="header_ul">
+            <li class="active">
+                <div class="p_ibm logo"></div>
+                <label class="p_ibm logo_txt">管理后台</label>
+            </li>
+            <li>
+                <div class="p_ibm"></div>
+                <label class="p_ibm hover_pointer" id="goto_index_label">
+                    访问首页
+                </label>
+            </li>
+            <!--<li><div class="p_ibm logo2"></div>
+                <label class="p_ibm">OMS管理系统</label></li> -->
+        </ul>
+    </div>
+    <div class="right Mtp15">
+        <span class="p_ibm co_fff">${requestScope.loginUser}</span>
+        <span class="p_ibm exit_btn" id="logout"></span>
+    </div>
+</div>
+
+<!-- 左侧导航部分 -->
+<div id="Loms" class="Loms" th:fragment="sidebar">
+    <div class="select_box">
+        <div class="Select menu_root" data-ishide="0" data-menu-url="/portal-web/mgt/mgtIndex.do">
+            <a class="show oms_menu_option" href="/view/index"><span class="p_ibm lab1"></span><span class="p_ibm lab2">我的工作台</span></a>
+        </div>
+        <ul class="Ul"></ul>
+    </div>
+    <div class="select_box">
+        <div class="Select menu_root" data-ishide="0" data-menu-url="/portal-web">
+            <div class="oms_menu_option">
+                <span class="p_ibm lab1"></span>
+                <span class="p_ibm lab2 hover_pointer">系统管理</span>
+                <span class="p_ibm lab3"></span>
+            </div>
+        </div>
+        <ul class="Ul">
+            <li class="sub_menu" data-menu-url="/portal-web/dictionaries"><a
+                    href="/portal-web/dictionaries"><span class="p_ibm hover_pointer">字典管理</span></a></li>
+            <li class="sub_menu" data-menu-url="/portal-web/dictionaries/techType/children"><a
+                    href="/portal-web/dictionaries/techType/children"><span class="p_ibm hover_pointer">技术方向管理</span></a></li>
+            <li class="sub_menu" data-menu-url="/portal-web/mgt/feedback"><a
+                    href="/portal-web/mgt/feedback"><span class="p_ibm hover_pointer">反馈中心</span></a></li>
+        </ul>
+    </div>
+    <div class="select_box">
+        <div class="Select menu_root" data-ishide="0" data-menu-url="/portal-web">
+            <div class="oms_menu_option">
+                <span class="p_ibm lab1"></span>
+                <span class="p_ibm lab2 hover_pointer">资源管理</span>
+                <span class="p_ibm lab3"></span>
+            </div>
+        </div>
+        <ul class="Ul">
+            <li class="sub_menu" data-menu-url="/portal-web/resources/ftp"><a
+                    href="/portal-web/resources/ftp"><span class="p_ibm hover_pointer">FTP文件管理</span></a></li>
+            <li class="sub_menu" data-menu-url="/portal-web/videos"><a
+                    href="/view/video"><span class="p_ibm hover_pointer">视频资源</span></a></li>
+            <li class="sub_menu" data-menu-url="/portal-web/resources/logs"><a
+                    href="/portal-web/resources/logs"><span class="p_ibm hover_pointer">导入导出日志</span></a></li>
+        </ul>
+    </div>
+    <div class="select_box">
+        <div class="Select menu_root" data-ishide="0" data-menu-url="/portal-web">
+            <div class="oms_menu_option">
+                <span class="p_ibm lab1"></span>
+                <span class="p_ibm lab2 hover_pointer">课程管理</span>
+                <span class="p_ibm lab3"></span>
+            </div>
+        </div>
+        <ul class="Ul">
+            <li class="sub_menu" data-menu-url="/portal-web/textbooks"><a
+                    href="/portal-web/textbooks"><span class="p_ibm hover_pointer">教材资源</span></a></li>
+            <li class="sub_menu" data-menu-url="/portal-web/resources/courses"><a
+                    href="/view/course"><span class="p_ibm hover_pointer">我的课程</span></a></li>
+            <li class="sub_menu" data-menu-url="/portal-web/resources/courses?category=1"><a
+                    href="/portal-web/resources/courses?category=1"><span class="p_ibm hover_pointer">我的开放课</span></a></li>
+            <li class="sub_menu" data-menu-url="/portal-web/resources/courses?category=0"><a
+                    href="/portal-web/resources/courses?category=0"><span class="p_ibm hover_pointer">我的专业课</span></a></li>
+            <li class="sub_menu" data-menu-url="/portal-web/professions"><a
+                    href="/portal-web/professions"><span class="p_ibm hover_pointer">岗位课程</span></a></li>
+        </ul>
+    </div>
+    <div class="select_box">
+        <div class="Select menu_root" data-ishide="0" data-menu-url="/portal-web">
+            <div class="oms_menu_option">
+                <span class="p_ibm lab1"></span>
+                <span class="p_ibm lab2 hover_pointer">云实验管理</span>
+                <span class="p_ibm lab3"></span>
+            </div>
+        </div>
+        <ul class="Ul">
+            <li class="sub_menu" data-menu-url="/portal-web/resources/lab_templates"><a
+                    href="/portal-web/resources/lab_templates"><span class="p_ibm hover_pointer">虚拟机模板管理</span></a></li>
+            <li class="sub_menu" data-menu-url="/portal-web/resources/cases/labs"><a
+                    href="/portal-web/resources/cases/labs"><span class="p_ibm hover_pointer">实验室案例管理</span></a></li>
+        </ul>
+    </div>
+    <div class="select_box">
+        <div class="Select menu_root" data-ishide="0" data-menu-url="/portal-web">
+            <div class="oms_menu_option">
+                <span class="p_ibm lab1"></span>
+                <span class="p_ibm lab2 hover_pointer">考试管理</span>
+                <span class="p_ibm lab3"></span>
+            </div>
+        </div>
+        <ul class="Ul">
+            <li class="sub_menu" data-menu-url="/portal-web/exams/questions"><a
+                    href="/portal-web/exams/questions"><span class="p_ibm hover_pointer">试题管理</span></a></li>
+            <li class="sub_menu" data-menu-url="/portal-web/exams/templates"><a
+                    href="/view/testpaper"><span class="p_ibm hover_pointer">试卷管理</span></a></li>
+            <li class="sub_menu" data-menu-url="/portal-web/exams"><a
+                    href="/view/test"><span class="p_ibm hover_pointer">考试管理</span></a></li>
+            <li class="sub_menu" data-menu-url="/portal-web/exams/sentences"><a
+                    href="/portal-web/exams/sentences"><span class="p_ibm hover_pointer">考试判阅</span></a></li>
+        </ul>
+    </div>
+    <div class="select_box">
+        <div class="Select menu_root" data-ishide="0" data-menu-url="/portal-web">
+            <div class="oms_menu_option">
+                <span class="p_ibm lab1"></span>
+                <span class="p_ibm lab2 hover_pointer">实训管理</span>
+                <span class="p_ibm lab3"></span>
+            </div>
+        </div>
+        <ul class="Ul">
+            <li class="sub_menu" data-menu-url="/portal-web/cloud/templates"><a
+                    href="/portal-web/cloud/templates"><span class="p_ibm hover_pointer">云模板管理</span></a></li>
+            <li class="sub_menu" data-menu-url="/portal-web/projects"><a
+                    href="/portal-web/projects"><span class="p_ibm hover_pointer">案例库管理</span></a></li>
+            <li class="sub_menu" data-menu-url="/portal-web/trainings"><a
+                    href="/portal-web/trainings"><span class="p_ibm hover_pointer">实训管理</span></a></li>
+        </ul>
+    </div>
+    <div id="menu" class="select_box">
+        <div class="select_box">
+            <div class="Select menu_root hasChildren" data-ishide="1" data-menu-url="/portal-web/mgtExperiments/cloud">
+                <div class="oms_menu_option">
+                    <span class="p_ibm lab1"></span>
+                    <span class="p_ibm lab2 hover_pointer">云资源管理</span>
+                    <span class="p_ibm lab3"></span>
+                </div>
+            </div>
+            <ul class="Ul" style="height: 460px">
+                <li class="sub_menu" data-menu-url="/portal-web/mgtExperiments/vms/flavors">
+                    <a href="/portal-web/mgtExperiments/vms/flavors"><span class="p_ibm hover_pointer">OpenStack虚拟机模板</span></a>
+                </li>
+                <li class="sub_menu" data-menu-url="/portal-web/mgtExperiments/vms/instances">
+                    <a href="/portal-web/mgtExperiments/vms/instances"><span class="p_ibm hover_pointer">虚拟机管理</span></a>
+                </li>
+                <li class="sub_menu" data-menu-url="/portal-web/mgtExperiments/vms/images">
+                    <a href="/portal-web/mgtExperiments/vms/images"><span class="p_ibm hover_pointer">OpenStack镜像管理</span></a>
+                </li>
+                <li class="sub_menu" data-menu-url="/portal-web/mgtExperiments/vms/volumes">
+                    <a href="/portal-web/mgtExperiments/vms/volumes"><span class="p_ibm hover_pointer">OpenStack存储管理</span></a>
+                </li>
+                <li class="sub_menu" data-menu-url="/portal-web/mgtExperiments/vms/VMState">
+                    <a href="/portal-web/mgtExperiments/vms/VMState"><span class="p_ibm hover_pointer">云桌面管理</span></a>
+                </li>
+                <li class="sub_menu" data-menu-url="/portal-web/mgtExperiments/trainings">
+                    <a href="/portal-web/mgtExperiments/trainings"><span class="p_ibm hover_pointer">云实训管理</span></a>
+                </li>
+                <li class="sub_menu" data-menu-url="/portal-web/mgtExperiments/vms/hypervisors">
+                    <a href="/portal-web/mgtExperiments/vms/hypervisors"><span class="p_ibm hover_pointer">OpenStack资源监控</span></a>
+                </li>
+                <li class="sub_menu" data-menu-url="/portal-web/mgtExperiments/docker/images">
+                    <a href="/portal-web/mgtExperiments/docker/images"><span class="p_ibm hover_pointer">容器镜像管理</span></a>
+                </li>
+                <li class="sub_menu" data-menu-url="/portal-web/mgtExperiments/docker/status">
+                    <a href="/portal-web/mgtExperiments/docker/status"><span class="p_ibm hover_pointer">Docker资源监控</span></a>
+                </li>
+            </ul>
+        </div>
+        <div class="select_box">
+            <div class="Select menu_root" data-ishide="0" data-menu-url="/portal-web/mgtExperiments/labs/templates">
+                <a class="show oms_menu_option" href="/portal-web/mgtExperiments/labs/templates">
+                    <span class="p_ibm lab1"></span>
+                    <span class="p_ibm lab2">实验模板管理</span>
+                </a>
+            </div>
+        </div>
+        <div class="select_box">
+            <div class="Select menu_root" data-ishide="0" data-menu-url="/portal-web/mgtExperiments/labs">
+                <a class="show oms_menu_option" href="/portal-web/mgtExperiments/labs">
+                    <span class="p_ibm lab1"></span>
+                    <span class="p_ibm lab2">实验案例管理</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</html>
+

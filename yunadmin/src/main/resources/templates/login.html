@@ -1,0 +1,174 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>中软国际智慧教学云平台-用户登录</title>
+    <link href="/css/public_style.css?v=20160630" type="text/css" rel="stylesheet"/>
+<link type="text/css" rel="stylesheet" href="/css/qqlogin.css"/>
+<link type="text/css" rel="stylesheet" href="/css/menu.css"/>
+<script type="text/javascript">
+    var schoolVerFlag = "false" == "true";
+    var ctx = "/portal-web";
+    // itp 前端项目访问地址
+    var domain = 'https://zhjxy.kp.futurelab.tv'
+    var resourceHost = 'https://zhjxy.kp.futurelab.tv:18087'
+    var sessionid = "bebfb709-0015-4d99-86aa-286ccc15c298";
+    if (typeof String.prototype.startsWith != 'function') {
+        String.prototype.startsWith = function (prefix) {
+            return this.slice(0, prefix.length) === prefix;
+        };
+    }
+</script>
+<script type="text/javascript" src="/js/lodash/lodash.js"></script>
+<script type="text/javascript" src="/js/jquery-1.12.0.min.js"></script>
+<script type="text/javascript" src="/js/jquery.placeholder.min.js"></script>
+<script type="text/javascript" src="/js/remoteCall.js"></script>
+<!-- jQuery-Impromptu-master Start -->
+<link href="/css/jquery-impromptu.min.css" type="text/css" rel="stylesheet"/>
+<script src="/js/jquery-impromptu.min.js" type="text/javascript"></script>
+<!-- jQuery-Impromptu-master End -->
+<script type="text/javascript" src="/js/jquery.lazyload.js"></script>
+<script type="text/javascript" src="/js/ResizeSensor.js"></script>
+<script type="text/javascript" src="/js/jquery.publicAlert.js"></script>
+<script type="text/javascript" src="/js/util.js"></script>
+<script type="text/javascript" src="/js/qqlogin/qqlogin.js?v=20160630"></script>
+<script type="text/javascript">
+    jQuery.extend({
+        escapeXML: function (content) {
+            return $('<span></span>').text(content).html();
+        },
+        newline2br: function (content) {
+            return content.replace(/\r\n/g, "<br/>").replace(/\r/g, "<br/>").replace(/\n/g, "<br/>");
+        },
+    });
+    jQuery.prompt.setDefaults({
+        top: '30%',
+        persistent: false,
+        buttons: {
+            '确定': true
+        }
+    });
+    window.alert = function (info, func) {
+        if (!isNaN(parseInt(info))) {
+            info = info + "";
+        }
+        $.prompt(info, {
+            close: func
+        });
+    };
+
+    // 跳转页面
+    function gotoURL(targetUTL) {
+        window.location.href = targetUTL;
+    }
+</script>
+<!-- 图片懒加载 -->
+<!-- <script type="text/javascript">
+$(function() {
+$("img.lazy").lazyload();
+$('input, textarea').placeholder();
+});
+</script> -->
+<!-- Logo -->
+<link href="/portal-web/images/favicon.ico" rel="icon" type="image/x-icon"/>
+<link href="/portal-web/images/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+
+<link type="text/css" rel="stylesheet" href="/portal-web/font/iconfont.css">
+<link type="text/css" rel="stylesheet" href="/css/common_alert.css">
+<link type="text/css" rel="stylesheet" href="/portal-web/js/components/login_bomb/login_bomb.css">
+<link type="text/css" rel="stylesheet" href="/css/header.css">
+<link type="text/css" rel="stylesheet" href="/css/iconfont12.css">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script type="text/javascript" src="/portal-web/js/account/inputSuggest_0.1.js"></script>
+    <script type="text/javascript" src="/portal-web/js/account/login.js"></script>
+    <script type="text/javascript">
+        var redirect = "";
+        var errorCount = "";
+        var referer = "https://zhjxy.kp.futurelab.tv/";
+        $(function () {
+            if (errorCount < 3) {
+                $('#verifyCode_div').hide();
+            }
+        });
+    </script>
+</head>
+<body>
+<!-- head -->
+<div class="lg_top_box">
+    <a class="lg_logo_a" href="/portal-web/"><img height="30" src="img/logo.png" alt="中软国际智慧教学云平台"></a>
+</div>
+<div id="login_bg" class="lg_banner_box">
+    <div class="lg_login_box">
+        <div class="lf_pic_box">
+            <div></div>
+        </div>
+        <div class="rt_con_box">
+            <div class="lgr_top_box">
+                <label class="lab1">登录</label>
+            </div>
+            <form id="login_form" method="post" th:action="@{/user/doLogin}">
+                <div class="lg_p_inp_box">
+                    <label class="lab1"></label> <input id="username" name="username" class="inp1" type="text" placeholder="手机／邮箱" maxlength="38" tabindex="1"/> <label
+                    class="lab2"></label> <label class="lab3"></label>
+                </div>
+                <div class="prompt_box">
+                    <div id="error1" class="error_box">
+                        <label class="lab1"></label> <label
+                        class="lab2"></label> </div>
+                </div>
+                <div class="lg_p_inp_box">
+                    <label class="lab1 labo"></label> <input id="password" name="password" class="inp1" value="" type="password" placeholder="密码" maxlength="38" tabindex="2"/>
+                    <label class="lab2"></label> <label class="lab3"></label>
+                </div>
+                <div class="prompt_box">
+                    <div id="error2" class="error_box">
+                        <label class="lab1"></label> <label class="lab2"></label> <a class="a1" href=""></a>
+                    </div>
+                </div>
+                <div class="prompt_box">
+                    <div id="error3" class="error_box">
+                        <label class="lab1"></label> <label class="lab2"></label>
+                    </div>
+                    <!--显示错误信息-->
+                    <p th:text="${msg}" style="color: red;"></p>
+                </div>
+
+                <div class="lg_remb_box">
+                    <div class="p_radio_div" tabindex="5" style="float: left;">
+                        <input id="rememberMe" class="p_radio_input" type="checkbox" checked="checked" name="cookie" value="cookieon"/>
+                        <label class="p_radio_label" for="rememberMe"></label> <label class="mar_lf5" for="rememberMe">下次自动登录</label>
+                    </div>
+                    </div>
+                <div>
+                    <input id="login_btn1" class="login_btn_inp" type="submit" value="登录" tabindex="7">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<style>
+    /*foot*/
+    .ix_foot_box {
+        height: 80px;
+        background-color: #2f3032;
+        clear: both;
+        width: 100%
+    }
+
+    .foot_in_box {
+        color: #5f5f5f;
+        text-align: center;
+    }
+
+    .foot_in_box a {
+        color: #5f5f5f;
+    }
+</style>
+<div class="ix_foot_box" style=" background-color: #fff;">
+    <div class="foot_in_box Center">
+        <label class="p_c_laber">Copyright© 2019 中软国际教育科技股份有限公司 版权所有 保留一切权利</label>
+    </div>
+</div>
+</body>
+</html>
+

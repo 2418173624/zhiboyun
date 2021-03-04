@@ -1,0 +1,563 @@
+<html lang="zh-cmn-Hans" class=" ">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<link rel="icon" href="/logo.png">
+		<title>在线考试系统</title>
+		
+		
+
+		
+		
+		<link href="/css/chunk-vendors.91e123d7.css" rel="stylesheet"/>
+		<link href="/css/app.fbbf1a0d.css" rel="stylesheet"/>
+		<link href="/css/chunk-bf3bfb48.6be25be4.css" rel="stylesheet"/>
+		<link href="/css/chunk-4706a1a8.02dc90b7.css" rel="stylesheet"/>
+		<link href="/css/chunk-1b000fcc.8bd23dab.css" rel="stylesheet"/>
+	    <link href="/css/chunk-db6be91c.0cd72384.css" rel="stylesheet"/>
+		 <link href="/css/chunk-4e4cabd4.147b3a3c.css" rel="stylesheet"/>
+		  <link href=/"css/user.eca17ac7.css" >
+		 
+		<style>
+			#loading-mask {
+				position: fixed;
+				left: 0;
+				top: 0;
+				height: 100%;
+				width: 100%;
+				background: #fff;
+				user-select: none;
+				z-index: 9999;
+				overflow: hidden
+			}
+
+			.loading-wrapper {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -100%)
+			}
+
+			.loading-dot {
+				animation: antRotate 1.2s infinite linear;
+				transform: rotate(45deg);
+				position: relative;
+				display: inline-block;
+				font-size: 64px;
+				width: 64px;
+				height: 64px;
+				box-sizing: border-box
+			}
+
+			.loading-dot i {
+				width: 22px;
+				height: 22px;
+				position: absolute;
+				display: block;
+				background-color: #1890ff;
+				border-radius: 100%;
+				transform: scale(.75);
+				transform-origin: 50% 50%;
+				opacity: .3;
+				animation: antSpinMove 1s infinite linear alternate
+			}
+
+			.loading-dot i:nth-child(1) {
+				top: 0;
+				left: 0
+			}
+
+			.loading-dot i:nth-child(2) {
+				top: 0;
+				right: 0;
+				-webkit-animation-delay: .4s;
+				animation-delay: .4s
+			}
+
+			.loading-dot i:nth-child(3) {
+				right: 0;
+				bottom: 0;
+				-webkit-animation-delay: .8s;
+				animation-delay: .8s
+			}
+
+			.loading-dot i:nth-child(4) {
+				bottom: 0;
+				left: 0;
+				-webkit-animation-delay: 1.2s;
+				animation-delay: 1.2s
+			}
+
+			@keyframes antRotate {
+				to {
+					-webkit-transform: rotate(405deg);
+					transform: rotate(405deg)
+				}
+			}
+
+			@-webkit-keyframes antRotate {
+				to {
+					-webkit-transform: rotate(405deg);
+					transform: rotate(405deg)
+				}
+			}
+
+			@keyframes antSpinMove {
+				to {
+					opacity: 1
+				}
+			}
+
+			@-webkit-keyframes antSpinMove {
+				to {
+					opacity: 1
+				}
+			}
+		</style>
+		
+		
+		
+		<style type="text/css">
+			.vue-cropper[data-v-6dae58fd] {
+				position: relative;
+				width: 100%;
+				height: 100%;
+				box-sizing: border-box;
+				user-select: none;
+				-webkit-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				direction: ltr;
+				touch-action: none;
+				text-align: left;
+				background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAAA3NCSVQICAjb4U/gAAAABlBMVEXMzMz////TjRV2AAAACXBIWXMAAArrAAAK6wGCiw1aAAAAHHRFWHRTb2Z0d2FyZQBBZG9iZSBGaXJld29ya3MgQ1M26LyyjAAAABFJREFUCJlj+M/AgBVhF/0PAH6/D/HkDxOGAAAAAElFTkSuQmCC");
+			}
+
+			.cropper-box[data-v-6dae58fd],
+			.cropper-box-canvas[data-v-6dae58fd],
+			.cropper-drag-box[data-v-6dae58fd],
+			.cropper-crop-box[data-v-6dae58fd],
+			.cropper-face[data-v-6dae58fd] {
+				position: absolute;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				user-select: none;
+			}
+
+			.cropper-box-canvas img[data-v-6dae58fd] {
+				position: relative;
+				text-align: left;
+				user-select: none;
+				transform: none;
+				max-width: none;
+				max-height: none;
+			}
+
+			.cropper-box[data-v-6dae58fd] {
+				overflow: hidden;
+			}
+
+			.cropper-move[data-v-6dae58fd] {
+				cursor: move;
+			}
+
+			.cropper-crop[data-v-6dae58fd] {
+				cursor: crosshair;
+			}
+
+			.cropper-modal[data-v-6dae58fd] {
+				background: rgba(0, 0, 0, 0.5);
+			}
+
+			.cropper-crop-box[data-v-6dae58fd] {
+				/*border: 2px solid #39f;*/
+			}
+
+			.cropper-view-box[data-v-6dae58fd] {
+				display: block;
+				overflow: hidden;
+				width: 100%;
+				height: 100%;
+				outline: 1px solid #39f;
+				outline-color: rgba(51, 153, 255, 0.75);
+				user-select: none;
+			}
+
+			.cropper-view-box img[data-v-6dae58fd] {
+				user-select: none;
+				text-align: left;
+				max-width: none;
+				max-height: none;
+			}
+
+			.cropper-face[data-v-6dae58fd] {
+				top: 0;
+				left: 0;
+				background-color: #fff;
+				opacity: 0.1;
+			}
+
+			.crop-info[data-v-6dae58fd] {
+				position: absolute;
+				left: 0px;
+				min-width: 65px;
+				text-align: center;
+				color: white;
+				line-height: 20px;
+				background-color: rgba(0, 0, 0, 0.8);
+				font-size: 12px;
+			}
+
+			.crop-line[data-v-6dae58fd] {
+				position: absolute;
+				display: block;
+				width: 100%;
+				height: 100%;
+				opacity: 0.1;
+			}
+
+			.line-w[data-v-6dae58fd] {
+				top: -3px;
+				left: 0;
+				height: 5px;
+				cursor: n-resize;
+			}
+
+			.line-a[data-v-6dae58fd] {
+				top: 0;
+				left: -3px;
+				width: 5px;
+				cursor: w-resize;
+			}
+
+			.line-s[data-v-6dae58fd] {
+				bottom: -3px;
+				left: 0;
+				height: 5px;
+				cursor: s-resize;
+			}
+
+			.line-d[data-v-6dae58fd] {
+				top: 0;
+				right: -3px;
+				width: 5px;
+				cursor: e-resize;
+			}
+
+			.crop-point[data-v-6dae58fd] {
+				position: absolute;
+				width: 8px;
+				height: 8px;
+				opacity: 0.75;
+				background-color: #39f;
+				border-radius: 100%;
+			}
+
+			.point1[data-v-6dae58fd] {
+				top: -4px;
+				left: -4px;
+				cursor: nw-resize;
+			}
+
+			.point2[data-v-6dae58fd] {
+				top: -5px;
+				left: 50%;
+				margin-left: -3px;
+				cursor: n-resize;
+			}
+
+			.point3[data-v-6dae58fd] {
+				top: -4px;
+				right: -4px;
+				cursor: ne-resize;
+			}
+
+			.point4[data-v-6dae58fd] {
+				top: 50%;
+				left: -4px;
+				margin-top: -3px;
+				cursor: w-resize;
+			}
+
+			.point5[data-v-6dae58fd] {
+				top: 50%;
+				right: -4px;
+				margin-top: -3px;
+				cursor: w-resize;
+			}
+
+			.point6[data-v-6dae58fd] {
+				bottom: -5px;
+				left: -4px;
+				cursor: sw-resize;
+			}
+
+			.point7[data-v-6dae58fd] {
+				bottom: -5px;
+				left: 50%;
+				margin-left: -3px;
+				cursor: s-resize;
+			}
+
+			.point8[data-v-6dae58fd] {
+				bottom: -5px;
+				right: -4px;
+				cursor: se-resize;
+			}
+
+			@media screen and (max-width: 500px) {
+				.crop-point[data-v-6dae58fd] {
+					position: absolute;
+					width: 20px;
+					height: 20px;
+					opacity: 0.45;
+					background-color: #39f;
+					border-radius: 100%;
+				}
+
+				.point1[data-v-6dae58fd] {
+					top: -10px;
+					left: -10px;
+				}
+
+				.point2[data-v-6dae58fd],
+				.point4[data-v-6dae58fd],
+				.point5[data-v-6dae58fd],
+				.point7[data-v-6dae58fd] {
+					display: none;
+				}
+
+				.point3[data-v-6dae58fd] {
+					top: -10px;
+					right: -10px;
+				}
+
+				.point4[data-v-6dae58fd] {
+					top: 0;
+					left: 0;
+				}
+
+				.point6[data-v-6dae58fd] {
+					bottom: -10px;
+					left: -10px;
+				}
+
+				.point8[data-v-6dae58fd] {
+					bottom: -10px;
+					right: -10px;
+				}
+			}
+					
+			
+		</style>
+		<script charset="utf-8" src="js/fail.24dd48b1.js"></script>
+	
+	</head>
+	<body><noscript><strong>We're sorry but vue-antd-pro doesn't work properly without JavaScript enabled. Please enable
+				it to continue.</strong></noscript>
+		<div id="app">
+			<div data-v-94cd13fa="" class="ant-layout">
+				<div data-v-94cd13fa="" class="header ant-layout-header" style="color: rgb(255, 255, 255);"><span data-v-94cd13fa=""
+					 style="font-size: 25px; margin-left: 0px;"><span data-v-94cd13fa="" class="ant-avatar ant-avatar-lg ant-avatar-circle"
+						 slot="avatar"><span class="ant-avatar-string" style="transform: scale(1) translateX(-50%);"></span></span>
+						赵守信
+						<span data-v-94cd13fa="" style="font-size: 15px;">sadasd as </span></span><span data-v-94cd13fa="" style="float: right;"><span
+						 data-v-94cd13fa="" style="margin-right: 60px; font-size: 20px;">考试限时：90分钟 这里是倒计时</span><button data-v-94cd13fa=""
+						 type="button" class="ant-btn ant-btn-danger ant-btn-background-ghost" style="margin-right: 60px;"><span>交 卷</span></button><span
+						 data-v-94cd13fa="" class="avatar ant-avatar ant-avatar-sm ant-avatar-circle ant-avatar-image"><img src="https://i.loli.net/2019/11/02/OUfHKhMSwRv1ntX.jpg"></span><span
+						 data-v-94cd13fa="" style="margin-left: 12px;">暮雪飞扬</span></span></div>
+				<div data-v-94cd13fa="" class="ant-layout ant-layout-has-sider">
+					<div data-v-94cd13fa="" class="ant-layout-sider ant-layout-sider-dark" style="flex: 0 0 190px; max-width: 190px; min-width: 190px; width: 190px; background: rgb(68, 68, 68); overflow: auto; height: 100vh; position: fixed; left: 0px;">
+						<div class="ant-layout-sider-children" id="a">
+							<!-- 整体左半部分 -->
+							<ul data-v-94cd13fa="" role="menu" class="ant-menu ant-menu-inline ant-menu-root ant-menu-light" style="height: 100%; border-right: 0px;" id="ul1">
+								<!-- 第一行 -->
+								<li data-v-94cd13fa="" role="menuitem"  id="menuitem" class=" ant-menu-submenu ant-menu-submenu-inline">
+									<div  aria-haspopup="true" class="ant-menu-submenu-title" style="padding-left: 24px;"><span data-v-94cd13fa=""><i
+											 data-v-94cd13fa="" class="anticon anticon-check-circle"><svg data-v-94cd13fa="" viewBox="64 64 896 896"
+												 data-icon="check-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+													<path fill="#1890ff" d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"></path>
+													<path fill="#e6f7ff" d="M512 140c-205.4 0-372 166.6-372 372s166.6 372 372 372 372-166.6 372-372-166.6-372-372-372zm193.4 225.7l-210.6 292a31.8 31.8 0 0 1-51.7 0L318.5 484.9c-3.8-5.3 0-12.7 6.5-12.7h46.9c10.3 0 19.9 5 25.9 13.3l71.2 98.8 157.2-218c6-8.4 15.7-13.3 25.9-13.3H699c6.5 0 10.3 7.4 6.4 12.7z"></path>
+													<path fill="#1890ff" d="M699 353h-46.9c-10.2 0-19.9 4.9-25.9 13.3L469 584.3l-71.2-98.8c-6-8.3-15.6-13.3-25.9-13.3H325c-6.5 0-10.3 7.4-6.5 12.7l124.6 172.8a31.8 31.8 0 0 0 51.7 0l210.6-292c3.9-5.3.1-12.7-6.4-12.7z"></path>
+												</svg></i>单选题(每题5分)</span><i class="ant-menu-submenu-arrow"></i></div>
+									<!-- 第一行的二级菜单 -->
+									<ul role="menu" class="ant-menu ant-menu-inline ant-menu-sub" id="menu" style="display:none;">
+										<li data-v-94cd13fa="" role="menuitem" class="ant-menu-item" style="padding-left: 48px;">
+											<!---->
+											<span class="glyphicon glyphicon-chevron-down">题目1</span>
+										</li>
+										<li data-v-94cd13fa="" role="menuitem" class="ant-menu-item" style="padding-left: 48px;">
+											<!---->
+											<span class="glyphicon glyphicon-chevron-down">题目1</span>
+										</li>
+										<li data-v-94cd13fa="" role="menuitem" class="ant-menu-item" style="padding-left: 48px;">
+											<!---->
+											<span class="glyphicon glyphicon-chevron-down">题目1</span>
+										</li>
+										<li data-v-94cd13fa="" role="menuitem" class="ant-menu-item" style="padding-left: 48px;">
+											<!---->
+											<span class="glyphicon glyphicon-chevron-down">题目1</span>
+										</li>
+										
+										<li data-v-94cd13fa="" role="menuitem" class="ant-menu-item" style="padding-left: 48px;">
+											<!---->
+											<span class="glyphicon glyphicon-chevron-down">题目1</span>
+										</li>
+										
+										<li data-v-94cd13fa="" role="menuitem" class="ant-menu-item" style="padding-left: 48px;">
+											<!---->
+											<span class="glyphicon glyphicon-chevron-down">题目1</span>
+										</li>
+										
+										<li data-v-94cd13fa="" role="menuitem" class="ant-menu-item" style="padding-left: 48px;">
+											<!---->
+											<span class="glyphicon glyphicon-chevron-down">题目1</span>
+										</li>
+										
+										<li data-v-94cd13fa="" role="menuitem" class="ant-menu-item" style="padding-left: 48px;">
+											<!---->
+											<span class="glyphicon glyphicon-chevron-down">题目1</span>
+										</li>
+										
+										<li data-v-94cd13fa="" role="menuitem" class="ant-menu-item" style="padding-left: 48px;">
+											<!---->
+											<span class="glyphicon glyphicon-chevron-down">题目1</span>
+										
+										</li>
+										<li data-v-94cd13fa="" role="menuitem" class="ant-menu-item" style="padding-left: 48px;">
+											<!---->
+											<span class="glyphicon glyphicon-chevron-down">题目1</span>
+										
+										</li>
+										<li data-v-94cd13fa="" role="menuitem" class="ant-menu-item" style="padding-left: 48px;">
+											<!---->
+											<span class="glyphicon glyphicon-chevron-down">题目1</span>
+										
+										</li>
+										<li data-v-94cd13fa="" role="menuitem" class="ant-menu-item" style="padding-left: 48px;">
+											<!---->
+											<span class="glyphicon glyphicon-chevron-down">题目1</span>
+										
+										</li>
+										<li data-v-94cd13fa="" role="menuitem" class="ant-menu-item" style="padding-left: 48px;">
+											<!---->
+											<span class="glyphicon glyphicon-chevron-down">题目1</span>
+										
+										</li>
+										<li data-v-94cd13fa="" role="menuitem" class="ant-menu-item" style="padding-left: 48px;">
+											<span class="glyphicon glyphicon-chevron-down">题目1</span>
+										
+										</li>
+										<li data-v-94cd13fa="" role="menuitem" class="ant-menu-item" style="padding-left: 48px;">
+											<!---->
+											<span class="glyphicon glyphicon-chevron-down">题目1</span>
+										
+										</li>
+										<li data-v-94cd13fa="" role="menuitem" class="ant-menu-item" style="padding-left: 48px;">
+											<!---->
+											<span class="glyphicon glyphicon-chevron-down">题目1</span>
+										</li>
+										<li data-v-94cd13fa="" role="menuitem" class="ant-menu-item" style="padding-left: 48px;">
+											<!---->
+											<span class="glyphicon glyphicon-chevron-down">题目1</span>
+										
+										</li>
+										<li data-v-94cd13fa="" role="menuitem" class="ant-menu-item" style="padding-left: 48px;">
+											<!---->
+											<span class="glyphicon glyphicon-chevron-down">题目1</span>
+										</li>
+										
+									</ul>
+								</li>
+								<li data-v-94cd13fa="" role="menuitem" class="ant-menu-submenu ant-menu-submenu-inline">
+									<div aria-haspopup="true" class="ant-menu-submenu-title" style="padding-left: 24px;"><span data-v-94cd13fa=""><i
+											 data-v-94cd13fa="" class="anticon anticon-check-square"><svg data-v-94cd13fa="" viewBox="64 64 896 896"
+												 data-icon="check-square" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+													<path fill="#1890ff" d="M880 112H144c-17.7 0-32 14.3-32 32v736c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V144c0-17.7-14.3-32-32-32zm-40 728H184V184h656v656z"></path>
+													<path fill="#e6f7ff" d="M184 840h656V184H184v656zm130-367.8h46.9c10.2 0 19.9 4.9 25.9 13.3l71.2 98.8 157.2-218c6-8.3 15.6-13.3 25.9-13.3H688c6.5 0 10.3 7.4 6.5 12.7l-210.6 292a31.8 31.8 0 0 1-51.7 0L307.5 484.9c-3.8-5.3 0-12.7 6.5-12.7z"></path>
+													<path fill="#1890ff" d="M432.2 657.7a31.8 31.8 0 0 0 51.7 0l210.6-292c3.8-5.3 0-12.7-6.5-12.7h-46.9c-10.3 0-19.9 5-25.9 13.3L458 584.3l-71.2-98.8c-6-8.4-15.7-13.3-25.9-13.3H314c-6.5 0-10.3 7.4-6.5 12.7l124.7 172.8z"></path>
+												</svg></i>多选题(每题5分)</span><i class="ant-menu-submenu-arrow"></i></div>
+									<ul role="menu" class="ant-menu ant-menu-inline ant-menu-sub" id="menu" style="display:none;">
+										<li data-v-94cd13fa="" role="menuitem" class="ant-menu-item" style="padding-left: 48px;">
+											<!---->
+											<span class="glyphicon glyphicon-chevron-down">题目1</span>
+										</li>
+									</ul>
+								</li>
+								<li data-v-94cd13fa="" role="menuitem" class="ant-menu-submenu ant-menu-submenu-inline ant-menu-submenu-selected">
+									<div aria-haspopup="true" class="ant-menu-submenu-title" style="padding-left: 24px;"><span data-v-94cd13fa=""><i
+											 data-v-94cd13fa="" class="anticon anticon-like"><svg data-v-94cd13fa="" viewBox="64 64 896 896" data-icon="like"
+												 width="1em" height="1em" fill="currentColor" aria-hidden="true" class="">
+													<path fill="#e6f7ff" d="M273 495.9v428l.3-428zm538.2-88.3H496.8l9.6-198.4c.6-11.9-4.7-23.1-14.6-30.5-6.1-4.5-13.6-6.8-21.1-6.7-19.6.1-36.9 13.4-42.2 32.3-37.1 134.4-64.9 235.2-83.5 302.5V852h399.4a56.85 56.85 0 0 0 33.6-51.8c0-9.7-2.3-18.9-6.9-27.3l-13.9-25.4 21.9-19a56.76 56.76 0 0 0 19.6-43c0-9.7-2.3-18.9-6.9-27.3l-13.9-25.4 21.9-19a56.76 56.76 0 0 0 19.6-43c0-9.7-2.3-18.9-6.9-27.3l-14-25.5 21.9-19a56.76 56.76 0 0 0 19.6-43c0-19.1-11-37.5-28.8-48.4z"></path>
+													<path fill="#1890ff" d="M112 528v364c0 17.7 14.3 32 32 32h65V496h-65c-17.7 0-32 14.3-32 32zm773.9 5.7c16.8-22.2 26.1-49.4 26.1-77.7 0-44.9-25.1-87.5-65.5-111a67.67 67.67 0 0 0-34.3-9.3H572.3l6-122.9c1.5-29.7-9-57.9-29.5-79.4a106.4 106.4 0 0 0-77.9-33.4c-52 0-98 35-111.8 85.1l-85.8 310.8-.3 428h472.1c9.3 0 18.2-1.8 26.5-5.4 47.6-20.3 78.3-66.8 78.3-118.4 0-12.6-1.8-25-5.4-37 16.8-22.2 26.1-49.4 26.1-77.7 0-12.6-1.8-25-5.4-37 16.8-22.2 26.1-49.4 26.1-77.7 0-12.6-1.8-25-5.4-37zM820.4 499l-21.9 19 14 25.5a56.2 56.2 0 0 1 6.9 27.3c0 16.5-7.1 32.2-19.6 43l-21.9 19 13.9 25.4a56.2 56.2 0 0 1 6.9 27.3c0 16.5-7.1 32.2-19.6 43l-21.9 19 13.9 25.4a56.2 56.2 0 0 1 6.9 27.3c0 22.4-13.2 42.6-33.6 51.8H345V506.8c18.6-67.2 46.4-168 83.5-302.5a44.28 44.28 0 0 1 42.2-32.3c7.5-.1 15 2.2 21.1 6.7 9.9 7.4 15.2 18.6 14.6 30.5l-9.6 198.4h314.4C829 418.5 840 436.9 840 456c0 16.5-7.1 32.2-19.6 43z"></path>
+												</svg></i>判断题(每题5分)</span><i class="ant-menu-submenu-arrow"></i></div>
+									<ul role="menu" class="ant-menu ant-menu-inline ant-menu-sub" id="menu" style="display:none;">
+										<li data-v-94cd13fa="" role="menuitem" class="ant-menu-item" style="padding-left: 48px;">
+											<!---->
+											<span class="glyphicon glyphicon-chevron-down">题目1</span>
+										</li>
+										<li data-v-94cd13fa="" role="menuitem" class="ant-menu-item" style="padding-left: 48px;">
+											<!---->
+											<span class="glyphicon glyphicon-chevron-down">题目1</span>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div data-v-94cd13fa="" class="ant-layout" style="margin-left: 200px;">
+						<div data-v-94cd13fa="" class="ant-layout-content" style="margin: 24px 16px 0px; height: 84vh; overflow: initial;">
+							<div data-v-94cd13fa="" style="padding: 24px; background: rgb(255, 255, 255); height: 84vh;"><span
+								 data-v-94cd13fa="" style="font-size: 30px; font-family: Consolas; display: none;">欢迎参加考试，请点击左侧题目编号开始答题</span><strong
+								 data-v-94cd13fa="">判断题 </strong>
+								<p data-v-94cd13fa="">与他人交谈完毕就可以立即转身离开</p>
+								<div data-v-94cd13fa="" class="ant-radio-group ant-radio-group-outline ant-radio-group-default"><label
+									 data-v-94cd13fa="" class="ant-radio-wrapper" style="display: block; height: 30px; line-height: 30px; margin-left: 0px;"><span
+										 class="ant-radio"><input type="radio" class="ant-radio-input" value="b8e2e6300ab04016a82481fff15750e0"><span
+											 class="ant-radio-inner"></span></span><span>
+											正确
+										</span></label><label data-v-94cd13fa="" class="ant-radio-wrapper" style="display: block; height: 30px; line-height: 30px; margin-left: 0px;"><span
+										 class="ant-radio"><input type="radio" class="ant-radio-input" value="d15f9106bb9941eaab1e37356af083b3"><span
+											 class="ant-radio-inner"></span></span><span>
+											错误
+										</span></label></div>
+								<!---->
+							</div>
+						</div>
+						<div data-v-94cd13fa="" class="ant-layout-footer" style="text-align: center;">
+							<!-- Spting Boot Online Exam ©2020 Crated by Liang Shan Guang -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- <script src="/js/chunk-vendors.f1b1d460.js"></script>
+		<script src="/js/app.064ef733.js"></script>
+		<script  src="js/fail.24dd48b1.js"></script>
+		<script  src="js/chunk-vendors.f1b1d460.js"></script>
+		<script  src="js/app.064ef733.js"></script>
+		 <script  src="js/user.31cb25eb.js"></script>
+		  <script  src="js/user.31cb25eb.js"></script>
+		 <script  src="js/chunk-1b000fcc.d3651afd.js"></script>
+		 <script  src="js/chunk-4e4cabd4.3dc1556f.js"></script>
+		 <script  src="js/chunk-4706a1a8.34852328.js"></script>
+		  <script  src="js/chunk-0532881c.7d46f4ea.js"></script>
+		 <script  src="js/chunk-b508e4fa.63cc0c19.js"></script>
+		 <script  src="js/chunk-bf3bfb48.b6087e26.js"></script>
+		  <script  src="js/chunk-db6be91c.0bffc2bd.js"></script>
+					 <script  src="js/testpaper.js"></script> -->
+					 <script  src="/js/jquery-1.12.0.min.js"></script>
+		<script>
+			
+				$(".ant-menu-submenu-title").click(function(){
+				    $(this).next("#menu").slideToggle();//实现二级菜单的展开收缩功能
+				    //$(this).find("span").toggleClass("glyphicon glyphicon-chevron-down");//实现菜单点击时图标的转换效果
+				    //$(this).find("span").toggleClass("glyphicon glyphicon-chevron-right");
+				})
+			
+		</script>
+	</body>
+</html>

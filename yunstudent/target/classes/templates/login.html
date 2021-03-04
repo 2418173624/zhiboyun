@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link href="/css/common_dbbbd09.css" rel="stylesheet" />
+		<link href="/css/components_2ada063.css" rel="stylesheet" />
+		<link href="/css/train_banner_429adde.css" rel="stylesheet" />
+		<link href="/css/personal_nav_5b79317.css" rel="stylesheet" />
+		<link href="/css/iconfont.css" rel="stylesheet" />
+		<link href="/css/main_4d07d49.css" rel="stylesheet" />
+		<link href="/css/element.css" rel="stylesheet" />
+		<link href="/css/classroom_cfd09f6.css" rel="stylesheet" />
+		<link href="/css/elementui.css" rel="stylesheet" />
+	</head>
+	<body>
+	<form method="post" th:action="@{/teacher/doLogin}">
+		<div class="login_bomb_box" style="">
+			<div class="login_bomb_cancel"></div>
+			<div class="wisdom_login posf border1">
+				<div class="posa" style="width: 110px; top: -50px; left: 106px;"><img src="/webApp/images/logo/userName.png" alt=""
+					 class="wido100"></div>
+				<div class="posa" style="width: 110px; top: -50px; left: 106px; display: none;"><img src="/webApp/images/logo/pwd.png"
+					 alt="" class="wido100"></div>
+				<div class="input_text Mtp30 posr"><input type="text" id="phone" name="phone" placeholder="手机号" class="F14 on"> <span class="posa co_798f9c iconfont icon-username"></span>
+					<span class="posa iconfont icon-close" style=""></span></div>
+				<div class="input_password Mtp25 posr"><input type="password" placeholder="密码" id="password" name="password" class="F14"> <span class="posa co_798f9c iconfont icon-password"></span>
+					<span class="posa iconfont icon-close" style="display: none;"></span></div>
+				<div class="Mtp20"><input id="remember" type="checkbox" class="p_ibm Mrt5 Mlf15" style="width: 16px; height: 16px;">
+					<label for="remember" class="F12 co_526e7a">记住密码</label> 
+					<!-- <a target="_top" href="http://user.futurelab.tv/#/UserCenterLogin?platformCode=ZHJXY&amp;redirectUrl=https://zhjxy.kp.futurelab.tv/"
+					 class="right co_09f F12">联合登录&gt;&gt;</a> -->
+					 </div> <input type="submit" value="登录" class="login_btn Mtp25 F16 Center">
+			</div>
+		</div>
+	</form>
+	</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link href="/css/common_dbbbd09.css" rel="stylesheet" />
+		<link href="/css/components_2ada063.css" rel="stylesheet" />
+		<link href="/css/train_banner_429adde.css" rel="stylesheet" />
+		<link href="/css/personal_nav_5b79317.css" rel="stylesheet" />
+		<link href="/css/iconfont.css" rel="stylesheet" />
+		<link href="/css/main_4d07d49.css" rel="stylesheet" />
+		<link href="/css/element.css" rel="stylesheet" />
+		<link href="/css/classroom_cfd09f6.css" rel="stylesheet" />
+		<link href="/css/elementui.css" rel="stylesheet" />
+		<link href="/css/course.css" rel="stylesheet" />
+	</head>
+	<body>
+		<div id="app" style="position: relative; min-height: calc(100vh - 185px);">
+			<!--头部导航栏-->
+			<div th:replace="~{common::topbar}"></div>
+
+					<article>
+						<!-- 中间部分开始 -->
+						<div class="training_activity_list_main clearfix">
+							<!--中间左半部分部分开始-->
+							<div th:replace="~{common::sidebar}"></div>
+							<!--中间左半部分结束-->
+
+							<!-- 中间右半部分开始 -->
+								<div class="training_activity_list_detailed">
+									<div class="training_activity_list_detailed_nav clearfix">
+										<ul class="left">
+											<li class="active">开放课程</li>
+											<li class="">岗位课程</li>
+										</ul>
+									</div>
+									<div style="">
+										<div class="Mtp20">
+											<ul class="vc_course">
+												<li class="li p_ibt" style="margin-right: 50px;"><a href="https://zhjxy.kp.futurelab.tv/courses/073bcb7fc4da41b9bbd2f9b10f838513" target="_blank">
+													<div class="course_img" style="background-image: url(&quot;https://zhjxy.kp.futurelab.tv:18087/textbooks/c2594617a3a345b6ae7db21dc0e83361/cover/c2594617a3a345b6ae7db21dc0e83361.jpg&quot;);"></div>
+													<div class="course_detail">
+														<div class="tech_type" style="background-color: rgb(80, 227, 194);">
+															云计算</div>
+														<!---->
+														<h2 class="course_name">华为鲲鹏应用开发</h2>
+														<p class="description">CPU国产化是整个中华民族期待的大事，鲲鹏作为国产CPU的先行者，出现在历史舞台。本课程主要针对鲲鹏初学者、鲲鹏迁移工程师、HCIA认证工程师等受众，前5章主要针对没有Linux基础的同学，如果你有Linux基础请直接从第6章开始。中间有大量基于华为鲲鹏云的实验，从系统环境的构建到开发环境的搭建，再到应用的移植，然后是应用调优等等由浅入深，适合所有基础的同学进行学习。</p>
+														<div class="count_box">
+															<div class="p_ibm count"><span>章</span> <span>12</span></div> <span class="Mlf20 Mrt20">|</span>
+															<div class="p_ibm count"><span>节</span> <span>41</span></div> <span class="Mlf20 Mrt20">|</span>
+															<!---->
+															<div class="p_ibm count"><span>进度</span> <span>0%</span></div>
+														</div>
+													</div>
+												</a>
+													<div class="control_box"><a href="javascript:;" class="iconfont icon-delete"></a> <span class="iconfont icon-checkbox" style="display: none;"></span></div>
+													<div class="mask_box" style="display: none;"></div>
+												</li>
+											</ul>
+										</div>
+										<div class="Mtp10 training_activity_list_detailed_empty" style="display: none;"><img src="/webApp/images/no_data.png" alt="暂无内容">
+											<div class="prom_txt">暂无课程</div>
+										</div>
+										<div class="Center Pbm30" style="display: none;">
+											<div class="outcomePage el-pagination"><span class="el-pagination__total">共 1 条</span><button type="button" disabled="disabled" class="btn-prev"><span>上一页</span></button>
+												<ul class="el-pager">
+													<li class="number active">1</li>
+													<!---->
+													<!---->
+													<!---->
+												</ul><button type="button" disabled="disabled" class="btn-next"><span>下一页</span></button>
+											</div>
+										</div>
+									</div>
+									<div style="display: none;">
+										<div class="Mtp20">
+											<ul class="vc_list_template"></ul>
+										</div>
+										<div class="Mtp10 training_activity_list_detailed_empty" style=""><img src="/webApp/images/no_data.png" alt="暂无内容">
+											<div class="prom_txt">暂无岗位课程</div>
+										</div>
+										<div class="Center Pbm30" style="display: none;">
+											<div class="outcomePage el-pagination"><span class="el-pagination__total">共 0 条</span><button type="button" disabled="disabled" class="btn-prev"><span>上一页</span></button>
+												<ul class="el-pager">
+													<!---->
+													<!---->
+													<!---->
+													<!---->
+												</ul><button type="button" class="btn-next" disabled="disabled"><span>下一页</span></button>
+											</div>
+										</div>
+									</div>
+								</div>
+
+							<!-- 中间右半部分结束 -->
+
+						</div>
+					</article>
+					<!-- 中间部分结束 -->
+				</header>
+			</div>
+		</div>
+
+	<!--底部开始-->
+		<div th:replace="~{common::footerbar}"></div>
+	</body>
+</html>

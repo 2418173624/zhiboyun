@@ -1,0 +1,549 @@
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+    color: #ccc !important;
+}
+
+input:-moz-placeholder, textarea:-moz-placeholder {
+    color: #ccc !important;
+}
+
+input:-ms-input-placeholder, textarea:-ms-input-placeholder {
+    /* IE10+  */
+    color: #ccc !important;
+}
+
+.Toms {
+    height: 60px;
+    background-color: #338af5;
+    min-width: 1000px;
+}
+
+.Toms .logo_box {
+    line-height: 60px;
+    height: 60px;
+    position: relative;
+    left: 0;
+    top: 0;
+}
+
+.Toms .logo {
+    width: 30px;
+    height: 30px;
+    background: url(../img/logo.png) no-repeat;
+    background-size: 100%;
+    margin-left: 20px;
+    float: none;
+}
+
+.Toms .logo1 {
+    width: 23px;
+    height: 22px;
+    background: url(../images/oms/oms_all_icon.png) no-repeat -36px -173px;
+    margin-right: 5px;
+}
+
+.Toms .logo2 {
+    width: 22px;
+    height: 26px;
+    background: url(../images/oms/oms_all_icon.png) no-repeat -64px -173px;
+    margin-right: 5px;
+}
+
+.Toms .logo3 {
+    width: 26px;
+    height: 25px;
+    background: url(../images/oms/oms_all_icon.png) no-repeat -92px -173px;
+    margin-right: 5px;
+}
+
+.Toms .logo_txt {
+    font-size: 16px;
+    color: #fff;
+    height: 30px;
+    line-height: 30px;
+    margin: 0 20px 0px 10px;
+}
+
+.adv_bbox {
+    padding: 9px;
+    width: 15px;
+    height: 12px;
+    line-height: 12px;
+    border-radius: 5px;
+}
+
+.adv_bbox:hover {
+    background-color: #227cb8;
+}
+
+.Toms .adv_btn {
+    width: 15px;
+    height: 12px;
+    background: url(../images/oms/oms_all_icon.png) no-repeat -35px 0;
+    cursor: pointer;
+}
+
+.msg_box1 {
+    height: 16px;
+    position: relative;
+    width: 14px;
+    margin-right: 40px;
+}
+
+.new_msg_icon {
+    position: absolute;
+    min-width: 9px;
+    height: 17px;
+    top: -10px;
+    background-color: #EC6941;
+    color: #FFF;
+    line-height: 17px;
+    text-align: center;
+    font-size: 12px;
+    padding: 0px 4px;
+    border-radius: 9px;
+    left: 7px;
+}
+
+.msg_box2 {
+    position: absolute;
+    top: 0px;
+    right: -10px;
+    width: 40px;
+    height: 38px;
+}
+
+.msg_box2:hover .msg_box3 {
+    display: block;
+}
+
+.msg_box3 {
+    position: absolute;
+    width: 246px;
+    min-height: 40px;
+    z-index: 2;
+    background-color: #fff;
+    border-radius: 3px;
+    padding: 0px 12px;
+    right: -16px;
+    top: 37px;
+    display: none;
+    border: 1px solid #ededed;
+    font-size: 12px;
+}
+
+.msg_ul1 {
+}
+
+.msg_ul1 li {
+    padding: 15px 0px;
+    border-bottom: 1px solid #ededed;
+}
+
+.msg_ul1 li a {
+    color: #999999;
+    line-height: 20px;
+    padding: 3px 5px;
+}
+
+.msg_ul1 li a:hover {
+    background-color: #f5f5f5;
+}
+
+.msg_all_btn {
+    color: #666666;
+    display: block;
+    padding: 14px 0px;
+    line-height: 20px;
+    text-align: center;
+}
+
+.msg_all_btn:hover {
+    color: #666;
+}
+
+.msg_all_btn:after {
+    content: "";
+    width: 5px;
+    height: 9px;
+    display: inline-block;
+    background: url(../images/oms/oms_all_icon.png) no-repeat -145px -145px;
+    margin-left: 5px;
+}
+
+.Toms .login_name {
+    color: #fff;
+}
+
+.Toms .right {
+    margin-top: 16px;
+}
+
+.Toms .exit_btn {
+    width: 16px;
+    height: 18px;
+    background: url(../images/oms/oms_all_icon.png) no-repeat 0 -34px;
+    margin: 0 20px;
+    cursor: pointer;
+}
+
+.Roms {
+    position: absolute;
+    left: 220px;
+    top: 60px;
+    bottom: 0px;
+    right: 0px;
+    overflow: auto;
+    min-width: 780px;
+    background-color: #fafafa; /* padding: 0 15px; */
+}
+
+.record_box2 {
+    background-color: #fff;
+    margin-top: 20px;
+    padding: 10px 20px 30px;
+    font-size: 12px;
+    color: #666;
+}
+
+.Select2 {
+    background: url(../images/oms/p_select_bg.png) no-repeat 132px center;
+    font-size: 12px;
+    margin-right: 10px;
+    width: 148px;
+    height: 32px;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    border: 1px solid #e4e4e4;
+    padding-left: 8px;
+}
+
+.mar_rt30 {
+    margin-right: 30px;
+}
+
+.Input5 {
+    width: 180px;
+    height: 30px;
+    border: 1px solid #e4e4e4;
+    padding-left: 4px;
+    border-radius: 3px;
+}
+
+.P_table {
+    table-layout: fixed;
+    width: 100%;
+    border: 1px solid #e4e4e4;
+    color: #666666;
+    font-size: 12px;
+    text-align: center;
+}
+
+.P_table5 thead th {
+    height: 45px;
+}
+
+.P_table thead th {
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #e4e4e4;
+    height: 30px;
+}
+
+.P_table tbody td {
+    border: 1px solid #e4e4e4;
+    height: 30px;
+}
+
+.P_table5 tbody td {
+    height: 40px;
+    background-color: #fff;
+    border-right: none;
+    border-left: none;
+}
+
+.record_box2 .Cset4 {
+    margin: 20px 0 0;
+}
+
+.Cset4 {
+    margin: 0 20px 20px;
+    color: #666;
+    font-size: 12px;
+}
+
+.Cset4 .box1 {
+    position: relative;
+    margin: 0 5px;
+}
+
+.page_select {
+    width: 70px;
+    height: 29px;
+    border-radius: 3px;
+    padding-left: 5px;
+    border: 1px solid #eeeeee;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -o-appearance: none;
+}
+
+.check_box {
+    width: 12px;
+    height: 12px;
+    background: url(../images/oms/oms_all_icon.png) no-repeat -66px -23px;
+}
+
+.check_on {
+    background-position: -66px -38px;
+}
+
+/*头部列表*/
+.header_ul li {
+    display: inline-block;
+    text-align: center;
+    font-size: 16px;
+    color: #fff;
+    height: 60px;
+    line-height: 60px;
+    float: left;
+    width: 220px;
+}
+
+.header_ul li.active {
+    background-color: #156ad3;
+}
+
+.header_ul li:hover {
+    background-color: #156ad3;
+}
+
+/*  左侧导航图标 覆盖原先的 */
+.Loms {
+    width: 220px;
+    background-color: #262a33;
+    position: absolute;
+    left: 0px;
+    top: 60px;
+    bottom: 0px;
+    overflow-y: auto;
+}
+
+.Loms .select_box {
+    background-color: #262a33;
+    line-height: 50px;
+    color: #b4b6bd;
+    overflow: hidden;
+}
+
+.Select {
+    height: auto;
+    font-weight: bold;
+}
+
+.Select:hover {
+    background-color: #338af5;
+    color: #fff;
+}
+
+.Select .lab1 {
+    width: 5px;
+    height: 5px;
+    background-color: #b4b6bd;
+    border-radius: 5px;
+}
+
+.Select:hover .lab1 {
+    background-color: #fff;
+}
+
+.Select .lab2 {
+    margin: 0 0px 0 15px;
+    width: 124px;
+}
+
+.Select .lab3 {
+    width: 8px;
+    height: 8px;
+    background: url(../img/oms_all_icon.png) no-repeat -44px -21px;
+}
+
+.Select .lab4 {
+    background-position: 0px 0px;
+}
+
+.Select .lab5 {
+    background-position: 0px -30px;
+}
+
+.Select .lab6 {
+    background-position: 0px -60px;
+}
+
+.Select .lab7 {
+    background-position: 0px -91px;
+}
+
+.Select .lab8 {
+    background-position: 0px -121px;
+}
+
+.Select .lab9 {
+    background-position: 0px -150px;
+}
+
+.Select .lab10 {
+    background-position: 0px -179px;
+}
+
+.Select .lab11 {
+    background-position: 0px -209px;
+}
+
+/*hover*/
+.Select:hover .lab4 {
+    background-position: -31px 0px;
+}
+
+.Select:hover .lab5 {
+    background-position: -31px -30px;
+}
+
+.Select:hover .lab6 {
+    background-position: -32px -60px;
+}
+
+.Select:hover .lab7 {
+    background-position: -32px -91px;
+}
+
+.Select:hover .lab8 {
+    background-position: -32px -121px;
+}
+
+.Select:hover .lab9 {
+    background-position: -32px -150px;
+}
+
+.Select:hover .lab10 {
+    background-position: -32px -179px;
+}
+
+.Select:hover .lab11 {
+    background-position: -31px -209px;
+}
+
+.S_on {
+    border-color: #338af5;
+    background-color: #338af5;
+}
+
+.S_on .lab1 {
+    background-position: -87px 0px;
+    background-color: #fff;
+}
+
+.S_on .lab2 {
+    color: #fff;
+}
+
+.S_on .lab3 {
+    background-position: -35px -21px;
+}
+
+.S_on .lab4 {
+    background-position: -31px 0px;
+}
+
+.S_on .lab5 {
+    background-position: -31px -30px;
+}
+
+.S_on .lab6 {
+    background-position: -32px -60px;
+}
+
+.S_on .lab7 {
+    background-position: -32px -91px;
+}
+
+.S_on .lab8 {
+    background-position: -32px -121px;
+}
+
+.S_on .lab9 {
+    background-position: -32px -150px;
+}
+
+.S_on .lab10 {
+    background-position: -32px -179px;
+}
+
+.S_on .lab11 {
+    background-position: -31px -209px;
+}
+
+.Ul {
+    background-color: #1b1f26;
+    overflow: hidden;
+    height: 0;
+    -webkit-transition: height 0.5s;
+    -o-transition: height 0.5s;
+    transition: height 0.5s;
+}
+
+.Ul li {
+    background-color: #1b1f26;
+}
+
+.Ul .lab1 {
+    width: 6px;
+    height: 6px;
+    background-color: #b4b6bd;
+    border-radius: 6px;
+    margin-right: 20px;
+}
+
+.Ul li:hover {
+    font-weight: bold;
+    color: #fff;
+    background-color: #2b2f35;
+}
+
+.Ul .Li {
+    font-weight: bold;
+    color: #fff;
+    background-color: #2b2f35;
+}
+
+.Ul .Li .lab1 {
+    background-color: #ffb100;
+}
+
+.Ul li a {
+    color: #b4b6bd;
+    padding-left: 72px;
+    display: block;
+}
+
+.Ul .Li a {
+    color: #fff;
+}
+
+.Ul li a:hover {
+    font-weight: bold;
+    color: #fff;
+}
+
+.menu_root a {
+    color: #b4b6bd;
+}
+
+.menu_root a:hover {
+    font-weight: bold;
+    color: #fff;
+}
+
+.oms_menu_option {
+    padding-left: 37px;
+    cursor: pointer;
+}

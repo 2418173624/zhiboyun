@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/yunadmin/yunadmin.iml" filepath="$PROJECT_DIR$/yunadmin/yunadmin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/yunstudent/yunstudent.iml" filepath="$PROJECT_DIR$/yunstudent/yunstudent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/yunteacher/yunteacher.iml" filepath="$PROJECT_DIR$/yunteacher/yunteacher.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zhiboyun.iml" filepath="$PROJECT_DIR$/zhiboyun.iml" />
+    </modules>
+  </component>
+</project>
